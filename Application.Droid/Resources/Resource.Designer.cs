@@ -111,6 +111,9 @@ namespace Application.Droid
 			// aapt resource value: 0x7f040001
 			public const int MvxBindingTagUnique = 2130968577;
 			
+			// aapt resource value: 0x7f040002
+			public const int button1 = 2130968578;
+			
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
