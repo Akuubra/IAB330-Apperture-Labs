@@ -8,16 +8,16 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="40dp"
-        local:MvxBind="Text Hello" />
+        local:MvxBind="Text Hello, Mode=OneWay" />
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="40dp"
-        local:MvxBind="Text Hello" />
+        local:MvxBind="Text Hello, Mode=TwoWay" />
     <Button
         android:text="Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button1" 
-        local:MvxBind="Text Click" />
+        local:MvxBind="Text Click, Mode=OneWay" />
 </LinearLayout>
