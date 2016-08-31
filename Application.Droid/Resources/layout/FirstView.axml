@@ -2,22 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        local:MvxBind="Text Hello, Mode=TwoWay" />
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        local:MvxBind="Text Hello, Mode=OneWay" />
-    <Button
-        android:text="Button"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button1"
-        local:MvxBind="Text Click, Mode=OneWay" />
+        android:layout_height="fill_parent"
+        android:layout_marginTop="40dp"
+        android:id="@+id/gridLayout1">
+        <Mvx.MvxListView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            local:MvxItemTemplate="@layout/messagelayout"
+            local:MvxBind="ItemsSource Messages"
+            android:layout_marginTop="50dp"
+            android:id="@+id/mvx.MvxListView1" />
+    </GridLayout>
 </LinearLayout>
