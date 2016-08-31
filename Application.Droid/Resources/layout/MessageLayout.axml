@@ -8,10 +8,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="30dp"
+        android:textColor="#000000"
         local:MvxBind="Text MessageName" />
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:textColor="#000000"
         local:MvxBind="Text MessageContext" />
 </LinearLayout>
