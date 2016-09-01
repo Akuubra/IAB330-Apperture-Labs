@@ -49,9 +49,18 @@ namespace Application.Core.ViewModels
                 new Message("Sathya", "^ Asked to Meet: 10:30am"),
                 new Message("John; Mary; Sam", "> Asked to Meet: 12:30am"),
                 new Message("Jake", "> Asked Location"),
+                new Message("Jake", "^ Asked to Meet: 1:30pm"),
+                new Message("Jared", "^ Asked Location"),
+                new Message("Sathya", "^ Asked to Meet: 10:30am"),
+                new Message("John; Mary; Sam", "> Asked to Meet: 12:30am"),
+                new Message("Jake", "> Asked Location"),
+                new Message("Jake", "^ Asked to Meet: 1:30pm"),
+                new Message("Jared", "^ Asked Location"),
+                new Message("Sathya", "^ Asked to Meet: 10:30am"),
+                new Message("John; Mary; Sam", "> Asked to Meet: 12:30am"),
+                new Message("Jake", "> Asked Location"),
                 new Message("Jake", "^ Asked to Meet: 1:30pm")
             };
-
         }
 
     }

@@ -33,8 +33,8 @@ namespace Application.Core.ViewModels
 			set { _password = value; }
 		}
 
-		private double _startTime;
-		private double _finishTime;
+		//private double _startTime;
+		//private double _finishTime;
 
 		// set multiple fields with one button??
 

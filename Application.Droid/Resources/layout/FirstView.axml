@@ -5,17 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
+    <Button
+        android:text="Search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        android:drawableLeft="@drawable/button_icon" />
+    <Button
+        android:text="Messages"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:id="@+id/button2"
+        android:drawableLeft="@drawable/message_icon" />
+    <Button
+        android:text="Contacts"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="200dp"
+        android:id="@+id/button3"
+        android:drawableLeft="@drawable/profile_icon" />
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="40dp"
-        android:id="@+id/gridLayout1">
+        android:layout_height="fill_parent">
         <Mvx.MvxListView
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             local:MvxItemTemplate="@layout/messagelayout"
-            local:MvxBind="ItemsSource Messages"
-            android:layout_marginTop="50dp"
-            android:id="@+id/mvx.MvxListView1" />
+            local:MvxBind="ItemsSource Messages; ItemClick MakeToast" />
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_marginBottom="100dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:id="@+id/imageButton1" />
     </GridLayout>
 </LinearLayout>
