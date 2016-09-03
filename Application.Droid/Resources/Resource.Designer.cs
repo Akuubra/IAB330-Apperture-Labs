@@ -126,11 +126,11 @@ namespace Application.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040005
-			public const int ContactsBTN = 2130968581;
+			// aapt resource value: 0x7f040006
+			public const int ContactsBTN = 2130968582;
 			
-			// aapt resource value: 0x7f040004
-			public const int MessagesBTN = 2130968580;
+			// aapt resource value: 0x7f040005
+			public const int MessagesBTN = 2130968581;
 			
 			// aapt resource value: 0x7f040000
 			public const int MvvmCrossTagId = 2130968576;
@@ -138,11 +138,14 @@ namespace Application.Droid
 			// aapt resource value: 0x7f040001
 			public const int MvxBindingTagUnique = 2130968577;
 			
-			// aapt resource value: 0x7f040002
-			public const int SearchBTN = 2130968578;
-			
 			// aapt resource value: 0x7f040003
-			public const int SettingsBTN = 2130968579;
+			public const int SearchBTN = 2130968579;
+			
+			// aapt resource value: 0x7f040004
+			public const int SettingsBTN = 2130968580;
+			
+			// aapt resource value: 0x7f040002
+			public const int focus_thief = 2130968578;
 			
 			static Id()
 			{

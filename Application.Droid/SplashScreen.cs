@@ -5,8 +5,7 @@ using MvvmCross.Droid.Views;
 namespace Application.Droid
 {
     [Activity(
-        Label = "Application.Droid"
-        , MainLauncher = true)]
+        MainLauncher = true)]
     /*[Activity(
         Label = "Application.Droid"
         , MainLauncher = true

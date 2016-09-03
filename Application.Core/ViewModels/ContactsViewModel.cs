@@ -29,17 +29,25 @@ namespace Application.Core.ViewModels
             }
         }
 
+
+
         public ContactsViewModel()
         {
             Contacts = new ObservableCollection<Contact>()
             {
-                new Contact("Alex O."),
-                new Contact("Alex N."),
-                new Contact("Jared B."),
-                new Contact("Jack H."),
-                new Contact("Jake H."),
-                new Contact("Sathya A."),
-
+                new Contact("Alexander O.", false),
+                new Contact("Alex M.", false),
+                new Contact("Alex N.", false),
+                new Contact("Barry M.", false),
+                new Contact("Connor N.", false),
+                new Contact("Jack H.", true),
+                new Contact("Jake H.", false),
+                new Contact("Jared B.", true),
+                new Contact("Josh C.", false),
+                new Contact("Josh R.", false),
+                new Contact("Rachael F.", false),
+                new Contact("Sathya A.", true),
+                new Contact("Thomas D.", false),
             };
         }
     }
