@@ -96,7 +96,9 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\SplashScreen.axml" />
-    <AndroidResource Include="Resources\layout\FirstView.axml" />
+    <AndroidResource Include="Resources\layout\FirstView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\MessageLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -116,6 +118,7 @@
     <AndroidResource Include="Resources\drawable\button_icon.png" />
     <AndroidResource Include="Resources\drawable\profile_icon.png" />
     <AndroidResource Include="Resources\drawable\message_icon.png" />
+    <AndroidResource Include="Resources\drawable\settings_icon.png" />
     <Content Include="ToDo-MvvmCross\_ Droid UI.txt" />
   </ItemGroup>
   <ItemGroup>

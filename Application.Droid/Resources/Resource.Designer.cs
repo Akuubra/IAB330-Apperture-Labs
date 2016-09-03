@@ -99,7 +99,10 @@ namespace Application.Droid
 			public const int profile_icon = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int splash = 2130837508;
+			public const int settings_icon = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int splash = 2130837509;
 			
 			static Drawable()
 			{
@@ -114,6 +117,12 @@ namespace Application.Droid
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f040005
+			public const int ContactsBTN = 2130968581;
+			
+			// aapt resource value: 0x7f040004
+			public const int MessagesBTN = 2130968580;
+			
 			// aapt resource value: 0x7f040000
 			public const int MvvmCrossTagId = 2130968576;
 			
@@ -121,16 +130,13 @@ namespace Application.Droid
 			public const int MvxBindingTagUnique = 2130968577;
 			
 			// aapt resource value: 0x7f040002
-			public const int button1 = 2130968578;
+			public const int SearchBTN = 2130968578;
 			
 			// aapt resource value: 0x7f040003
-			public const int button2 = 2130968579;
+			public const int SettingsBTN = 2130968579;
 			
-			// aapt resource value: 0x7f040004
-			public const int button3 = 2130968580;
-			
-			// aapt resource value: 0x7f040005
-			public const int imageButton1 = 2130968581;
+			// aapt resource value: 0x7f040006
+			public const int imageButton1 = 2130968582;
 			
 			static Id()
 			{

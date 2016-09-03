@@ -5,12 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
+  <LinearLayout
+      android:layout_height="wrap_content"
+      android:layout_width="fill_parent"
+      android:gravity = "center_horizontal"
+      android:weightSum="1.0"
+    >
     <Button
         android:text="Search"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/button1"
+        android:layout_weight="1"
+        android:id="@+id/SearchBTN"
         android:drawableLeft="@drawable/button_icon" />
+    <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/SettingsBTN"
+    android:drawableLeft="@drawable/settings_icon" />
+    </LinearLayout>
   <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
@@ -22,14 +35,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".50"
-        android:id="@+id/button2"
+        android:id="@+id/MessagesBTN"
         android:drawableLeft="@drawable/message_icon" />
     <Button
         android:text="Contacts"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".50"
-        android:id="@+id/button3"
+        android:id="@+id/ContactsBTN"
         android:drawableLeft="@drawable/profile_icon" />
     </LinearLayout>
     <GridLayout
