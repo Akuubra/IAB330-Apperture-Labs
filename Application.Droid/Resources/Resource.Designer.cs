@@ -104,6 +104,15 @@ namespace Application.Droid
 			// aapt resource value: 0x7f020005
 			public const int splash = 2130837509;
 			
+			// aapt resource value: 0x7f020006
+			public const int star_gold_icon = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int star_grey_icon = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int user_icon = 2130837512;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -135,9 +144,6 @@ namespace Application.Droid
 			// aapt resource value: 0x7f040003
 			public const int SettingsBTN = 2130968579;
 			
-			// aapt resource value: 0x7f040006
-			public const int imageButton1 = 2130968582;
-			
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -152,13 +158,19 @@ namespace Application.Droid
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int FirstView = 2130903040;
+			public const int ContactsLayout = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int MessageLayout = 2130903041;
+			public const int ContactsView = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int SplashScreen = 2130903042;
+			public const int FirstView = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int MessageLayout = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int SplashScreen = 2130903044;
 			
 			static Layout()
 			{

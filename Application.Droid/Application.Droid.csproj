@@ -102,6 +102,12 @@
     <AndroidResource Include="Resources\layout\MessageLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\ContactsView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ContactsLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -119,6 +125,9 @@
     <AndroidResource Include="Resources\drawable\profile_icon.png" />
     <AndroidResource Include="Resources\drawable\message_icon.png" />
     <AndroidResource Include="Resources\drawable\settings_icon.png" />
+    <AndroidResource Include="Resources\drawable\user_icon.png" />
+    <AndroidResource Include="Resources\drawable\star_gold_icon.png" />
+    <AndroidResource Include="Resources\drawable\star_grey_icon.png" />
     <Content Include="ToDo-MvvmCross\_ Droid UI.txt" />
   </ItemGroup>
   <ItemGroup>

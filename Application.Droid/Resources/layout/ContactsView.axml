@@ -56,12 +56,12 @@
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:layout_weight=".50"
-            android:background="#0c5de2" />
+            android:background="#d6d6d6" />
         <View
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:layout_weight=".50"
-            android:background="#d6d6d6" />
+            android:background="#ff7300" />
     </LinearLayout>
     <GridLayout
         android:layout_width="match_parent"
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:background="#e6e6e6"
-            local:MvxItemTemplate="@layout/messagelayout"
-            local:MvxBind="ItemsSource Messages; ItemClick MakeToast" />
+            local:MvxItemTemplate="@layout/contactslayout"
+            local:MvxBind="ItemsSource Contacts; ItemClick MakeToast" />
     </GridLayout>
 </LinearLayout>
