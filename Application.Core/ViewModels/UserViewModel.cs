@@ -14,6 +14,7 @@ namespace Application.Core.ViewModels
 
 		public string UserName {
 			get { return _userName; }
+			set {  SetProperty(ref _userName, value); }
 		}
 
 		private string _email = "jaredsbagnall@gmail.com";
@@ -21,7 +22,7 @@ namespace Application.Core.ViewModels
 		public string Email
 		{
 			get { return _email; }
-			set { _email = value; }
+			set { SetProperty(ref _email, value); }
 		}
 
 		private string _password = "password";
@@ -29,7 +30,7 @@ namespace Application.Core.ViewModels
 		public string Password
 		{
 			get { return _password; }
-			set { _password = value; }
+			set { SetProperty(ref _password, value); }
 		}
 
 		//private double _startTime;
