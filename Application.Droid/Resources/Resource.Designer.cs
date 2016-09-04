@@ -194,10 +194,10 @@ namespace Application.Droid
 			public const int MessageLayout = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int Profile = 2130903044;
+			public const int SplashScreen = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int SplashScreen = 2130903045;
+			public const int UserProfile = 2130903045;
 			
 			static Layout()
 			{

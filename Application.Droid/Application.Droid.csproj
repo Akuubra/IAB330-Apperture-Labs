@@ -90,6 +90,7 @@
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Views\ContactsView.cs" />
     <Compile Include="Views\FirstView.cs" />
+    <Compile Include="Views\UserProfileView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -109,7 +110,7 @@
     <AndroidResource Include="Resources\layout\ContactsLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Profile.axml" />
+    <AndroidResource Include="Resources\layout\UserProfile.axml" />
 
   </ItemGroup>
   <ItemGroup>

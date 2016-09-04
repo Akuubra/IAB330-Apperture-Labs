@@ -4,10 +4,15 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
-
+/*
+ * Author: Jared Bagnall N5686245
+ * 
+ * View model for the User Profile screen
+ * 
+ * */
 namespace Application.Core.ViewModels
 {
-	public class UserViewModel : MvxViewModel
+	public class UserProfileViewModel : MvxViewModel
 	{
 
 		private string _userName = "Jared";
