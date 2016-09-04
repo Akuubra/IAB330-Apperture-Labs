@@ -5,7 +5,12 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
-
+/// <summary>
+/// Author: Jack Hendy
+/// Student Number: n9066845
+/// Responsible Screen: Messaging Screen
+/// Responsible Files: FirstViewModel.cs, Message.cs, MessageLayout.axml, FirstView.axml, FirstView.cs
+/// </summary>
 namespace Application.Core.ViewModels
 {
     public class FirstViewModel 
