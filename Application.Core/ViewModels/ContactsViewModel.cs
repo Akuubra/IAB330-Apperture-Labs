@@ -5,8 +5,18 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
+
+/// <summary>
+/// Author: Sathya Amarsee
+/// Student Number: n9462716
+/// Responsible Screen: Contacts Screen
+/// Responsible Files: ContactsViewModel.cs, Contact.cs, ContactsLayout.axml, ContactsView.axml, ContactsView.cs
+/// </summary>
+
 namespace Application.Core.ViewModels
 {
+
+
     public class ContactsViewModel : MvxViewModel
     {
 
