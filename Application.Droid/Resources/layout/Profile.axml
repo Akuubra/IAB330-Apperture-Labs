@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@android:color/background_light"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <ImageView
+        android:src="@drawable/profile_icon"
+        android:id="@+id/profilePicture"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_row="0"
+        android:textSize="40dp"
+        android:minWidth="200dp"
+        android:minHeight="200dp" />
+    <TextView
+        android:text="Name"
+        android:id="@+id/nameTag"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+    <EditText
+        android:id="@+id/nameField"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        local:MvxBind="Text UserName, Mode=TwoWay" />
+    <TextView
+        android:text="Email"
+        android:id="@+id/EmailTag"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+    <EditText
+        android:inputType="textEmailAddress"
+        android:id="@+id/EmailField"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        local:MvxBind="Text Email, Mode=TwoWay" />
+    <TextView
+        android:text="Password"
+        android:id="@+id/PasswordTag"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+    <EditText
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/passwordField"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        local:MvxBind="Text Password, Mode=TwoWay" />
+</LinearLayout>

@@ -14,7 +14,6 @@ namespace Application.Core.ViewModels
 
 		public string UserName {
 			get { return _userName; }
-			set { _userName = value;}
 		}
 
 		private string _email = "jaredsbagnall@gmail.com";
