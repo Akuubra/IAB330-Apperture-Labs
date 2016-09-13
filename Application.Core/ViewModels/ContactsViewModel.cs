@@ -26,38 +26,54 @@ namespace Application.Core.ViewModels
             get { return contacts; }
             set { SetProperty(ref contacts, value); }
         }
-        private string contactName;
-        public string ContactName
+
+        private string contactSearch;
+        public string ContactSearch
         {
-            get { return contactName; }
+            get { return contactSearch; }
+            set
+            {
+                SetProperty(ref contactSearch, value);
+                if (contactSearch.Length > 3)
+                {
+
+                    //SearchLocations(searchTerm);
+                }
+            }
+        }
+        /*private string contactFirstName;
+        public string ContactFirstName
+        {
+            get { return contactFirstName; }
             set
             {
                 if (value != null)
                 {
-                    SetProperty(ref contactName, value);
+                    SetProperty(ref contactFirstName, value);
                 }
             }
-        }
+        }*/
 
-
+        public ICommand SelectContactCommand { get; private set; }
 
         public ContactsViewModel()
         {
+            SelectContactCommand = new MvxCommand<Contact>(selectedContact => ShowViewModel<UserProfileViewModel>(selectedContact));
             Contacts = new ObservableCollection<Contact>()
             {
-                new Contact("Alexander O.", false),
-                new Contact("Alex M.", false),
-                new Contact("Alex N.", false),
-                new Contact("Barry M.", false),
-                new Contact("Connor N.", false),
-                new Contact("Jack H.", true),
-                new Contact("Jake H.", false),
+                new Contact("Alexander", "Henry", "A.Henry@gmail.com", false),
+                new Contact("Alex", "Manderson", "A.Manderson@gmail.com", false),
+                new Contact("Alex", "Nelly", "A.Nelly@gmail.com", false),
+                new Contact("Barry", "Mitchel", "B.Mitchel@gmail.com", false),
+                new Contact("Connor", "Ned", "C.Ned@gmail.com", false),
+                new Contact("Jack", "Hendy", "J.Hendy@gmail.com", true),
+                /*new Contact("Jake H.", false),
                 new Contact("Jared B.", true),
                 new Contact("Josh C.", false),
                 new Contact("Josh R.", false),
                 new Contact("Rachael F.", false),
                 new Contact("Sathya A.", true),
-                new Contact("Thomas D.", false),
+                new Contact("Thomas D.", false),*/
             };
         }
     }

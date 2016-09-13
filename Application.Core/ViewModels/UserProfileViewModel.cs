@@ -14,15 +14,21 @@ namespace Application.Core.ViewModels
 {
 	public class UserProfileViewModel : MvxViewModel
 	{
-
-		private string _userName = "Jared";
+        private Contact selectedContact;
+        public void Init(Contact parameters)
+        {
+            selectedContact = parameters;
+        }
+        private string _userName;
+        //= "Jared";
 
 		public string UserName {
 			get { return _userName; }
 			set {  SetProperty(ref _userName, value); }
 		}
 
-		private string _email = "jaredsbagnall@gmail.com";
+        private string _email;
+        //= "jaredsbagnall@gmail.com";
 
 		public string Email
 		{
@@ -30,7 +36,8 @@ namespace Application.Core.ViewModels
 			set { SetProperty(ref _email, value); }
 		}
 
-		private string _password = "password";
+        private string _password;
+        //= "password";
 
 		public string Password
 		{
@@ -47,6 +54,12 @@ namespace Application.Core.ViewModels
 
 			get; set;
 		}
-	}
+        public override void Start()
+        {
+            base.Start();
+            _userName = selectedContact.ContactFirstName + " " + selectedContact.ContactLastName;
+            _email = selectedContact.ContactEmail;
+        }
+    }
 }
 

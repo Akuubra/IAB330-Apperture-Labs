@@ -144,9 +144,6 @@ namespace Application.Droid
 			// aapt resource value: 0x7f040001
 			public const int MvxBindingTagUnique = 2130968577;
 			
-			// aapt resource value: 0x7f04000c
-			public const int PasswordTag = 2130968588;
-			
 			// aapt resource value: 0x7f040003
 			public const int SearchBTN = 2130968579;
 			
@@ -161,9 +158,6 @@ namespace Application.Droid
 			
 			// aapt resource value: 0x7f040008
 			public const int nameTag = 2130968584;
-			
-			// aapt resource value: 0x7f04000d
-			public const int passwordField = 2130968589;
 			
 			// aapt resource value: 0x7f040007
 			public const int profilePicture = 2130968583;

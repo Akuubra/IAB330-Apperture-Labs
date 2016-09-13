@@ -21,7 +21,7 @@
         android:layout_width="fill_parent"
         android:textColor="@android:color/black"
         android:textSize="20dp" />
-    <EditText
+    <TextView
         android:id="@+id/nameField"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
@@ -35,7 +35,7 @@
         android:layout_width="fill_parent"
         android:textColor="@android:color/black"
         android:textSize="20dp" />
-    <EditText
+    <TextView
         android:inputType="textEmailAddress"
         android:id="@+id/EmailField"
         android:layout_height="wrap_content"
@@ -43,19 +43,19 @@
         android:textColor="@android:color/black"
         android:textSize="20dp"
         local:MvxBind="Text Email, Mode=TwoWay" />
-    <TextView
+    <!--<TextView
         android:text="Password"
         android:id="@+id/PasswordTag"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:textColor="@android:color/black"
         android:textSize="20dp" />
-    <EditText
+    <TextView
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/passwordField"
         android:textColor="@android:color/black"
         android:textSize="20dp"
-        local:MvxBind="Text Password, Mode=TwoWay" />
+        local:MvxBind="Text Password, Mode=TwoWay" />-->
 </LinearLayout>

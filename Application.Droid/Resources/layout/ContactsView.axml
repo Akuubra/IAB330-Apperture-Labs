@@ -10,11 +10,11 @@
         android:layout_width="fill_parent"
         android:gravity="center_horizontal"
         android:weightSum="1.0">
-      <View
-          android:id="@+id/focus_thief"
-          android:layout_width="1dp"
-          android:layout_height="1dp"
-          android:focusableInTouchMode="true" />
+        <View
+            android:id="@+id/focus_thief"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:focusableInTouchMode="true" />
         <EditText
             android:hint="Search Contacts"
             android:textColorHint="#7f7f7f"
@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.88"
             android:id="@+id/SearchBTN"
-            android:drawableLeft="@drawable/button_icon" />
+            android:drawableLeft="@drawable/button_icon"
+            local:MvxBind="Text ContactSearch"/>
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -79,6 +80,6 @@
             android:layout_height="fill_parent"
             android:background="#e6e6e6"
             local:MvxItemTemplate="@layout/contactslayout"
-            local:MvxBind="ItemsSource Contacts; ItemClick MakeToast" />
+            local:MvxBind="ItemsSource Contacts; ItemClick SelectContactCommand" />
     </GridLayout>
 </LinearLayout>
