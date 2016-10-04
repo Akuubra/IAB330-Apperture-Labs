@@ -55,10 +55,11 @@ namespace Application.Core.ViewModels
         }*/
 
         public ICommand SelectContactCommand { get; private set; }
-
+        public ICommand SwitchToMessages { get; private set; }
         public ContactsViewModel()
         {
             SelectContactCommand = new MvxCommand<Contact>(selectedContact => ShowViewModel<UserProfileViewModel>(selectedContact));
+            SwitchToMessages = new MvxCommand(()=> ShowViewModel<FirstViewModel>());
             Contacts = new ObservableCollection<Contact>()
             {
                 new Contact("Alexander", "Henry", "A.Henry@gmail.com", false),

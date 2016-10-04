@@ -10,11 +10,11 @@
         android:layout_width="fill_parent"
         android:gravity="center_horizontal"
         android:weightSum="1.0">
-      <View
-          android:id="@+id/focus_thief"
-          android:layout_width="1dp"
-          android:layout_height="1dp"
-          android:focusableInTouchMode="true" />
+        <View
+            android:id="@+id/focus_thief"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:focusableInTouchMode="true" />
         <EditText
             android:hint="Search Messages"
             android:textColorHint="#7f7f7f"
@@ -53,7 +53,8 @@
             android:textColor="#ff7300"
             android:background="#d6d6d6"
             android:id="@+id/ContactsBTN"
-            android:drawableLeft="@drawable/profile_icon" />
+            android:drawableLeft="@drawable/profile_icon"
+            local:MvxBind="Click SwitchToContacts" />
     </LinearLayout>
     <LinearLayout
         android:layout_height="wrap_content"

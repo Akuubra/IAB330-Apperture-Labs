@@ -24,7 +24,7 @@
             android:layout_weight="0.88"
             android:id="@+id/SearchBTN"
             android:drawableLeft="@drawable/button_icon"
-            local:MvxBind="Text ContactSearch"/>
+            local:MvxBind="Text ContactSearch" />
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -45,7 +45,8 @@
             android:textColor="#0c5de2"
             android:background="#d6d6d6"
             android:id="@+id/MessagesBTN"
-            android:drawableLeft="@drawable/message_icon" />
+            android:drawableLeft="@drawable/message_icon"
+            local:MvxBind="Click SwitchToMessages"/>
         <Button
             android:text="Contacts"
             android:layout_width="0dp"
@@ -54,7 +55,7 @@
             android:textColor="#ff7300"
             android:background="#d6d6d6"
             android:id="@+id/ContactsBTN"
-            android:drawableLeft="@drawable/profile_icon" />
+            android:drawableLeft="@drawable/profile_icon"/>
     </LinearLayout>
     <LinearLayout
         android:layout_height="wrap_content"

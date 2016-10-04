@@ -1,4 +1,4 @@
-using MvvmCross.Core.ViewModels;
+ using MvvmCross.Core.ViewModels;
 using Application.Core.Models;
 using System;
 using System.Collections.ObjectModel;
@@ -46,8 +46,10 @@ namespace Application.Core.ViewModels
                 }
             }
         }
+        public ICommand SwitchToContacts { get; private set; }
         public FirstViewModel()
         {
+            SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>());
             Messages = new ObservableCollection<Message>()
             {
                 new Message("Jared", "^ Asked Location"),
