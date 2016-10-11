@@ -4,7 +4,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
-
+using Application.Core.Interfaces;
+using MvvmCross.Platform;
 
 /// <summary>
 /// Author: Sathya Amarsee
@@ -54,11 +55,20 @@ namespace Application.Core.ViewModels
             }
         }*/
 
-        public ICommand SelectContactCommand { get; private set; }
+        public ICommand SelectContactCommandProfile { get; private set; }
+        public ICommand SelectContactCommandToast { get; private set; }
+        public void SelectContactToast()
+        {
+            //actually send message
+            Mvx.Resolve<IToast>().Show("Message Sent!");
+        }
         public ICommand SwitchToMessages { get; private set; }
         public ContactsViewModel()
         {
-            SelectContactCommand = new MvxCommand<Contact>(selectedContact => ShowViewModel<UserProfileViewModel>(selectedContact));
+            SelectContactCommandToast = new MvxCommand(SelectContactToast);
+            //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
+
+            SelectContactCommandProfile = new MvxCommand<Contact>(selectedContact => ShowViewModel<UserProfileViewModel>(selectedContact));
             SwitchToMessages = new MvxCommand(()=> ShowViewModel<FirstViewModel>());
             Contacts = new ObservableCollection<Contact>()
             {

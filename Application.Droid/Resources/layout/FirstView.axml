@@ -25,7 +25,7 @@
             android:id="@+id/SearchBTN"
             android:drawableLeft="@drawable/button_icon" />
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/SettingsBTN"
             android:layout_weight="0.12"

@@ -2,6 +2,9 @@ using Android.Content;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform;
+using Application.Core.Interfaces;
+using Application.Droid.Services;
 
 namespace Application.Droid
 {
@@ -19,6 +22,11 @@ namespace Application.Droid
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
+        }
+        protected override void InitializeFirstChance()
+        {
+            Mvx.LazyConstructAndRegisterSingleton<IToast, ToastService>();
+            base.InitializeFirstChance();
         }
     }
 }
