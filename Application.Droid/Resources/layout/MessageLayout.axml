@@ -4,16 +4,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="fill_parent"
+    <LinearLayout
         android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:textColor="#000000"
-        local:MvxBind="Text MessageName" />
-    <TextView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textColor="#000000"
-        local:MvxBind="Text MessageContext" />
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:gravity="center_horizontal"
+        android:weightSum="1.0" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#7f7f7f" />
 </LinearLayout>
