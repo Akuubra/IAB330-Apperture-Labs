@@ -6,6 +6,9 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Application.Core.Interfaces;
 using MvvmCross.Platform;
+using SQLite.Net;
+using Application.Core.Database;
+using System.Collections.Generic;
 
 /// <summary>
 /// Author: Sathya Amarsee
@@ -20,9 +23,11 @@ namespace Application.Core.ViewModels
 
     public class ContactsViewModel : MvxViewModel
     {
+        private readonly IUserStoreDatabase database;
 
-        private ObservableCollection<Contact> contacts;
-        public ObservableCollection<Contact> Contacts
+        private ObservableCollection<UserStore> contacts = new ObservableCollection<UserStore>();
+        List<UserStore> _contacts = new List<UserStore>();
+        public ObservableCollection<UserStore> Contacts
         {
             get { return contacts; }
             set { SetProperty(ref contacts, value); }
@@ -41,6 +46,22 @@ namespace Application.Core.ViewModels
                     //SearchLocations(searchTerm);
                 }
             }
+        }
+
+        public async void  GetContacts()
+        {
+            var _contacts = await database.GetUsers(); /// need to add in wrapping for favourites and also separate details for groups
+            Contacts.Clear();
+            foreach (var user in _contacts)
+            {
+                Contacts.Add(user);
+
+            }
+        }
+
+        public void OnResume()
+        {
+            GetContacts();
         }
         /*private string contactFirstName;
         public string ContactFirstName
@@ -63,29 +84,33 @@ namespace Application.Core.ViewModels
             Mvx.Resolve<IToast>().Show("Message Sent!");
         }
         public ICommand SwitchToMessages { get; private set; }
-        public ContactsViewModel()
+        public ICommand CreateUser { get; private set; }
+        public ContactsViewModel(IUserStoreDatabase contactDatbase)
         {
+            database = contactDatbase;
             SelectContactCommandToast = new MvxCommand(SelectContactToast);
             //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
 
             SelectContactCommandProfile = new MvxCommand<Contact>(selectedContact => ShowViewModel<UserProfileViewModel>(selectedContact));
             SwitchToMessages = new MvxCommand(()=> ShowViewModel<FirstViewModel>());
-            Contacts = new ObservableCollection<Contact>()
-            {
-                new Contact("Alexander", "Henry", "A.Henry@gmail.com", false),
-                new Contact("Alex", "Manderson", "A.Manderson@gmail.com", false),
-                new Contact("Alex", "Nelly", "A.Nelly@gmail.com", false),
-                new Contact("Barry", "Mitchel", "B.Mitchel@gmail.com", false),
-                new Contact("Connor", "Ned", "C.Ned@gmail.com", false),
-                new Contact("Jack", "Hendy", "J.Hendy@gmail.com", true),
-                /*new Contact("Jake H.", false),
-                new Contact("Jared B.", true),
-                new Contact("Josh C.", false),
-                new Contact("Josh R.", false),
-                new Contact("Rachael F.", false),
-                new Contact("Sathya A.", true),
-                new Contact("Thomas D.", false),*/
-            };
+            CreateUser = new MvxCommand(() => ShowViewModel<CreateUserViewModel>());
+            //Contacts = new ObservableCollection<Contact>()
+            //{
+            //    new Contact("Alexander", "Henry", "A.Henry@gmail.com", false),
+            //    new Contact("Alex", "Manderson", "A.Manderson@gmail.com", false),
+            //    new Contact("Alex", "Nelly", "A.Nelly@gmail.com", false),
+            //    new Contact("Barry", "Mitchel", "B.Mitchel@gmail.com", false),
+            //    new Contact("Connor", "Ned", "C.Ned@gmail.com", false),
+            //    new Contact("Jack", "Hendy", "J.Hendy@gmail.com", true),
+            //    /*new Contact("Jake H.", false),
+            //    new Contact("Jared B.", true),
+            //    new Contact("Josh C.", false),
+            //    new Contact("Josh R.", false),
+            //    new Contact("Rachael F.", false),
+            //    new Contact("Sathya A.", true),
+            //    new Contact("Thomas D.", false),*/
+            //};
+            GetContacts();
         }
     }
 }

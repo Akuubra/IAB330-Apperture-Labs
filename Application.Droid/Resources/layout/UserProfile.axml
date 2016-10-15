@@ -43,7 +43,7 @@
         android:textColor="@android:color/black"
         android:textSize="20dp"
         local:MvxBind="Text Email, Mode=TwoWay" />
-    <!--<TextView
+<!--<TextView
         android:text="Password"
         android:id="@+id/PasswordTag"
         android:layout_height="wrap_content"

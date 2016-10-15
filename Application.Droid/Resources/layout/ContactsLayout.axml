@@ -24,7 +24,7 @@
             android:textColor="#000000"
             android:layout_weight="0.78"
             android:layout_marginLeft="20dp"
-            local:MvxBind="Text ContactFirstName" />
+            local:MvxBind="Text First_Name" />
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"

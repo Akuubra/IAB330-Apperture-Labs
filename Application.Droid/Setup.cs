@@ -5,6 +5,8 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform;
 using Application.Core.Interfaces;
 using Application.Droid.Services;
+using Application.Droid.Database;
+using Application.Core.Database;
 
 namespace Application.Droid
 {
@@ -26,6 +28,9 @@ namespace Application.Droid
         protected override void InitializeFirstChance()
         {
             Mvx.LazyConstructAndRegisterSingleton<IToast, ToastService>();
+            Mvx.LazyConstructAndRegisterSingleton<ISqlite, SqliteDroid>();
+            Mvx.LazyConstructAndRegisterSingleton<IAzureDatabase, AzureDatabase>();
+            Mvx.LazyConstructAndRegisterSingleton<IUserStoreDatabase, UserStoreDBAzure>();
             base.InitializeFirstChance();
         }
     }
