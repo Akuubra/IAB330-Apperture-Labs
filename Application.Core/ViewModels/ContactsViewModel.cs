@@ -92,7 +92,7 @@ namespace Application.Core.ViewModels
             //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
 
             SelectContactCommandProfile = new MvxCommand<Contact>(selectedContact => ShowViewModel<UserProfileViewModel>(selectedContact));
-            SwitchToMessages = new MvxCommand(()=> ShowViewModel<FirstViewModel>());
+            SwitchToMessages = new MvxCommand(()=> ShowViewModel<MessageViewModel>());
             CreateUser = new MvxCommand(() => ShowViewModel<CreateUserViewModel>());
             //Contacts = new ObservableCollection<Contact>()
             //{

@@ -144,7 +144,7 @@
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Views\CreateUserView.cs" />
     <Compile Include="Views\ContactsView.cs" />
-    <Compile Include="Views\FirstView.cs" />
+    <Compile Include="Views\MessageView.cs" />
     <Compile Include="Views\UserProfileView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -154,7 +154,7 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\SplashScreen.axml" />
-    <AndroidResource Include="Resources\layout\FirstView.axml">
+    <AndroidResource Include="Resources\layout\MessageView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\MessageLayout.axml">
