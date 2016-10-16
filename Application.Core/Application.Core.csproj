@@ -37,19 +37,24 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Database\MessageSentStoreDB.cs" />
     <Compile Include="Database\UserStoreDB.cs" />
+    <Compile Include="Database\MessageSentStoreDBAzure.cs" />
     <Compile Include="Database\UserStoreDBAzure.cs" />
     <Compile Include="Interfaces\IAzureDatabase.cs" />
+    <Compile Include="Interfaces\IMessageStoreDatabase.cs" />
     <Compile Include="Interfaces\IUserStoreDatabase.cs" />
     <Compile Include="Interfaces\ISqlite.cs" />
     <Compile Include="Interfaces\IToast.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\MessageSentStore.cs" />
     <Compile Include="Models\UserStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ContactsViewModel.cs" />
     <Compile Include="ViewModels\FirstViewModel.cs" />
     <Compile Include="ViewModels\CreateUserViewModel.cs" />
+    <Compile Include="ViewModels\SendMessageViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

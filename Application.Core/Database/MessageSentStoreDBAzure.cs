@@ -12,24 +12,24 @@ using System.Diagnostics;
 
 namespace Application.Core.Database
 {
-    public class UserStoreDBAzure : IUserStoreDatabase
+    public class MessageSentStoreDBAzure : IMessageStoreDatabase
     {
         private MobileServiceClient azureDatabase;
-        private IMobileServiceSyncTable<UserStore> azureSyncTable;
+        private IMobileServiceSyncTable<MessageSentStore> azureSyncTable;
    
-        public UserStoreDBAzure()
+        public MessageSentStoreDBAzure()
         {
             azureDatabase = Mvx.Resolve<IAzureDatabase>().GetMobileServiceClient();
-            azureSyncTable = azureDatabase.GetSyncTable<UserStore>();
+            azureSyncTable = azureDatabase.GetSyncTable<MessageSentStore>();
         }
 
-        public async Task<int> DeleteUser(object id)
+        public async Task<int> DeleteMessage(object id)
         {
             await SyncAsync(true);
-            var userStore = await azureSyncTable.Where(x => x.Id == (string)id).ToListAsync();
-            if (userStore.Any())
+            var messageSentStore = await azureSyncTable.Where(x => x.Id == (string)id).ToListAsync();
+            if (messageSentStore.Any())
             {
-                await azureSyncTable.DeleteAsync(userStore.FirstOrDefault());
+                await azureSyncTable.DeleteAsync(messageSentStore.FirstOrDefault());
                 await SyncAsync();
                 return 1;
             }
@@ -41,36 +41,37 @@ namespace Application.Core.Database
 
         }
 
-
-        public async Task<UserStore> GetSingleUser(string userID)
+        public async Task<int> UpdateMessage(MessageSentStore message)
         {
             await SyncAsync(true);
-            var user = await azureSyncTable.Where(x => x.Id == userID).ToListAsync();
+            var messageSentStore = await azureSyncTable.Where(x => x.Id == message.Id).ToListAsync();
+            if (messageSentStore.Any())
+            {
+                await azureSyncTable.UpdateAsync(message);
+                await SyncAsync();
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
 
-            return user.FirstOrDefault();
+
         }
 
-        public async Task<UserStore> GetSingleUserByName(string userName)
+        public async Task<IEnumerable<MessageSentStore>> GetMessages()
         {
             await SyncAsync(true);
-            var user = await azureSyncTable.Where(x => x.Username == userName).ToListAsync();
-
-            return user.FirstOrDefault();
+            var messages = await azureSyncTable.ToListAsync();
+            return messages;
         }
 
-        public async Task<IEnumerable<UserStore>> GetUsers()
-        {
-            await SyncAsync(true);
-            var users = await azureSyncTable.ToListAsync();
-            return users;
-        }
-
-        public async Task<int> InsertUser(UserStore user)
+        public async Task<int> InsertMessage(MessageSentStore message)
         {
             try
             {
                 await SyncAsync(true);
-                await azureSyncTable.InsertAsync(user);
+                await azureSyncTable.InsertAsync(message);
                 await SyncAsync();
                 return 1;
             }
@@ -91,7 +92,7 @@ namespace Application.Core.Database
                 await azureDatabase.SyncContext.PushAsync();
                 if (pullData)
                 {
-                    await azureSyncTable.PullAsync("allUsers", azureSyncTable.CreateQuery());
+                    await azureSyncTable.PullAsync("allMessages", azureSyncTable.CreateQuery());
                 }
             }catch(Exception e)
             {

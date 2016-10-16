@@ -14,8 +14,8 @@ namespace Application.Core.ViewModels
 {
 	public class UserProfileViewModel : MvxViewModel
 	{
-        private Contact selectedContact;
-        public void Init(Contact parameters)
+        private UserStore selectedContact;
+        public void Init(UserStore parameters)
         {
             selectedContact = parameters;
         }
@@ -57,8 +57,8 @@ namespace Application.Core.ViewModels
         public override void Start()
         {
             base.Start();
-            _userName = selectedContact.ContactFirstName + " " + selectedContact.ContactLastName;
-            _email = selectedContact.ContactEmail;
+            _userName = selectedContact.First_Name + " " + selectedContact.Last_Name;
+            _email = selectedContact.Email;
         }
     }
 }
