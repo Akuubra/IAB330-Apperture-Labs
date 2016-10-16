@@ -96,7 +96,7 @@ namespace Application.Core.ViewModels
 
             
 
-            SwitchToMessages = new MvxCommand(()=> ShowViewModel<FirstViewModel>());
+            SwitchToMessages = new MvxCommand(()=> ShowViewModel<MessageViewModel>());
             CreateUser = new MvxCommand(() => ShowViewModel<CreateUserViewModel>());
 
             GetContacts();

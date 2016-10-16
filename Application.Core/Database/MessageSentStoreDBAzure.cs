@@ -99,5 +99,16 @@ namespace Application.Core.Database
                 Debug.WriteLine(e);
             }
         }
+
+        public async Task<IEnumerable<MessageSentStore>> GetUsersMessages(string id)
+        {
+            await SyncAsync(true);
+            var messages = await azureSyncTable.Where(x => x.ReceivedBy == id).ToListAsync();
+            return messages;
+
+        }
+
+
+
     }
 }

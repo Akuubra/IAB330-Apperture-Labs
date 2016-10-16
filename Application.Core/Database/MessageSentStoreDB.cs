@@ -45,6 +45,14 @@ namespace Application.Core.Database
         {
             return database.Update(message);
         }
+
+
+        public async Task<IEnumerable<MessageSentStore>> GetUsersMessages(string id)
+        {
+            var messages = database.Table<MessageSentStore>().Where(x => x.ReceivedBy == id ).ToList();
+            return messages;
+
+        }
     }
 
 }

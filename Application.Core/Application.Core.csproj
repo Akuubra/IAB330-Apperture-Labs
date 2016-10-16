@@ -48,6 +48,7 @@
     <Compile Include="Interfaces\IToast.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\MessageWrapper.cs" />
     <Compile Include="Models\MessageSentStore.cs" />
     <Compile Include="Models\UserStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

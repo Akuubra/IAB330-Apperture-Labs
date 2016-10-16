@@ -16,5 +16,7 @@ namespace Application.Core.Interfaces
         Task<int> InsertMessage(MessageSentStore message);
 
         Task<int> UpdateMessage(MessageSentStore message);
+
+        Task<IEnumerable<MessageSentStore>> GetUsersMessages(string id);
     }
 }

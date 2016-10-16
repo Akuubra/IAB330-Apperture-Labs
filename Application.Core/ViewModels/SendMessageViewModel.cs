@@ -130,7 +130,7 @@ namespace Application.Core.ViewModels
 
             CreateMessage = new MvxCommand(() => {
                 createNewMessage();
-                ShowViewModel<FirstViewModel>();
+                ShowViewModel<MessageViewModel>();
                 Mvx.Resolve<IToast>().Show("Message Created");
             });
         }
