@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using Application.Core.Interfaces;
+using System.Diagnostics;
 /// <summary>
 /// Author: Jared Bagnall
 /// Student Number: n5686245
@@ -90,19 +91,24 @@ namespace Application.Core.ViewModels
         private async void addNewUser()
         {
             user();
-           await userStore.InsertUser(userTemp);
+            Debug.WriteLine(userTemp.First_Name.GetType());
+            Debug.WriteLine(userTemp.Last_Name.GetType());
+            Debug.WriteLine(userTemp.Username.GetType());
+            Debug.WriteLine(userTemp.Location.GetType());
+            Debug.WriteLine(userTemp.Email.GetType());
+            await userStore.InsertUser(userTemp);
         }
 
         private void user()
         {
             userTemp = new UserStore();
             //userTemp.Id = 1;
-            userTemp.Email = this.Email;
-            userTemp.Username = this.UserName;
-            userTemp.First_Name = this.First_Name;
-            userTemp.Last_Name = this.Last_Name;
-            userTemp.Location = this.Location;
-           
+            userTemp.Email = (string)this.Email;
+            userTemp.Username = (string)this.UserName;
+            userTemp.First_Name = (string)this.First_Name;
+            userTemp.Last_Name = (string)this.Last_Name;
+            userTemp.Location = (string)this.Location;
+          
         }
     }
 }

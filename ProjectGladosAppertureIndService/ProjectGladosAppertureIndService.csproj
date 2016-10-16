@@ -178,6 +178,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\ProjectGladosAppertureInd - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectGladosAppertureInd - Web Deploy.pubxml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
