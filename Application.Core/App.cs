@@ -11,7 +11,7 @@ namespace Application.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-			RegisterAppStart<ViewModels.MessageViewModel>();
+			RegisterAppStart<ViewModels.LoginViewModel>();
         }
     }
 }
