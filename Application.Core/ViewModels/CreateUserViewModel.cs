@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Application.Core.Interfaces;
 using System.Diagnostics;
+using MvvmCross.Platform;
 /// <summary>
 /// Author: Jared Bagnall
 /// Student Number: n5686245
@@ -85,17 +86,19 @@ namespace Application.Core.ViewModels
 
             AddUser = new MvxCommand(()=>{
                 addNewUser();
-                ShowViewModel<ContactsViewModel>(); });
+                ShowViewModel<ContactsViewModel>();
+                Mvx.Resolve<IToast>().Show("User Created");
+            });
         }
 
         private async void addNewUser()
         {
             user();
-            Debug.WriteLine(userTemp.First_Name.GetType());
-            Debug.WriteLine(userTemp.Last_Name.GetType());
-            Debug.WriteLine(userTemp.Username.GetType());
-            Debug.WriteLine(userTemp.Location.GetType());
-            Debug.WriteLine(userTemp.Email.GetType());
+            //Debug.WriteLine(userTemp.First_Name.GetType());
+            //Debug.WriteLine(userTemp.Last_Name.GetType());
+            //Debug.WriteLine(userTemp.Username.GetType());
+            //Debug.WriteLine(userTemp.Location.GetType());
+            //Debug.WriteLine(userTemp.Email.GetType());
             await userStore.InsertUser(userTemp);
         }
 

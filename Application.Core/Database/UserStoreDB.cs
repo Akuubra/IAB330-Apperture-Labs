@@ -20,15 +20,7 @@ namespace Application.Core.Database
             var sqlite = Mvx.Resolve<ISqlite>();
             database = sqlite.GetConnection();
             database.CreateTable<UserStore>();
-
-            //UserStore user = new UserStore();
-            //user.Email = "Jared@jared.com";
-            //user.First_Name = "Jared";
-            //user.Last_Name = "Bagnall";
-            //user.Location = "Level 11";
-            //user.Username = "deraj";
-
-            //database.Insert(user);
+            
         }
 
         public async Task<IEnumerable<UserStore>>  GetUsers()
@@ -47,7 +39,18 @@ namespace Application.Core.Database
         {
             return database.Delete<UserStore>(Convert.ToInt16(id));
         }
-       
-        
+
+        public async Task<UserStore> GetSingleUser(string userID)
+        {
+            var user = database.Table<UserStore>().Where(x => x.Id == userID);
+            return user.FirstOrDefault();
+        }
+
+        public async Task<UserStore> GetSingleUserByName(string userName)
+        {
+            var user = database.Table<UserStore>().ToList();
+            user.Where(x => x.Username == userName);
+            return user.FirstOrDefault();
+        }
     }
 }

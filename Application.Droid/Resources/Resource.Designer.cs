@@ -161,12 +161,6 @@ namespace Application.Droid
 			// aapt resource value: 0x7f050004
 			public const int SettingsBTN = 2131034116;
 			
-			// aapt resource value: 0x7f050014
-			public const int button1 = 2131034132;
-			
-			// aapt resource value: 0x7f050013
-			public const int editText1 = 2131034131;
-			
 			// aapt resource value: 0x7f05000a
 			public const int firstNameField = 2131034122;
 			
@@ -182,6 +176,18 @@ namespace Application.Droid
 			// aapt resource value: 0x7f05000b
 			public const int lastNameTag = 2131034123;
 			
+			// aapt resource value: 0x7f050014
+			public const int locationField = 2131034132;
+			
+			// aapt resource value: 0x7f050013
+			public const int locationTag = 2131034131;
+			
+			// aapt resource value: 0x7f050016
+			public const int meetField = 2131034134;
+			
+			// aapt resource value: 0x7f050015
+			public const int meetTag = 2131034133;
+			
 			// aapt resource value: 0x7f050008
 			public const int nameField = 2131034120;
 			
@@ -191,8 +197,8 @@ namespace Application.Droid
 			// aapt resource value: 0x7f050010
 			public const int passwordField = 2131034128;
 			
-			// aapt resource value: 0x7f050015
-			public const int profilePicture = 2131034133;
+			// aapt resource value: 0x7f050017
+			public const int profilePicture = 2131034135;
 			
 			static Id()
 			{
@@ -217,13 +223,13 @@ namespace Application.Droid
 			public const int CreateUserView = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int LoginLayout = 2130903043;
+			public const int MessageLayout = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int MessageLayout = 2130903044;
+			public const int MessageView = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int MessageView = 2130903045;
+			public const int SendMessageView = 2130903045;
 			
 			// aapt resource value: 0x7f030006
 			public const int SplashScreen = 2130903046;

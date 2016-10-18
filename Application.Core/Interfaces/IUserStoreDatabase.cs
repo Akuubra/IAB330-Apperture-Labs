@@ -15,6 +15,7 @@ namespace Application.Core.Interfaces
 
         Task<int> InsertUser(UserStore user);
 
-
+        Task<UserStore> GetSingleUser(string userID);
+        Task<UserStore> GetSingleUserByName(string userName);
     }
 }

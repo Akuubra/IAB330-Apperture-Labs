@@ -41,6 +41,7 @@ namespace Application.Droid.Database
             }
             var store = new MobileServiceSQLiteStore(path);
             store.DefineTable<UserStore>();
+            store.DefineTable<MessageSentStore>();
             azureDatabse.SyncContext.InitializeAsync(store);
         }
     }

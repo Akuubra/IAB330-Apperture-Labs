@@ -155,11 +155,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Startup.MobileApp.cs" />
+    <Compile Include="Controllers\MessageSentStoreController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\UserStoreController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
+    <Compile Include="DataObjects\MessageSentStore.cs" />
     <Compile Include="DataObjects\UserStore.cs" />
+    <Compile Include="Models\MessagesSentStoreContext.cs" />
     <Compile Include="Models\ProjectGladosAppertureIndContext.cs" />
     <Compile Include="Models\UserStoreContext.cs" />
     <Compile Include="Startup.cs" />

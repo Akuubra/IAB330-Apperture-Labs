@@ -26,7 +26,7 @@ namespace Application.Core.Database
         public async Task<int> DeleteUser(object id)
         {
             await SyncAsync(true);
-            var userStore = await azureSyncTable.Where(x => x.Username == (string)id).ToListAsync();
+            var userStore = await azureSyncTable.Where(x => x.Id == (string)id).ToListAsync();
             if (userStore.Any())
             {
                 await azureSyncTable.DeleteAsync(userStore.FirstOrDefault());
@@ -41,6 +41,22 @@ namespace Application.Core.Database
 
         }
 
+
+        public async Task<UserStore> GetSingleUser(string userID)
+        {
+            await SyncAsync(true);
+            var user = await azureSyncTable.Where(x => x.Id == userID).ToListAsync();
+
+            return user.FirstOrDefault();
+        }
+
+        public async Task<UserStore> GetSingleUserByName(string userName)
+        {
+            await SyncAsync(true);
+            var user = await azureSyncTable.Where(x => x.Username == userName).ToListAsync();
+
+            return user.FirstOrDefault();
+        }
 
         public async Task<IEnumerable<UserStore>> GetUsers()
         {

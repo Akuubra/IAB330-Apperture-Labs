@@ -142,9 +142,9 @@
     <Compile Include="Services\ToastService.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreen.cs" />
+    <Compile Include="Views\SendMessageView.cs" />
     <Compile Include="Views\CreateUserView.cs" />
     <Compile Include="Views\ContactsView.cs" />
-    <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\MessageView.cs" />
     <Compile Include="Views\UserProfileView.cs" />
   </ItemGroup>
@@ -167,11 +167,13 @@
     <AndroidResource Include="Resources\layout\ContactsLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\UserProfile.axml" />
+    <AndroidResource Include="Resources\layout\UserProfile.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\CreateUserView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\LoginLayout.axml">
+    <AndroidResource Include="Resources\layout\SendMessageView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -88,28 +88,17 @@ namespace Application.Core.ViewModels
         public ContactsViewModel(IUserStoreDatabase contactDatbase)
         {
             database = contactDatbase;
-            SelectContactCommandToast = new MvxCommand(SelectContactToast);
+            SelectContactCommandToast = new MvxCommand<UserStore>(selectedContact => ShowViewModel<UserProfileViewModel>(selectedContact));
             //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
 
-            SelectContactCommandProfile = new MvxCommand<Contact>(selectedContact => ShowViewModel<UserProfileViewModel>(selectedContact));
+            SelectContactCommandProfile = new MvxCommand<UserStore>(selectedContact => ShowViewModel<SendMessageViewModel>(selectedContact));
+
+
+            
+
             SwitchToMessages = new MvxCommand(()=> ShowViewModel<MessageViewModel>());
             CreateUser = new MvxCommand(() => ShowViewModel<CreateUserViewModel>());
-            //Contacts = new ObservableCollection<Contact>()
-            //{
-            //    new Contact("Alexander", "Henry", "A.Henry@gmail.com", false),
-            //    new Contact("Alex", "Manderson", "A.Manderson@gmail.com", false),
-            //    new Contact("Alex", "Nelly", "A.Nelly@gmail.com", false),
-            //    new Contact("Barry", "Mitchel", "B.Mitchel@gmail.com", false),
-            //    new Contact("Connor", "Ned", "C.Ned@gmail.com", false),
-            //    new Contact("Jack", "Hendy", "J.Hendy@gmail.com", true),
-            //    /*new Contact("Jake H.", false),
-            //    new Contact("Jared B.", true),
-            //    new Contact("Josh C.", false),
-            //    new Contact("Josh R.", false),
-            //    new Contact("Rachael F.", false),
-            //    new Contact("Sathya A.", true),
-            //    new Contact("Thomas D.", false),*/
-            //};
+
             GetContacts();
         }
     }

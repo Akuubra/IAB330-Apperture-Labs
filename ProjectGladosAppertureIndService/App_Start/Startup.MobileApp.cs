@@ -28,7 +28,8 @@ namespace ProjectGladosAppertureIndService
             // Use Entity Framework Code First to create database tables based on your DbContext
             Database.SetInitializer(new ProjectGladosAppertureIndInitializer());
             Database.SetInitializer(new UserStoreInitializer());
-
+            Database.SetInitializer(new MessagesSentStoreInitializer());
+            
             // To prevent Entity Framework from modifying your database schema, use a null database initializer
             // Database.SetInitializer<ProjectGladosAppertureIndContext>(null);
 
@@ -81,9 +82,29 @@ namespace ProjectGladosAppertureIndService
 
             };
 
-            foreach (UserStore todoItem in users)
+            foreach (UserStore user in users)
             {
-                context.Set<UserStore>().Add(todoItem);
+                context.Set<UserStore>().Add(user);
+            }
+            base.Seed(context);
+        }
+    }
+
+    public class MessagesSentStoreInitializer : CreateDatabaseIfNotExists<MessagesSentStoreContext>
+    {
+        protected override void Seed(MessagesSentStoreContext context)
+        {
+            List<MessageSentStore> messages = new List<MessageSentStore>
+            {
+               new MessageSentStore { Sender = "deraj", ReceivedBy = "Paul", Location = "Y", Meet = "Level 1", Time = "1pm" },
+               new MessageSentStore { Sender = "deraj",  ReceivedBy = "Jim", Location = "Y", Meet = "Level 1", Time = "1pm" },
+               new MessageSentStore { Sender = "deraj",  ReceivedBy = "Tom", Location = "Y", Meet = "Level 1", Time = "1pm"},
+
+            };
+
+            foreach (MessageSentStore message in messages)
+            {
+                context.Set<MessageSentStore>().Add(message);
             }
             base.Seed(context);
         }
