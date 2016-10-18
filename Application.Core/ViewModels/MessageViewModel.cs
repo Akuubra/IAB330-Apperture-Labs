@@ -28,19 +28,16 @@ namespace Application.Core.ViewModels
         private UserStore loggedInUser;
 
 
-        public void Init()
-        {
+        //public void Init()
+        //{
             
-         //   getLoggedInUser();
+        //   // getLoggedInUser();
         //    GetMessages();
-        }
+        //}
 
-        public async Task<int> GetMessages()
+        public async void GetMessages()
         {
-            while ( loggedInUser==null)
-            {
-                
-            }
+           
             var rawMessages = await messageStore.GetUsersMessages(loggedInUser.Id);
             
             Messages.Clear();
@@ -60,18 +57,21 @@ namespace Application.Core.ViewModels
                 
 
             }
-            return 1;
         }
+
+        //public async void GetDetails()
 
         public async  void OnResume()
         {
-         //   await GetMessages();
+           await getLoggedInUser();
         }
 
-        private async void getLoggedInUser()
+        private async Task<UserStore> getLoggedInUser()
         {
-            loggedInUser = await userStore.GetSingleUserByName("deraj");
             
+            loggedInUser =  await Task.FromResult(await userStore.GetSingleUserByName("deraj"));
+            GetMessages();
+            return loggedInUser;
         }
         public ObservableCollection<MessageWrapper> Messages
         {
@@ -106,15 +106,13 @@ namespace Application.Core.ViewModels
 
 
         public ICommand SwitchToContacts { get; private set; }
-        public ICommand ShowUserPRofile { get; private set; }
         public  MessageViewModel(IMessageStoreDatabase messageStore, IUserStoreDatabase userStore)
         {
             this.messageStore = messageStore;
             this.userStore = userStore;
             SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>());
-            //ShowUserPRofile = new MvxCommand(() => )
-            //getLoggedInUser();
-            //GetMessages();
+            getLoggedInUser() ;
+             
             /*Messages = new ObservableCollection<Message>()
             {
                 new Message("Jared", "^ Asked Location"),

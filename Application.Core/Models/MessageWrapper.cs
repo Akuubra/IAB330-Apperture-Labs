@@ -15,36 +15,37 @@ namespace Application.Core.Models
         public MessageWrapper(MessageSentStore message, string receiver, bool sender)
         {
             MessageName = receiver;
-            if (sender)
-            {
-                if (message.Location == "Y" & message.Meet == "Y")
-                {
-                    MessageContext = string.Format("> Requested Location and Meet at {0}", message.Time);
-                }else if (message.Location == "N" & message.Meet == "Y")
-                {
-                    MessageContext = string.Format("> Requested to Meet at {0}", message.Time);
-                    
-                }else
-                {
-                    MessageContext = string.Format("> Requested Location");
-                }
-            }
-            else
-            {
-                if (message.Location == "Y" & message.Meet == "Y")
-                {
-                    MessageContext = string.Format("< Requested Location and Meet at {0}", message.Time);
-                }
-                else if (message.Location == "N" & message.Meet == "Y")
-                {
-                    MessageContext = string.Format("< Requested to Meet at {0}", message.Time);
+            MessageContext = string.Format("> Requested Location");
+            //if (sender)
+            //{
+            //    if (message.Location == "Y" & message.Meet == "Y")
+            //    {
+            //        MessageContext = string.Format("> Requested Location and Meet at {0}", message.Time);
+            //    }else if (message.Location == "N" & message.Meet == "Y")
+            //    {
+            //        MessageContext = string.Format("> Requested to Meet at {0}", message.Time);
 
-                }
-                else
-                {
-                    MessageContext = string.Format("< Requested Location");
-                }
-            }
+            //    }else
+            //    {
+            //        MessageContext = string.Format("> Requested Location");
+            //    }
+            //}
+            //else
+            //{
+            //    if (message.Location == "Y" & message.Meet == "Y")
+            //    {
+            //        MessageContext = string.Format("< Requested Location and Meet at {0}", message.Time);
+            //    }
+            //    else if (message.Location == "N" & message.Meet == "Y")
+            //    {
+            //        MessageContext = string.Format("< Requested to Meet at {0}", message.Time);
+
+            //    }
+            //    else
+            //    {
+            //        MessageContext = string.Format("< Requested Location");
+            //    }
+            //}
 
         }
     }

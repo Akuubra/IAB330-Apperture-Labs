@@ -16,7 +16,7 @@ namespace Application.Core.Database
     {
         private MobileServiceClient azureDatabase;
         private IMobileServiceSyncTable<MessageSentStore> azureSyncTable;
-   
+    
         public MessageSentStoreDBAzure()
         {
             azureDatabase = Mvx.Resolve<IAzureDatabase>().GetMobileServiceClient();
