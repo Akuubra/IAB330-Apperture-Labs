@@ -19,19 +19,19 @@
         android:textColor="@android:color/black"
         android:textSize="20dp"
         local:MvxBind="Text Receiver_First_Name" />
- 
-  
     <CheckBox
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Request Location?"
         android:textColor="@android:color/black"
+        android:textSize="20dp"
         local:MvxBind="Checked LocationSet" />
     <CheckBox
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Request Meeting?"
         android:textColor="@android:color/black"
+        android:textSize="20dp"
         local:MvxBind="Checked MeetingSet" />
 <!--<TextView
         android:text="Meet"
@@ -47,21 +47,20 @@
         android:textColor="@android:color/black"
         android:textSize="20dp"
         local:MvxBind="Text Meet, Mode=TwoWay" />-->
-  <TextView
+    <TextView
         android:text="Time:"
         android:id="@+id/tmeTag"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:textColor="@android:color/black"
         android:textSize="20dp" />
-  <EditText
-      android:id="@+id/timeField"
-      android:layout_height="wrap_content"
-      android:layout_width="fill_parent"
-      android:textColor="@android:color/black"
-      android:visibility="{Binding MeetingSet}"
-      android:textSize="20dp"
-      local:MvxBind="Text Time, Mode=TwoWay" />
+    <EditText
+        android:id="@+id/timeField"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        local:MvxBind="Text Time, Mode=TwoWay" />
     <Button
         android:text="Create"
         android:layout_height="wrap_content"

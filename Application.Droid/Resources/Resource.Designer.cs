@@ -164,6 +164,9 @@ namespace Application.Droid
 			// aapt resource value: 0x7f050014
 			public const int button1 = 2131034132;
 			
+			// aapt resource value: 0x7f050015
+			public const int button2 = 2131034133;
+			
 			// aapt resource value: 0x7f050013
 			public const int editText1 = 2131034131;
 			
@@ -191,8 +194,14 @@ namespace Application.Droid
 			// aapt resource value: 0x7f050010
 			public const int passwordField = 2131034128;
 			
-			// aapt resource value: 0x7f050015
-			public const int profilePicture = 2131034133;
+			// aapt resource value: 0x7f050018
+			public const int profilePicture = 2131034136;
+			
+			// aapt resource value: 0x7f050017
+			public const int timeField = 2131034135;
+			
+			// aapt resource value: 0x7f050016
+			public const int tmeTag = 2131034134;
 			
 			static Id()
 			{

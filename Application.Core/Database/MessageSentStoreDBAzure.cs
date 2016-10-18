@@ -102,8 +102,17 @@ namespace Application.Core.Database
 
         public async Task<IEnumerable<MessageSentStore>> GetUsersMessages(string id)
         {
+
+            Debug.WriteLine(id);
             await SyncAsync(true);
             var messages = await azureSyncTable.Where(x => x.ReceivedBy == id).ToListAsync();
+            var messages2 = await azureSyncTable.Where(x => x.Sender == id).ToListAsync();
+
+            foreach(var message in messages2)
+            {
+                messages.Add(message);
+            }
+
             return messages;
 
         }

@@ -36,7 +36,7 @@ namespace Application.Core.ViewModels
             //if okay
             if (!(tempUser == null))
             {
-                ShowViewModel<MessageViewModel>(tempUser);
+                ShowViewModel<MessageViewModel>(new { currentUser = tempUser.Id });
             }else
             {
                 Mvx.Resolve<IToast>().Show("Login Failed!");

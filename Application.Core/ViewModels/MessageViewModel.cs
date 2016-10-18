@@ -27,24 +27,13 @@ namespace Application.Core.ViewModels
 
         private UserStore loggedInUser;
 
-        public void Init(UserStore parameters)
+        public async Task<int> Init(string currentUser)
         {
-            loggedInUser = parameters;
-            if(loggedInUser == null)
-            {
-                GetLoggedInUser();
-            }else
-            {
-                GetMessages();
-            }
+            loggedInUser = await userStore.GetSingleUser( currentUser);
+            GetMessages();
+            return 1;
         }
-
-        //public void Init()
-        //{
-
-        //   // getLoggedInUser();
-        //    GetMessages();
-        //}
+             
 
         public async void GetMessages()
         {
@@ -69,51 +58,21 @@ namespace Application.Core.ViewModels
 
             }
         }
+        
 
-        //public async void GetDetails()
-
-        public async  void OnResume()
-        {
-           await GetLoggedInUser();
-        }
-
-        private async Task<UserStore> GetLoggedInUser()
-        {
+        //private async Task<UserStore> GetLoggedInUser()
+        //{
             
-            loggedInUser =  await Task.FromResult(await userStore.GetSingleUserByName("deraj"));
-            GetMessages();
-            return loggedInUser;
-        }
+        //    loggedInUser =  await Task.FromResult(await userStore.GetSingleUserByName("deraj"));
+        //    GetMessages();
+        //    return loggedInUser;
+        //}
         public ObservableCollection<MessageWrapper> Messages
         {
             get { return messages; }
             set { SetProperty(ref messages, value); }
         }
-        //private string messageName;
-        //public string MessageName
-        //{
-        //    get { return messageName; }
-        //    set
-        //    {
-        //        if (value != null)
-        //        {
-        //            SetProperty(ref messageName, value);
-        //        }
-        //    }
-        //}
 
-        //private string messageContext;
-        //public string MessageContext
-        //{
-        //    get { return messageContext; }
-        //    set
-        //    {
-        //        if (value != null)
-        //        {
-        //            SetProperty(ref messageContext, value);
-        //        }
-        //    }
-        //}
 
 
         public ICommand SwitchToContacts { get; private set; }
@@ -121,27 +80,12 @@ namespace Application.Core.ViewModels
         {
             this.messageStore = messageStore;
             this.userStore = userStore;
-            SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>());
-            //getLoggedInUser() ;
-             
-            /*Messages = new ObservableCollection<Message>()
+            SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>( new {  currentUser = loggedInUser.Id }));
+            if(!(loggedInUser == null))
             {
-                new Message("Jared", "^ Asked Location"),
-                new Message("Sathya", "^ Asked to Meet: 10:30am"),
-                new Message("John; Mary; Sam", "> Asked to Meet: 12:30am"),
-                new Message("Jake", "> Asked Location"),
-                new Message("Jake", "^ Asked to Meet: 1:30pm"),
-                new Message("Jared", "^ Asked Location"),
-                new Message("Sathya", "^ Asked to Meet: 10:30am"),
-                new Message("John; Mary; Sam", "> Asked to Meet: 12:30am"),
-                new Message("Jake", "> Asked Location"),
-                new Message("Jake", "^ Asked to Meet: 1:30pm"),
-                new Message("Jared", "^ Asked Location"),
-                new Message("Sathya", "^ Asked to Meet: 10:30am"),
-                new Message("John; Mary; Sam", "> Asked to Meet: 12:30am"),
-                new Message("Jake", "> Asked Location"),
-                new Message("Jake", "^ Asked to Meet: 1:30pm")
-            };*/
+                GetMessages();
+            }
+    
         }
 
     }

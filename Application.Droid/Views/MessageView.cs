@@ -1,6 +1,7 @@
 using Android.App;
 using Android.OS;
 using MvvmCross.Droid.Views;
+using Application.Core.ViewModels;
 
 namespace Application.Droid.Views
 {
@@ -12,5 +13,6 @@ namespace Application.Droid.Views
             base.OnCreate(bundle);
 			SetContentView(Resource.Layout.MessageView);
         }
+
     }
 }

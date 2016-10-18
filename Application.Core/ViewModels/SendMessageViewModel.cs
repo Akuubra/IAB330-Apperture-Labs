@@ -25,16 +25,22 @@ namespace Application.Core.ViewModels
         private UserStore loggedInUser;
 
         private UserStore selectedContact;
-        public void Init(UserStore parameters)
+     
+        public async Task<int> Init(string receiver, string sender)
         {
-            selectedContact = parameters;
-            getLoggedInUser();
+            selectedContact = await userStore.GetSingleUser(receiver);
+            loggedInUser = await userStore.GetSingleUser(sender);
+            Sender = loggedInUser.Id;
+            UserName = selectedContact.Username;
+            Receiver_First_Name = selectedContact.First_Name;
+            Receiver = selectedContact.Id;
+            return 1;
         }
-
-        private async void getLoggedInUser()
+      
+        private void getLoggedInUser()
         {
-            loggedInUser = await userStore.GetSingleUserByName("deraj");
-            _sender = loggedInUser.Id;
+           // loggedInUser = await userStore.GetSingleUserByName("deraj");
+            
         }
 
         private string _userName;
@@ -90,25 +96,12 @@ namespace Application.Core.ViewModels
             set { SetProperty(ref _receiver_first_name, value); }
         }
 
-
-        public override void Start()
-        {
-            base.Start();
-            _userName = selectedContact.Username;
-            _receiver_first_name = selectedContact.First_Name; 
-            _receiver = selectedContact.Id;
-
-            //_sender = getUserDetails();
-        }
-
-        private string getUserDetails()
-        {
-            _sender  = this.loggedInUser.Id;
-            return _sender;
-        }
+              
 
         private void  generateMessage()
         {
+            SetLocation();
+            SetMeeting();
             message = new MessageSentStore();            
             message.ReceivedBy = this.Receiver;
             message.Sender = this.Sender;
@@ -130,20 +123,16 @@ namespace Application.Core.ViewModels
 
             CreateMessage = new MvxCommand(() => {
                 createNewMessage();
-                ShowViewModel<MessageViewModel>();
+                ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });
                 Mvx.Resolve<IToast>().Show("Message Sent!");
             });
         }
 
-        private async void createNewMessage()
+        private async Task<int> createNewMessage()
         {
             generateMessage();
-            //Debug.WriteLine(userTemp.First_Name.GetType());
-            //Debug.WriteLine(userTemp.Last_Name.GetType());
-            //Debug.WriteLine(userTemp.Username.GetType());
-            //Debug.WriteLine(userTemp.Location.GetType());
-            //Debug.WriteLine(userTemp.Email.GetType());
             await messageStore.InsertMessage(message);
+            return 1;
         }
 
 
@@ -163,11 +152,11 @@ namespace Application.Core.ViewModels
         {
             if (_locationSet)
             {
-                message.Location = "Y";
+                _location = "Y";
             }
             else
             {
-                message.Location = "N";
+                _location = "N";
             }
         }
 
@@ -185,11 +174,11 @@ namespace Application.Core.ViewModels
         {
             if (_meetingSet)
             {
-                message.Meet = "Y";
+                _meet = "Y";
             }
             else
             {
-                message.Meet = "N";
+                _meet = "N";
             }
         }
     }

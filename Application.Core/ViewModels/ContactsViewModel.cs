@@ -9,6 +9,7 @@ using MvvmCross.Platform;
 using SQLite.Net;
 using Application.Core.Database;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 /// <summary>
 /// Author: Sathya Amarsee
@@ -24,7 +25,7 @@ namespace Application.Core.ViewModels
     public class ContactsViewModel : MvxViewModel
     {
         private readonly IUserStoreDatabase database;
-
+        UserStore loggedInUser;
         private ObservableCollection<UserStore> contacts = new ObservableCollection<UserStore>();
         List<UserStore> _contacts = new List<UserStore>();
         public ObservableCollection<UserStore> Contacts
@@ -46,6 +47,14 @@ namespace Application.Core.ViewModels
                     //SearchLocations(searchTerm);
                 }
             }
+        }
+
+        public async Task<int> Init(string currentUser)
+        {
+            loggedInUser = await database.GetSingleUser(currentUser);
+
+            GetContacts();
+            return 1;
         }
 
         public async void  GetContacts()
@@ -92,15 +101,14 @@ namespace Application.Core.ViewModels
             SelectContactCommandToast = new MvxCommand<UserStore>(selectedContact => ShowViewModel<UserProfileViewModel>(selectedContact));
             //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
 
-            SelectContactCommandProfile = new MvxCommand<UserStore>(selectedContact => ShowViewModel<SendMessageViewModel>(selectedContact));
+            SelectContactCommandProfile = new MvxCommand<UserStore>(selectedContact => ShowViewModel<SendMessageViewModel>(new { receiver = selectedContact.Id , sender = loggedInUser.Id }));
 
 
             
 
-            SwitchToMessages = new MvxCommand(()=> ShowViewModel<MessageViewModel>());
+            SwitchToMessages = new MvxCommand(()=> ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id }));
             
 
-            GetContacts();
         }
     }
 }

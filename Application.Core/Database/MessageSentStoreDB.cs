@@ -4,6 +4,7 @@ using MvvmCross.Platform;
 using SQLite.Net;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,7 +50,15 @@ namespace Application.Core.Database
 
         public async Task<IEnumerable<MessageSentStore>> GetUsersMessages(string id)
         {
-            var messages = database.Table<MessageSentStore>().Where(x => x.ReceivedBy == id ).ToList();
+
+            Debug.WriteLine(id);
+            var messages =  database.Table<MessageSentStore>().Where(x => x.ReceivedBy == id).ToList();
+            var messages2 =  database.Table<MessageSentStore>().Where(x => x.Sender == id).ToList();
+
+            foreach (var message in messages2)
+            {
+                messages.Add(message);
+            }
             return messages;
 
         }
