@@ -63,7 +63,7 @@ namespace Application.Core.ViewModels
 
         public async  void OnResume()
         {
-            GetMessages();
+           await getLoggedInUser();
         }
 
         private async Task<UserStore> getLoggedInUser()
