@@ -11,23 +11,31 @@
         android:textColorHint="#7f7f7f"
         android:textColor="#000000"
         android:maxLength="15"
-        android:minEms ="10"
+        android:minEms="10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText1" />
+        android:id="@+id/editText1"
+        local:MvxBind="Text UserName, Mode=TwoWay" />
     <EditText
         android:hint="Password"
         android:textColorHint="#7f7f7f"
         android:textColor="#000000"
         android:maxLength="15"
-        android:minEms ="10"
+        android:minEms="10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        local:MvxBind="Text Password, Mode=TwoWay" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
         android:id="@+id/button1"
-        local:MvxBind="ItemClick Login"/>
+        local:MvxBind="Click Login" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create User"
+        android:id="@+id/button2"
+        local:MvxBind="Click CreateUser" />
 </LinearLayout>

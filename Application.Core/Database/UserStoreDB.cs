@@ -52,5 +52,11 @@ namespace Application.Core.Database
             user.Where(x => x.Username == userName);
             return user.FirstOrDefault();
         }
+        public async Task<UserStore> GetUserLogin(string userName, string password)
+        {
+            var user = database.Table<UserStore>().ToList();
+            user.Where(x => x.Username == userName && x.Password == password);
+            return user.FirstOrDefault();
+        }
     }
 }

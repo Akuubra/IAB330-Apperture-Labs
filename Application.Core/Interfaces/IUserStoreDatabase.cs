@@ -17,5 +17,7 @@ namespace Application.Core.Interfaces
 
         Task<UserStore> GetSingleUser(string userID);
         Task<UserStore> GetSingleUserByName(string userName);
+
+        Task<UserStore> GetUserLogin(string userName, string password);
     }
 }

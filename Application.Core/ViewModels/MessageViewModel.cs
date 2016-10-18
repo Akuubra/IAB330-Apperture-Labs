@@ -106,11 +106,13 @@ namespace Application.Core.ViewModels
 
 
         public ICommand SwitchToContacts { get; private set; }
+        public ICommand ShowUserPRofile { get; private set; }
         public  MessageViewModel(IMessageStoreDatabase messageStore, IUserStoreDatabase userStore)
         {
             this.messageStore = messageStore;
             this.userStore = userStore;
             SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>());
+            //ShowUserPRofile = new MvxCommand(() => )
             //getLoggedInUser();
             //GetMessages();
             /*Messages = new ObservableCollection<Message>()
