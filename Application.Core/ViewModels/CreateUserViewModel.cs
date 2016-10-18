@@ -113,6 +113,8 @@ namespace Application.Core.ViewModels
             userTemp.Location = (string)this.Location;
           
         }
+
+       
     }
 }
 

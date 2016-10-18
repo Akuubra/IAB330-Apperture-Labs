@@ -145,6 +145,49 @@ namespace Application.Core.ViewModels
             //Debug.WriteLine(userTemp.Email.GetType());
             await messageStore.InsertMessage(message);
         }
+
+
+      
+            private bool _locationSet;
+            public bool LocationSet
+            {
+                get { return _locationSet; }
+                set { SetProperty(ref _locationSet, value);
+                    RaiseCanExecuteChanged(); }
+            }
+
+            private void RaiseCanExecuteChanged()
+            {
+                if (_locationSetCommand != null)
+                _locationSetCommand.RaiseCanExecuteChanged();
+            }
+
+            private MvxCommand _locationSetCommand;
+            public ICommand LocationSetCommand
+            {
+                get
+                {
+                _locationSetCommand = _locationSetCommand ?? new MvxCommand(DoMyCommand, CanProcessCommand);
+                    return _locationSetCommand;
+                }
+            }
+
+            private bool CanProcessCommand()
+            {
+                return LocationSet;
+            }
+
+        private void DoMyCommand()
+        {
+            Count++;
+        }
+
+        private int _count;
+        public int Count
+        {
+            get { return _count; }
+            set { _count = value; RaisePropertyChanged(() => Count); }
+        }
     }
 }
 
