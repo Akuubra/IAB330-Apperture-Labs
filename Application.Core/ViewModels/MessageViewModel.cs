@@ -16,6 +16,8 @@ namespace Application.Core.ViewModels
     public class MessageViewModel 
         : MvxViewModel
     {
+        private UserStore user;
+
         private ObservableCollection<Message> messages;
         public ObservableCollection<Message> Messages
         {
@@ -47,10 +49,17 @@ namespace Application.Core.ViewModels
             }
         }
         public ICommand SwitchToContacts { get; private set; }
+        /*public void SwitchToContacts()
+        {
+            
+        }*/
+        //public ICommand SwitchToLogin { get; private set; }
         public MessageViewModel()
         {
             SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>());
-            /*Messages = new ObservableCollection<Message>()
+            
+            //SwitchToLogin = new MvxCommand(() => ShowViewModel<LoginViewModel>());
+            Messages = new ObservableCollection<Message>()
             {
                 new Message("Jared", "^ Asked Location"),
                 new Message("Sathya", "^ Asked to Meet: 10:30am"),
@@ -67,7 +76,7 @@ namespace Application.Core.ViewModels
                 new Message("John; Mary; Sam", "> Asked to Meet: 12:30am"),
                 new Message("Jake", "> Asked Location"),
                 new Message("Jake", "^ Asked to Meet: 1:30pm")
-            };*/
+            };
         }
 
     }

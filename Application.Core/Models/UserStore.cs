@@ -21,5 +21,7 @@ namespace Application.Core.Models
         public string Location { get; set; }
 
 
+
+
     }
 }

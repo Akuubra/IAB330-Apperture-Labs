@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#d6d6d6">
+    <EditText
+        android:hint="User Name"
+        android:textColorHint="#7f7f7f"
+        android:textColor="#000000"
+        android:maxLength="15"
+        android:minEms ="10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText1" />
+    <EditText
+        android:hint="Password"
+        android:textColorHint="#7f7f7f"
+        android:textColor="#000000"
+        android:maxLength="15"
+        android:minEms ="10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:id="@+id/button1"
+        local:MvxBind="ItemClick Login"/>
+</LinearLayout>
