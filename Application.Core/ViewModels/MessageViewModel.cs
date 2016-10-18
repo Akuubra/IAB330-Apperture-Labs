@@ -27,10 +27,21 @@ namespace Application.Core.ViewModels
 
         private UserStore loggedInUser;
 
+        public void Init(UserStore parameters)
+        {
+            loggedInUser = parameters;
+            if(loggedInUser == null)
+            {
+                GetLoggedInUser();
+            }else
+            {
+                GetMessages();
+            }
+        }
 
         //public void Init()
         //{
-            
+
         //   // getLoggedInUser();
         //    GetMessages();
         //}
@@ -63,10 +74,10 @@ namespace Application.Core.ViewModels
 
         public async  void OnResume()
         {
-           await getLoggedInUser();
+           await GetLoggedInUser();
         }
 
-        private async Task<UserStore> getLoggedInUser()
+        private async Task<UserStore> GetLoggedInUser()
         {
             
             loggedInUser =  await Task.FromResult(await userStore.GetSingleUserByName("deraj"));
@@ -111,7 +122,7 @@ namespace Application.Core.ViewModels
             this.messageStore = messageStore;
             this.userStore = userStore;
             SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>());
-            getLoggedInUser() ;
+            //getLoggedInUser() ;
              
             /*Messages = new ObservableCollection<Message>()
             {

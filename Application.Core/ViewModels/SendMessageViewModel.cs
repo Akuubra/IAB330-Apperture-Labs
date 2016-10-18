@@ -150,43 +150,47 @@ namespace Application.Core.ViewModels
       
             private bool _locationSet;
             public bool LocationSet
-            {
-                get { return _locationSet; }
-                set { SetProperty(ref _locationSet, value);
-                    RaiseCanExecuteChanged(); }
-            }
-
-            private void RaiseCanExecuteChanged()
-            {
-                if (_locationSetCommand != null)
-                _locationSetCommand.RaiseCanExecuteChanged();
-            }
-
-            private MvxCommand _locationSetCommand;
-            public ICommand LocationSetCommand
-            {
-                get
-                {
-                _locationSetCommand = _locationSetCommand ?? new MvxCommand(DoMyCommand, CanProcessCommand);
-                    return _locationSetCommand;
-                }
-            }
-
-            private bool CanProcessCommand()
-            {
-                return LocationSet;
-            }
-
-        private void DoMyCommand()
         {
-            Count++;
+            get { return _locationSet; }
+            set
+            {
+                SetProperty(ref _locationSet, value);
+                SetLocation();
+            }
         }
 
-        private int _count;
-        public int Count
+        private void SetLocation()
         {
-            get { return _count; }
-            set { _count = value; RaisePropertyChanged(() => Count); }
+            if (_locationSet)
+            {
+                message.Location = "Y";
+            }
+            else
+            {
+                message.Location = "N";
+            }
+        }
+
+        private bool _meetingSet;
+        public bool MeetingSet
+        {
+            get { return _meetingSet; }
+            set
+            {
+                SetProperty(ref _meetingSet, value);
+                SetMeeting();
+            }
+        }
+        private void SetMeeting()
+        {
+            if (_meetingSet)
+            {
+                message.Meet = "Y";
+            }
+            else
+            {
+                message.Meet = "N";
+            }
         }
     }
 }
