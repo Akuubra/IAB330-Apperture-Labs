@@ -84,9 +84,10 @@ namespace Application.Core.ViewModels
             Mvx.Resolve<IToast>().Show("Message Sent!");
         }
         public ICommand SwitchToMessages { get; private set; }
-        public ICommand CreateUser { get; private set; }
+        public ICommand ShowUserProfile { get; private set; }
         public ContactsViewModel(IUserStoreDatabase contactDatbase)
         {
+            //ShowUserPRofile = new MvxCommand(() => )
             database = contactDatbase;
             SelectContactCommandToast = new MvxCommand<UserStore>(selectedContact => ShowViewModel<UserProfileViewModel>(selectedContact));
             //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
@@ -97,7 +98,7 @@ namespace Application.Core.ViewModels
             
 
             SwitchToMessages = new MvxCommand(()=> ShowViewModel<MessageViewModel>());
-            CreateUser = new MvxCommand(() => ShowViewModel<CreateUserViewModel>());
+            
 
             GetContacts();
         }

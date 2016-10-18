@@ -58,6 +58,14 @@ namespace Application.Core.Database
             return user.FirstOrDefault();
         }
 
+        public async Task<UserStore> GetUserLogin(string userName, string password)
+        {
+            await SyncAsync(true);
+            var user = await azureSyncTable.Where(x => x.Username == userName && x.Password == password).ToListAsync();
+
+            return user.FirstOrDefault();
+        }
+
         public async Task<IEnumerable<UserStore>> GetUsers()
         {
             await SyncAsync(true);

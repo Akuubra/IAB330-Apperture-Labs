@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Application.Core.Interfaces;
 using System.Diagnostics;
 using MvvmCross.Platform;
+
 /// <summary>
 /// Author: Jared Bagnall
 /// Student Number: n5686245
@@ -86,7 +87,7 @@ namespace Application.Core.ViewModels
 
             AddUser = new MvxCommand(()=>{
                 addNewUser();
-                ShowViewModel<ContactsViewModel>();
+                ShowViewModel<LoginViewModel>();
                 Mvx.Resolve<IToast>().Show("User Created");
             });
         }
