@@ -21,8 +21,8 @@ namespace Application.Core.ViewModels
     public class ContactsViewModel : MvxViewModel
     {
 
-        private ObservableCollection<Contact> contacts;
-        public ObservableCollection<Contact> Contacts
+        private ObservableCollection<ContactsWrapper> contacts;
+        public ObservableCollection<ContactsWrapper> Contacts
         {
             get { return contacts; }
             set { SetProperty(ref contacts, value); }
@@ -55,6 +55,21 @@ namespace Application.Core.ViewModels
             }
         }*/
 
+        public void favClick(Contact contact)
+        {
+            if(contact.IsFavourite)
+            {
+                contact.IsFavourite = false;
+                System.Diagnostics.Debug.WriteLine("set to false: "+ contact.IsFavourite);
+            } else
+            {
+                contact.IsFavourite = true;
+                System.Diagnostics.Debug.WriteLine("set to true: " + contact.IsFavourite);
+            }
+
+        }
+
+
         public ICommand SelectContactCommandProfile { get; private set; }
         public ICommand SelectContactCommandToast { get; private set; }
         public void SelectContactToast()
@@ -70,14 +85,12 @@ namespace Application.Core.ViewModels
 
             SelectContactCommandProfile = new MvxCommand<Contact>(selectedContact => ShowViewModel<UserProfileViewModel>(selectedContact));
             SwitchToMessages = new MvxCommand(()=> ShowViewModel<FirstViewModel>());
-            Contacts = new ObservableCollection<Contact>()
+            Contacts = new ObservableCollection<ContactsWrapper>()
             {
-                new Contact("Alexander", "Henry", "A.Henry@gmail.com", false),
-                new Contact("Alex", "Manderson", "A.Manderson@gmail.com", false),
-                new Contact("Alex", "Nelly", "A.Nelly@gmail.com", false),
-                new Contact("Barry", "Mitchel", "B.Mitchel@gmail.com", false),
-                new Contact("Connor", "Ned", "C.Ned@gmail.com", false),
-                new Contact("Jack", "Hendy", "J.Hendy@gmail.com", true),
+                new ContactsWrapper(new Contact("Alexander", "Henry", "A.Henry@gmail.com", true), this),
+                new ContactsWrapper(new Contact("Alex", "Manderson", "A.Manderson@gmail.com", false), this),
+                new ContactsWrapper(new Contact("Alex", "Nelly", "A.Nelly@gmail.com", false), this),
+                new ContactsWrapper(new Contact("Barry", "Mitchel", "B.Mitchel@gmail.com", false), this),
                 /*new Contact("Jake H.", false),
                 new Contact("Jared B.", true),
                 new Contact("Josh C.", false),
