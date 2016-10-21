@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Application.Core.Interfaces;
 using MvvmCross.Platform;
-using SQLite.Net;
+using SQLite;
 using Application.Core.Database;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -63,8 +63,10 @@ namespace Application.Core.ViewModels
             Contacts.Clear();
             foreach (var user in _contacts)
             {
-                Contacts.Add(user);
-
+                if(!(user.Id == loggedInUser.Id))
+                {
+                    Contacts.Add(user);
+                }                
             }
         }
 

@@ -9,6 +9,7 @@ using ProjectGladosAppertureIndService.Models;
 
 namespace ProjectGladosAppertureIndService.Controllers
 {
+  
     public class MessageSentStoreController : TableController<MessageSentStore>
     {
         protected override void Initialize(HttpControllerContext controllerContext)

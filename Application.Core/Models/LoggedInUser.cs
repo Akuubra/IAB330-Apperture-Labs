@@ -1,16 +1,18 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SQLitePCL;
 
 namespace Application.Core.Models
 {
-    public class UserStore
+    public class LoggedInUser
     {
-        
+        [JsonProperty(PropertyName = "Id")]
         public string Id { get; set; }
+        [JsonProperty(PropertyName = "UserId")]
+        public string UserId { get; set; }
         public string Username { get; set; }
 
         public string Password { get; set; }
@@ -22,8 +24,7 @@ namespace Application.Core.Models
 
         public string Location { get; set; }
 
-
-
+        public bool LoggedIn { get; set; }
 
     }
 }

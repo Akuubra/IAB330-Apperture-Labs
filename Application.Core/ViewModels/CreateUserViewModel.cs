@@ -112,6 +112,7 @@ namespace Application.Core.ViewModels
             userTemp.First_Name = (string)this.First_Name;
             userTemp.Last_Name = (string)this.Last_Name;
             userTemp.Location = (string)this.Location;
+            userTemp.Password = (string)this.Password;
           
         }
 

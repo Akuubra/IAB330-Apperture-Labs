@@ -19,7 +19,7 @@ namespace Application.Core.ViewModels
     {
         private readonly IUserStoreDatabase userStore;
         private readonly IMessageStoreDatabase messageStore;
-        private MessageSentStore message;
+        private MessageRequestStore message;
          
 
         private UserStore loggedInUser;
@@ -102,7 +102,7 @@ namespace Application.Core.ViewModels
         {
             SetLocation();
             SetMeeting();
-            message = new MessageSentStore();            
+            message = new MessageRequestStore();            
             message.ReceivedBy = this.Receiver;
             message.Sender = this.Sender;
             message.Location = this.Location;
@@ -123,7 +123,7 @@ namespace Application.Core.ViewModels
 
             CreateMessage = new MvxCommand(() => {
                 createNewMessage();
-                ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });
+                 ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });
                 Mvx.Resolve<IToast>().Show("Message Sent!");
             });
         }

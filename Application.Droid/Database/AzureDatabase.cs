@@ -14,6 +14,8 @@ using Microsoft.WindowsAzure.MobileServices;
 using System.IO;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using Application.Core.Models;
+using System.Threading.Tasks;
+using Application.Droid.Views;
 
 namespace Application.Droid.Database
 {
@@ -41,8 +43,13 @@ namespace Application.Droid.Database
             }
             var store = new MobileServiceSQLiteStore(path);
             store.DefineTable<UserStore>();
-            store.DefineTable<MessageSentStore>();
+            store.DefineTable<MessageRequestStore>();
+            store.DefineTable<MessageResponseStore>();
+            store.DefineTable<UserFavouritesStore>();
             azureDatabse.SyncContext.InitializeAsync(store);
         }
+
+
+
     }
 }

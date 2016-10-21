@@ -19,17 +19,20 @@ namespace Application.Core.ViewModels
     public class MessageViewModel 
         : MvxViewModel
     {
-        List<MessageSentStore> rawMessages = new List<MessageSentStore>();
+        List<MessageRequestStore> rawMessages = new List<MessageRequestStore>();
         private ObservableCollection<MessageWrapper> messages = new ObservableCollection<MessageWrapper>();
 
         private readonly IMessageStoreDatabase messageStore;
         private readonly IUserStoreDatabase userStore;
+        private readonly IUserLogin userLoginDB; 
 
-        private UserStore loggedInUser;
+        private LoggedInUser loggedInUser;
 
         public async Task<int> Init(string currentUser)
         {
-            loggedInUser = await userStore.GetSingleUser( currentUser);
+            // loggedInUser = await userStore.GetSingleUser( currentUser);
+
+            loggedInUser = await userLoginDB.GetSingleUser(true);
             GetMessages();
             return 1;
         }
@@ -38,12 +41,12 @@ namespace Application.Core.ViewModels
         public async void GetMessages()
         {
            
-            var rawMessages = await messageStore.GetUsersMessages(loggedInUser.Id);
+            var rawMessages = await messageStore.GetUsersMessages(loggedInUser.UserId);
             
             Messages.Clear();
             foreach (var message in rawMessages)
             {
-                if(message.Sender == loggedInUser.Id)
+                if(message.Sender == loggedInUser.UserId)
                 {
                     var receiver = await userStore.GetSingleUser(message.ReceivedBy);
                     Messages.Add(new MessageWrapper(message, receiver.First_Name, true));
@@ -76,11 +79,12 @@ namespace Application.Core.ViewModels
 
 
         public ICommand SwitchToContacts { get; private set; }
-        public  MessageViewModel(IMessageStoreDatabase messageStore, IUserStoreDatabase userStore)
+        public  MessageViewModel(IMessageStoreDatabase messageStore, IUserStoreDatabase userStore, IUserLogin userLoginDB)
         {
+            this.userLoginDB = userLoginDB;
             this.messageStore = messageStore;
             this.userStore = userStore;
-            SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>( new {  currentUser = loggedInUser.Id }));
+            SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>( new {  currentUser = loggedInUser.UserId }));
             if(!(loggedInUser == null))
             {
                 GetMessages();

@@ -9,6 +9,7 @@ using Microsoft.Azure.Mobile.Server.Config;
 using ProjectGladosAppertureIndService.DataObjects;
 using ProjectGladosAppertureIndService.Models;
 using Owin;
+using System.Data.Entity.Migrations;
 
 namespace ProjectGladosAppertureIndService
 {
@@ -28,7 +29,10 @@ namespace ProjectGladosAppertureIndService
             // Use Entity Framework Code First to create database tables based on your DbContext
             Database.SetInitializer(new ProjectGladosAppertureIndInitializer());
             Database.SetInitializer(new UserStoreInitializer());
-            Database.SetInitializer(new MessagesSentStoreInitializer());
+            Database.SetInitializer(new MessageRequestStoreInitializer());
+
+            Database.SetInitializer(new MessageResponseStoreInitializer());
+            Database.SetInitializer(new UserFavouritesStoreInitializer());
             
             // To prevent Entity Framework from modifying your database schema, use a null database initializer
             // Database.SetInitializer<ProjectGladosAppertureIndContext>(null);
@@ -90,21 +94,61 @@ namespace ProjectGladosAppertureIndService
         }
     }
 
-    public class MessagesSentStoreInitializer : CreateDatabaseIfNotExists<MessagesSentStoreContext>
+    public class MessageRequestStoreInitializer : CreateDatabaseIfNotExists<MessageRequestStoreContext>
     {
-        protected override void Seed(MessagesSentStoreContext context)
+        protected override void Seed(MessageRequestStoreContext context)
         {
-            List<MessageSentStore> messages = new List<MessageSentStore>
+            List<MessageRequestStore> messages = new List<MessageRequestStore>
             {
-               new MessageSentStore { Sender = "deraj", ReceivedBy = "Paul", Location = "Y", Meet = "Level 1", Time = "1pm" },
-               new MessageSentStore { Sender = "deraj",  ReceivedBy = "Jim", Location = "Y", Meet = "Level 1", Time = "1pm" },
-               new MessageSentStore { Sender = "deraj",  ReceivedBy = "Tom", Location = "Y", Meet = "Level 1", Time = "1pm"},
+               new MessageRequestStore { Sender = "deraj", ReceivedBy = "Paul", Location = "Y", Meet = "Level 1", Time = "1pm" },
+               new MessageRequestStore { Sender = "deraj",  ReceivedBy = "Jim", Location = "Y", Meet = "Level 1", Time = "1pm" },
+               new MessageRequestStore { Sender = "deraj",  ReceivedBy = "Tom", Location = "Y", Meet = "Level 1", Time = "1pm"},
 
             };
 
-            foreach (MessageSentStore message in messages)
+            foreach (MessageRequestStore message in messages)
             {
-                context.Set<MessageSentStore>().Add(message);
+                context.Set<MessageRequestStore>().Add(message);
+            }
+            base.Seed(context);
+        }
+    }
+    public class MessageResponseStoreInitializer : CreateDatabaseIfNotExists<MessageResponseStoreContext>
+    {
+        protected override void Seed(MessageResponseStoreContext context)
+        {
+            List<MessageResponseStore> messages = new List<MessageResponseStore>
+            {
+               new MessageResponseStore { MessageID = "7cf9d110-8a97-473e-a11f-9aec7ab33995", Sender = "acd5a423-7cb1-4d00-8869-657dfb188998", Location = "Y" , Meet= "Y"},
+               new MessageResponseStore { MessageID = "7cf9d110-8a97-473e-a11f-9aec7ab33995",  Sender = "ec98b409-cfb8-4ebe-9769-806db5b6f5cc", Location = "Y", Meet= "Y"},
+               new MessageResponseStore { MessageID = "7cf9d110-8a97-473e-a11f-9aec7ab33995",  Sender = "ec98b409-cfb8-4ebe-9769-806db5b6f5cc", Location = "Y", Meet= "Y"},
+
+            };
+
+            foreach (MessageResponseStore message in messages)
+            {
+                context.Set<MessageResponseStore>().Add(message);
+            }
+            base.Seed(context);
+        }
+    }
+
+
+    public class UserFavouritesStoreInitializer : CreateDatabaseIfNotExists<UserFavouritesStoreContext>
+    {
+        protected override void Seed(UserFavouritesStoreContext context)
+        {
+            List<UserFavouritesStore> messages = new List<UserFavouritesStore>
+            {
+               new UserFavouritesStore { UserID = "be90dbbf-a595-48a7-8b0c-0f1c60bef789", FavouriteUserID = "acd5a423-7cb1-4d00-8869-657dfb188998", isFavourite = true },
+               new UserFavouritesStore { UserID = "be90dbbf-a595-48a7-8b0c-0f1c60bef789",  FavouriteUserID = "ec98b409-cfb8-4ebe-9769-806db5b6f5cc", isFavourite = true},
+               new UserFavouritesStore { UserID = "6f595822-4552-4cf3-99cb-54cbf7c141f7",  FavouriteUserID = "ec98b409-cfb8-4ebe-9769-806db5b6f5cc", isFavourite = true},
+
+            };
+
+            foreach (UserFavouritesStore message in messages)
+            {
+                context.Set<UserFavouritesStore>().Add(message);
             }
             base.Seed(context);
         }

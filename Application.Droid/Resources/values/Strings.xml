@@ -2,4 +2,5 @@
 <resources>
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">Project GLaDOS</string>
+  <string name="login_button_text">Sign in</string>
 </resources>

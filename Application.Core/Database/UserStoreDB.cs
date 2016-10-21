@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SQLite.Net;
+using SQLite;
 using MvvmCross.Platform;
 
 namespace Application.Core.Database
@@ -48,6 +48,7 @@ namespace Application.Core.Database
 
         public async Task<UserStore> GetSingleUserByName(string userName)
         {
+
             var user = database.Table<UserStore>().ToList();
             user.Where(x => x.Username == userName);
             return user.FirstOrDefault();
@@ -55,7 +56,7 @@ namespace Application.Core.Database
         public async Task<UserStore> GetUserLogin(string userName, string password)
         {
             var user = database.Table<UserStore>().ToList();
-            user.Where(x => x.Username == userName && x.Password == password);
+            user.Where(x => x.Username == userName & x.Password == password);
             return user.FirstOrDefault();
         }
     }

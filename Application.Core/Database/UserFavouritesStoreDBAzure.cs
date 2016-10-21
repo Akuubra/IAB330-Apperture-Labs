@@ -12,18 +12,18 @@ using System.Diagnostics;
 
 namespace Application.Core.Database
 {
-    public class UserStoreDBAzure : IUserStoreDatabase
+    public class UserFavouritesStoreDBAzure : IUserFavouritesStoreDatabase
     {
         private MobileServiceClient azureDatabase;
-        private IMobileServiceSyncTable<UserStore> azureSyncTable;
+        private IMobileServiceSyncTable<UserFavouritesStore> azureSyncTable;
    
-        public UserStoreDBAzure()
+        public UserFavouritesStoreDBAzure()
         {
             azureDatabase = Mvx.Resolve<IAzureDatabase>().GetMobileServiceClient();
-            azureSyncTable = azureDatabase.GetSyncTable<UserStore>();
+            azureSyncTable = azureDatabase.GetSyncTable<UserFavouritesStore>();
         }
 
-        public async Task<int> DeleteUser(object id)
+        public async Task<int> DeleteFavourite(object id)
         {
             await SyncAsync(true);
             var userStore = await azureSyncTable.Where(x => x.Id == (string)id).ToListAsync();
@@ -42,43 +42,49 @@ namespace Application.Core.Database
         }
 
 
-        public async Task<UserStore> GetSingleUser(string userID)
+        public async Task<IEnumerable<UserFavouritesStore>> GetFavourites(string userId)
         {
             await SyncAsync(true);
-            var user = await azureSyncTable.Where(x => x.Id == userID).ToListAsync();
+            var fav = await azureSyncTable.Where(x => x.UserID == userId).ToListAsync();
 
-            return user.FirstOrDefault();
+            return fav;
         }
 
-        public async Task<UserStore> GetSingleUserByName(string userName)
+      
+
+        public async Task<int> InsertFavourite(string userID, string favouriteUserId, bool isFavourite)
         {
-            await SyncAsync(true);
-            var user = await azureSyncTable.Where(x => x.Username == userName).ToListAsync();
-
-            return user.FirstOrDefault();
-        }
-
-        public async Task<UserStore> GetUserLogin(string userName, string password)
-        {
-            await SyncAsync(true);
-            var user = await azureSyncTable.Where(x => x.Username == userName & x.Password == password).ToListAsync();
-
-            return user.FirstOrDefault();
-        }
-
-        public async Task<IEnumerable<UserStore>> GetUsers()
-        {
-            await SyncAsync(true);
-            var users = await azureSyncTable.ToListAsync();
-            return users;
-        }
-
-        public async Task<int> InsertUser(UserStore user)
-        {
+            UserFavouritesStore fav = new UserFavouritesStore();
+            fav.UserID = userID;
+            fav.FavouriteUserID = favouriteUserId;
+            fav.isFavourite = isFavourite; 
             try
             {
                 await SyncAsync(true);
-                await azureSyncTable.InsertAsync(user);
+                await azureSyncTable.InsertAsync(fav);
+                await SyncAsync();
+                return 1;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+
+            return 0;
+
+        }
+
+        public async Task<int> UpdateFavourite(string userID, string favouriteUserId, bool isFavourite)
+        {
+           try
+            {
+                await SyncAsync(true);
+                var fav = await azureSyncTable.Where(x=> x.UserID == userID & x.FavouriteUserID == favouriteUserId).ToListAsync();
+                
+                var fav2 = fav.FirstOrDefault(); 
+                fav2.isFavourite = isFavourite;
+
+                await azureSyncTable.UpdateAsync(fav2);
                 await SyncAsync();
                 return 1;
             }

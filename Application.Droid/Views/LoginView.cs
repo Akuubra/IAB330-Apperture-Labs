@@ -10,6 +10,13 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Droid.Views;
+using Microsoft.WindowsAzure.MobileServices;
+using System.Threading.Tasks;
+using Java.Lang;
+using Application.Droid.Database;
+using MvvmCross.Core.ViewModels;
+using Application.Core.ViewModels;
+using Application.Core.Interfaces;
 
 namespace Application.Droid.Views
 {
@@ -21,5 +28,8 @@ namespace Application.Droid.Views
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.LoginLayout);
         }
+
+
+       
     }
 }

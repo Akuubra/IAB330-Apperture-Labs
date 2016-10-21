@@ -6,16 +6,14 @@ using System.Web;
 
 namespace ProjectGladosAppertureIndService.DataObjects
 {
-    public class MessageSentStore : EntityData
+    public class MessageResponseStore : EntityData
     {
+
+        public string MessageID { get; set; }
         public string Sender { get; set; }
-
-        public string ReceivedBy { get; set; }
-
+        
         public string Location { get; set; }
 
-        public string Time { get; set; }
         public string Meet { get; set; }
-        public string MeetingLocation { get; set; }
     }
 }

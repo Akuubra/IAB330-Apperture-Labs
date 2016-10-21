@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ProjectGladosAppertureIndService.DataObjects
 {
-    public class MessageSentStore : EntityData
+    public class MessageRequestStore : EntityData
     {
         public string Sender { get; set; }
 

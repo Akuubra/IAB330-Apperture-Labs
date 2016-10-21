@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Core.Models
 {
-    public class MessageSentStore
+    public class MessageRequestStore
     {
 
         public string Id { get; set; }
@@ -18,6 +18,7 @@ namespace Application.Core.Models
 
         public string Time { get; set; }
         public string Meet { get; set; }
+        public string MeetingLocation { get; set; }
 
         public string CreatedAt { get; set; } 
     }

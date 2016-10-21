@@ -7,8 +7,10 @@ using Microsoft.Azure.Mobile.Server;
 using ProjectGladosAppertureIndService.DataObjects;
 using ProjectGladosAppertureIndService.Models;
 
+
 namespace ProjectGladosAppertureIndService.Controllers
 {
+   
     public class UserStoreController : TableController<UserStore>
     {
         protected override void Initialize(HttpControllerContext controllerContext)

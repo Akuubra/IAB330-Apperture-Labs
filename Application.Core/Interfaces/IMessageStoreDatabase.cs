@@ -9,14 +9,14 @@ namespace Application.Core.Interfaces
 {
     public interface IMessageStoreDatabase
     {
-        Task<IEnumerable<MessageSentStore>> GetMessages();
+        Task<IEnumerable<MessageRequestStore>> GetMessages();
 
         Task<int> DeleteMessage(Object id);
 
-        Task<int> InsertMessage(MessageSentStore message);
+        Task<int> InsertMessage(MessageRequestStore message);
 
-        Task<int> UpdateMessage(MessageSentStore message);
+        Task<int> UpdateMessage(MessageRequestStore message);
 
-        Task<IEnumerable<MessageSentStore>> GetUsersMessages(string id);
+        Task<IEnumerable<MessageRequestStore>> GetUsersMessages(string id);
     }
 }

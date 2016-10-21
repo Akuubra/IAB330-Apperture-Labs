@@ -12,15 +12,15 @@ using System.Diagnostics;
 
 namespace Application.Core.Database
 {
-    public class MessageSentStoreDBAzure : IMessageStoreDatabase
+    public class MessageRequestStoreDBAzure : IMessageStoreDatabase
     {
         private MobileServiceClient azureDatabase;
-        private IMobileServiceSyncTable<MessageSentStore> azureSyncTable;
+        private IMobileServiceSyncTable<MessageRequestStore> azureSyncTable;
     
-        public MessageSentStoreDBAzure()
+        public MessageRequestStoreDBAzure()
         {
             azureDatabase = Mvx.Resolve<IAzureDatabase>().GetMobileServiceClient();
-            azureSyncTable = azureDatabase.GetSyncTable<MessageSentStore>();
+            azureSyncTable = azureDatabase.GetSyncTable<MessageRequestStore>();
         }
 
         public async Task<int> DeleteMessage(object id)
@@ -41,11 +41,11 @@ namespace Application.Core.Database
 
         }
 
-        public async Task<int> UpdateMessage(MessageSentStore message)
+        public async Task<int> UpdateMessage(MessageRequestStore message)
         {
             await SyncAsync(true);
-            var messageSentStore = await azureSyncTable.Where(x => x.Id == message.Id).ToListAsync();
-            if (messageSentStore.Any())
+            var messageRequestStore = await azureSyncTable.Where(x => x.Id == message.Id).ToListAsync();
+            if (messageRequestStore.Any())
             {
                 await azureSyncTable.UpdateAsync(message);
                 await SyncAsync();
@@ -59,14 +59,14 @@ namespace Application.Core.Database
 
         }
 
-        public async Task<IEnumerable<MessageSentStore>> GetMessages()
+        public async Task<IEnumerable<MessageRequestStore>> GetMessages()
         {
             await SyncAsync(true);
             var messages = await azureSyncTable.ToListAsync();
             return messages;
         }
 
-        public async Task<int> InsertMessage(MessageSentStore message)
+        public async Task<int> InsertMessage(MessageRequestStore message)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace Application.Core.Database
             }
         }
 
-        public async Task<IEnumerable<MessageSentStore>> GetUsersMessages(string id)
+        public async Task<IEnumerable<MessageRequestStore>> GetUsersMessages(string id)
         {
 
             Debug.WriteLine(id);

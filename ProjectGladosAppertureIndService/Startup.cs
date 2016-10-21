@@ -1,3 +1,5 @@
+using Microsoft.Azure.Mobile.Server.Config;
+using Microsoft.Azure.Mobile.Server.Tables.Config;
 using Microsoft.Owin;
 using Owin;
 
@@ -9,7 +11,8 @@ namespace ProjectGladosAppertureIndService
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureMobileApp(app);
+            
+             ConfigureMobileApp(app);
         }
     }
 }

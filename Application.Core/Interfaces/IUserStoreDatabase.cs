@@ -9,6 +9,7 @@ namespace Application.Core.Interfaces
 {
     public interface IUserStoreDatabase
     {
+        
         Task<IEnumerable<UserStore>> GetUsers();
 
         Task<int> DeleteUser(Object id);

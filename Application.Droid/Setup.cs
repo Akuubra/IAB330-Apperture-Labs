@@ -31,7 +31,10 @@ namespace Application.Droid
             Mvx.LazyConstructAndRegisterSingleton<ISqlite, SqliteDroid>();
             Mvx.LazyConstructAndRegisterSingleton<IAzureDatabase, AzureDatabase>();
             Mvx.LazyConstructAndRegisterSingleton<IUserStoreDatabase, UserStoreDBAzure>();
-            Mvx.LazyConstructAndRegisterSingleton<IMessageStoreDatabase, MessageSentStoreDBAzure>();
+            Mvx.LazyConstructAndRegisterSingleton<IMessageStoreDatabase, MessageRequestStoreDBAzure>();
+            Mvx.LazyConstructAndRegisterSingleton<IUserFavouritesStoreDatabase, UserFavouritesStoreDBAzure>();
+            Mvx.LazyConstructAndRegisterSingleton<IMessageResponseStoreDatabase, MessageResponseStoreDBAzure>();
+            Mvx.LazyConstructAndRegisterSingleton<IUserLogin, UserLoggedInDB>();
             base.InitializeFirstChance();
         }
     }

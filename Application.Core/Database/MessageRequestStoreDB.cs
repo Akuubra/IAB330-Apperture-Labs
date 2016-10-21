@@ -1,7 +1,7 @@
 ﻿using Application.Core.Interfaces;
 using Application.Core.Models;
 using MvvmCross.Platform;
-using SQLite.Net;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,25 +11,25 @@ using System.Threading.Tasks;
 
 namespace Application.Core.Database
 {
-    public class MessageSentStoreDB : IMessageStoreDatabase
+    public class MessageRequestStoreDB : IMessageStoreDatabase
     {
 
         public SQLiteConnection database;
 
-        public MessageSentStoreDB()
+        public MessageRequestStoreDB()
         {
             var sqlite = Mvx.Resolve<ISqlite>();
             database = sqlite.GetConnection();
-            database.CreateTable<MessageSentStore>();
+            database.CreateTable<MessageRequestStore>();
 
         }
 
-        public async Task<IEnumerable<MessageSentStore>> GetMessages()
+        public async Task<IEnumerable<MessageRequestStore>> GetMessages()
         {
-            return database.Table<MessageSentStore>().ToList();
+            return database.Table<MessageRequestStore>().ToList();
         }
 
-        public async Task<int> InsertMessage(MessageSentStore user)
+        public async Task<int> InsertMessage(MessageRequestStore user)
         {
             var num = database.Insert(user);
             database.Commit();
@@ -38,22 +38,22 @@ namespace Application.Core.Database
 
         public async Task<int> DeleteMessage(object id)
         {
-            return database.Delete<MessageSentStore>(Convert.ToInt16(id));
+            return database.Delete<MessageRequestStore>(Convert.ToInt16(id));
         }
 
 
-        public async Task<int> UpdateMessage(MessageSentStore message)
+        public async Task<int> UpdateMessage(MessageRequestStore message)
         {
             return database.Update(message);
         }
 
 
-        public async Task<IEnumerable<MessageSentStore>> GetUsersMessages(string id)
+        public async Task<IEnumerable<MessageRequestStore>> GetUsersMessages(string id)
         {
 
             Debug.WriteLine(id);
-            var messages =  database.Table<MessageSentStore>().Where(x => x.ReceivedBy == id).ToList();
-            var messages2 =  database.Table<MessageSentStore>().Where(x => x.Sender == id).ToList();
+            var messages =  database.Table<MessageRequestStore>().Where(x => x.ReceivedBy == id).ToList();
+            var messages2 =  database.Table<MessageRequestStore>().Where(x => x.Sender == id).ToList();
 
             foreach (var message in messages2)
             {

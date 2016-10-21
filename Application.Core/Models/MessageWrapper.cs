@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Application.Core.Models
 {
-    public class MessageWrapper : MessageSentStore
+    public class MessageWrapper : MessageRequestStore
     {
         public string MessageName { get; set; }
         public string MessageContext { get; set; }
 
         public MessageWrapper() { }
-        public MessageWrapper(MessageSentStore message, string receiver, bool sender)
+        public MessageWrapper(MessageRequestStore message, string receiver, bool sender)
         {
             MessageName = receiver;
             //MessageContext = string.Format("> Requested Location");
