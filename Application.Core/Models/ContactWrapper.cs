@@ -13,7 +13,7 @@ namespace Application.Core.Models
 
         Contact _contact;
         ContactsViewModel _parent;
-
+        public ContactWrapper() { }
         public ContactWrapper(Contact contact, ContactsViewModel parent)
         {
             _contact = contact;

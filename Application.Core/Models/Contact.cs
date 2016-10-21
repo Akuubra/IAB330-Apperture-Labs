@@ -13,6 +13,8 @@ namespace Application.Core.Models
         public string LastName { get; set; }
         new public string Email { get; set; }
         new public string Location { get; set; }
+        new public string UserId { get; set; }
+
         private bool _isFavourite;
         public bool IsFavourite
         {
@@ -33,6 +35,7 @@ namespace Application.Core.Models
             LastName = contact.Last_Name;
             Email = contact.Email;
             Location = contact.Location;
+            UserId = contact.Id;
         }
     }
 }

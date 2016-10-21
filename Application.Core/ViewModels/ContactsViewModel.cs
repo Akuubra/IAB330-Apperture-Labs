@@ -111,19 +111,29 @@ namespace Application.Core.ViewModels
         }
         public ICommand SwitchToMessages { get; private set; }
         public ICommand ShowUserProfile { get; private set; }
+
+
+
+
+
         public ContactsViewModel(IUserStoreDatabase contactDatbase)
         {
             //ShowUserPRofile = new MvxCommand(() => )
             database = contactDatbase;
-            SelectContactCommandToast = new MvxCommand<UserStore>(selectedContact => ShowViewModel<UserProfileViewModel>(selectedContact));
+            SelectContactCommandToast = new MvxCommand<ContactWrapper>(
+                selectedContact => 
+                
+                ShowViewModel<UserProfileViewModel>(
+                    selectedContact.Item));
             //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
 
-            SelectContactCommandProfile = new MvxCommand<UserStore>(selectedContact => ShowViewModel<SendMessageViewModel>(new { receiver = selectedContact.Id , sender = loggedInUser.Id }));
+            SelectContactCommandProfile = new MvxCommand<ContactWrapper>(selectedContact => ShowViewModel<SendMessageViewModel>( new { receiver =  selectedContact.Item.UserId , sender = loggedInUser.Id}));
 
 
             
 
-            SwitchToMessages = new MvxCommand(()=> ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id }));
+            SwitchToMessages = new MvxCommand(()=> ShowViewModel<MessageViewModel>(
+                new { currentUser = loggedInUser.Id }));
             
 
         }
