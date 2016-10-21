@@ -6,20 +6,33 @@ using System.Threading.Tasks;
 
 namespace Application.Core.Models
 {
-    public class Contact
+    public class Contact : UserStore
     {
-        public string ContactFirstName { get; set; }
-        public string ContactLastName { get; set; }
-        public string ContactEmail { get; set; }
-        public bool IsFavourite { get; set; }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        new public string Email { get; set; }
+        new public string Location { get; set; }
+        private bool _isFavourite;
+        public bool IsFavourite
+        {
+            get { return _isFavourite; }
+            set
+            {
+                _isFavourite = value;
+                RaisePropertyChanged(() => IsFavourite);
+            }
+        }
+        public string ImagePath { get; set; }
 
         public Contact() { }
-        public Contact(string contactFirstName, string contactLastName, string contactEmail, bool isFavourite)
+        public Contact(UserStore contact, bool isFav)
         {
-            IsFavourite = isFavourite;
-            ContactFirstName = contactFirstName;
-            ContactLastName = contactLastName;
-            ContactEmail = contactEmail;
+            _isFavourite = isFav;
+            FirstName = contact.First_Name;
+            LastName = contact.Last_Name;
+            Email = contact.Email;
+            Location = contact.Location;
         }
     }
 }

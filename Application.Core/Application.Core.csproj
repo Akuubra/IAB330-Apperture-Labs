@@ -55,6 +55,7 @@
     <Compile Include="Interfaces\ISqlite.cs" />
     <Compile Include="Interfaces\IToast.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\ContactWrapper.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\MessageResponseStore.cs" />
     <Compile Include="Models\MessageWrapper.cs" />
