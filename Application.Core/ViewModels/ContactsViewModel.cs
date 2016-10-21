@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Application.Core.Interfaces;
 using MvvmCross.Platform;
-using SQLite.Net;
+using SQLite;
 using Application.Core.Database;
 using System.Collections.Generic;
 using System.Threading.Tasks;
