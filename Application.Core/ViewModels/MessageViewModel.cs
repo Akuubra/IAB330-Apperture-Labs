@@ -26,13 +26,13 @@ namespace Application.Core.ViewModels
         private readonly IUserStoreDatabase userStore;
         private readonly IUserLogin userLoginDB; 
 
-        private LoggedInUser loggedInUser;
+        private UserStore loggedInUser;
 
         public async Task<int> Init(string currentUser)
         {
-            // loggedInUser = await userStore.GetSingleUser( currentUser);
+             loggedInUser = await userStore.GetSingleUser( currentUser);
 
-            loggedInUser = await userLoginDB.GetSingleUser(true);
+           // loggedInUser = await userLoginDB.GetSingleUser(true);
             GetMessages();
             return 1;
         }
@@ -41,12 +41,12 @@ namespace Application.Core.ViewModels
         public async void GetMessages()
         {
            
-            var rawMessages = await messageStore.GetUsersMessages(loggedInUser.UserId);
+            var rawMessages = await messageStore.GetUsersMessages(loggedInUser.Id);
             
             Messages.Clear();
             foreach (var message in rawMessages)
             {
-                if(message.Sender == loggedInUser.UserId)
+                if(message.Sender == loggedInUser.Id)
                 {
                     var receiver = await userStore.GetSingleUser(message.ReceivedBy);
                     Messages.Add(new MessageWrapper(message, receiver.First_Name, true));
@@ -84,7 +84,7 @@ namespace Application.Core.ViewModels
             this.userLoginDB = userLoginDB;
             this.messageStore = messageStore;
             this.userStore = userStore;
-            SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>( new {  currentUser = loggedInUser.UserId }));
+            SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>( new {  currentUser = loggedInUser.Id }));
             if(!(loggedInUser == null))
             {
                 GetMessages();

@@ -97,6 +97,21 @@ namespace Application.Core.Database
 
         }
 
+        public async Task<bool> favouriteExists(string userID, string favouriteID)
+        {
+            var fav = await GetFavourite(userID, favouriteID);
+            var FavExists = fav != null;
+            return FavExists;
+        }
+
+
+        public async Task<UserFavouritesStore> GetFavourite(string userId, string favUserId)
+        {
+            var fav = await azureSyncTable.Where(x => x.UserID == userId & x.FavouriteUserID == favUserId).ToListAsync();
+
+            return fav.FirstOrDefault();
+
+        }
 
         private async Task SyncAsync(bool pullData = false)
         {

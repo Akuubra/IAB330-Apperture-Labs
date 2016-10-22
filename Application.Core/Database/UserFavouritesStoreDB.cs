@@ -55,5 +55,19 @@ namespace Application.Core.Database
 
             return 1;
         }
+
+        public async Task<bool> favouriteExists(string userID, string favouriteID)
+        {
+            return database.Table<UserFavouritesStore>().Where(x => x.UserID == userID & x.FavouriteUserID == favouriteID).Any();
+        }
+
+
+        public async Task<UserFavouritesStore> GetFavourite(string userId, string favUserId)
+        {
+            var fav = database.Table<UserFavouritesStore>().Where(x => x.UserID == userId & x.FavouriteUserID == favUserId).ToList();
+
+            return fav.FirstOrDefault();
+
+        }
     }
 }

@@ -25,7 +25,11 @@ namespace Application.Core.ViewModels
     public class ContactsViewModel : MvxViewModel
     {
         private readonly IUserStoreDatabase database;
+        private readonly IUserFavouritesStoreDatabase fav;
+
+
         UserStore loggedInUser;
+
         private ObservableCollection<ContactWrapper> contacts = new ObservableCollection<ContactWrapper>();
         List<UserStore> _contacts = new List<UserStore>();
         public ObservableCollection<ContactWrapper> Contacts
@@ -49,19 +53,38 @@ namespace Application.Core.ViewModels
             }
         }
 
-        public void favClick(Contact contact)
+        public async Task<int> favClick(Contact contact)
         {
             if (contact.IsFavourite)
             {
                 contact.IsFavourite = false;
+
+                UserFavouritesStore favTemp = await fav.GetFavourite(loggedInUser.Id, contact.UserId);
+
+                favTemp.isFavourite = false;
+                await fav.UpdateFavourite(loggedInUser.Id, contact.UserId, false);
                 System.Diagnostics.Debug.WriteLine("set to false: " + contact.IsFavourite);
+                return 1;
             }
             else
             {
                 contact.IsFavourite = true;
-                System.Diagnostics.Debug.WriteLine("set to true: " + contact.IsFavourite);
-            }
+                if(await fav.favouriteExists(loggedInUser.Id, contact.UserId))
+                {
+                    UserFavouritesStore favTemp = await fav.GetFavourite(loggedInUser.Id, contact.UserId);
 
+                    favTemp.isFavourite = true ;
+                    await fav.UpdateFavourite(loggedInUser.Id, contact.UserId, true);
+                }
+                else
+                {
+                    await fav.InsertFavourite(loggedInUser.Id, contact.UserId, true);
+                }
+
+                System.Diagnostics.Debug.WriteLine("set to true: " + contact.IsFavourite);
+                return 2;
+            }
+            return 0;
         }
 
 
@@ -80,7 +103,19 @@ namespace Application.Core.ViewModels
             Contacts.Clear();
             foreach (var user in _contacts)
             {
-                Contacts.Add(new ContactWrapper(new Contact(user, false), this));
+                bool tempUserFav = false;
+                bool doesExist = await fav.favouriteExists(loggedInUser.Id, user.Id);
+                if(doesExist)
+                {
+                    var favTemp = await fav.GetFavourite(loggedInUser.Id, user.Id);
+                    tempUserFav = favTemp.isFavourite;
+                }else
+                {
+                    await fav.InsertFavourite(loggedInUser.Id, user.Id, false);
+
+                }
+
+                Contacts.Add(new ContactWrapper(new Contact(user, tempUserFav), this));
 
             }
         }
@@ -116,9 +151,10 @@ namespace Application.Core.ViewModels
 
 
 
-        public ContactsViewModel(IUserStoreDatabase contactDatbase)
+        public ContactsViewModel(IUserStoreDatabase contactDatbase, IUserFavouritesStoreDatabase fav)
         {
             //ShowUserPRofile = new MvxCommand(() => )
+            this.fav = fav; 
             database = contactDatbase;
             SelectContactCommandToast = new MvxCommand<ContactWrapper>(
                 selectedContact => 

@@ -43,17 +43,17 @@ namespace Application.Core.ViewModels
             //if okay
             if (!(tempUser == null))
             {
-                tempUserLoggedIn = new LoggedInUser();
-                tempUserLoggedIn.UserId = tempUser.Id;
-                tempUserLoggedIn.Email = tempUser.Email;
-                tempUserLoggedIn.Location = tempUser.Location;
-                tempUserLoggedIn.First_Name = tempUser.First_Name;
-                tempUserLoggedIn.Last_Name = tempUser.Last_Name;
-                tempUserLoggedIn.Username = tempUser.Username;
-                tempUserLoggedIn.LoggedIn = true;
+                //tempUserLoggedIn = new LoggedInUser();
+                //tempUserLoggedIn.UserId = tempUser.Id;
+                //tempUserLoggedIn.Email = tempUser.Email;
+                //tempUserLoggedIn.Location = tempUser.Location;
+                //tempUserLoggedIn.First_Name = tempUser.First_Name;
+                //tempUserLoggedIn.Last_Name = tempUser.Last_Name;
+                //tempUserLoggedIn.Username = tempUser.Username;
+                //tempUserLoggedIn.LoggedIn = true;
 
 
-                await UserDB.InsertUser(tempUserLoggedIn);
+                //await UserDB.InsertUser(tempUserLoggedIn);
                 ShowViewModel<MessageViewModel>(new { currentUser = tempUser.Id });
             }
                 else

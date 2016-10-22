@@ -11,12 +11,12 @@
         android:paddingBottom="5dp"
         android:gravity="center_horizontal"
         android:weightSum="1.0">
-        <ImageView
+    <!--<ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/user_icon"
             android:layout_marginLeft="5dp"
-            android:layout_weight="0.11" />
+            android:layout_weight="0.11" />-->
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="0dp"
