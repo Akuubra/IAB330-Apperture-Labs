@@ -7,7 +7,8 @@ using SQLite.Net.Attributes;
 
 namespace Application.Core.Models
 {
-    public class UserStore
+    //extends MvxNotifyPropertyChanged only so that it can allow RaisePropertyChanged from the Contact model class
+    public class UserStore : MvvmCross.Core.ViewModels.MvxNotifyPropertyChanged
     {
         
         public string Id { get; set; }

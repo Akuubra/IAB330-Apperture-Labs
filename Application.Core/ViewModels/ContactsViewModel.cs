@@ -26,9 +26,9 @@ namespace Application.Core.ViewModels
     {
         private readonly IUserStoreDatabase database;
         UserStore loggedInUser;
-        private ObservableCollection<UserStore> contacts = new ObservableCollection<UserStore>();
+        private ObservableCollection<ContactWrapper> contacts = new ObservableCollection<ContactWrapper>();
         List<UserStore> _contacts = new List<UserStore>();
-        public ObservableCollection<UserStore> Contacts
+        public ObservableCollection<ContactWrapper> Contacts
         {
             get { return contacts; }
             set { SetProperty(ref contacts, value); }
@@ -49,6 +49,23 @@ namespace Application.Core.ViewModels
             }
         }
 
+        public void favClick(Contact contact)
+        {
+            if (contact.IsFavourite)
+            {
+                contact.IsFavourite = false;
+                System.Diagnostics.Debug.WriteLine("set to false: " + contact.IsFavourite);
+            }
+            else
+            {
+                contact.IsFavourite = true;
+                System.Diagnostics.Debug.WriteLine("set to true: " + contact.IsFavourite);
+            }
+
+        }
+
+
+
         public async Task<int> Init(string currentUser)
         {
             loggedInUser = await database.GetSingleUser(currentUser);
@@ -63,7 +80,7 @@ namespace Application.Core.ViewModels
             Contacts.Clear();
             foreach (var user in _contacts)
             {
-                Contacts.Add(user);
+                Contacts.Add(new ContactWrapper(new Contact(user, false), this));
 
             }
         }

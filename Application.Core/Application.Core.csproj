@@ -47,10 +47,12 @@
     <Compile Include="Interfaces\ISqlite.cs" />
     <Compile Include="Interfaces\IToast.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\ContactWrapper.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\MessageWrapper.cs" />
     <Compile Include="Models\MessageSentStore.cs" />
     <Compile Include="Models\UserStore.cs" />
+    <Compile Include="Models\UserStoreWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ContactsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
