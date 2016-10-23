@@ -10,6 +10,7 @@ using SQLite;
 using Application.Core.Database;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 /// <summary>
 /// Author: Sathya Amarsee
@@ -32,6 +33,7 @@ namespace Application.Core.ViewModels
 
         private ObservableCollection<ContactWrapper> contacts = new ObservableCollection<ContactWrapper>();
         List<UserStore> _contacts = new List<UserStore>();
+        List<string> _favourites = new List<string>();
         public ObservableCollection<ContactWrapper> Contacts
         {
             get { return contacts; }
@@ -58,10 +60,14 @@ namespace Application.Core.ViewModels
             if (contact.IsFavourite)
             {
                 contact.IsFavourite = false;
-
+                var index = _favourites.IndexOf(contact.UserId);
+                Contacts.RemoveAt(index);
+                _favourites.RemoveAt(index);
+                RaisePropertyChanged(() => Contacts);
                 UserFavouritesStore favTemp = await fav.GetFavourite(loggedInUser.Id, contact.UserId);
 
                 favTemp.isFavourite = false;
+
                 await fav.UpdateFavourite(loggedInUser.Id, contact.UserId, false);
                 System.Diagnostics.Debug.WriteLine("set to false: " + contact.IsFavourite);
                 return 1;
@@ -69,7 +75,12 @@ namespace Application.Core.ViewModels
             else
             {
                 contact.IsFavourite = true;
-                if(await fav.favouriteExists(loggedInUser.Id, contact.UserId))
+                _favourites.Add(contact.UserId);
+                var index = _favourites.IndexOf(contact.UserId);
+                Contacts.Insert(index, new ContactWrapper(contact, this));
+                RaisePropertyChanged(() => Contacts);
+
+                if (await fav.favouriteExists(loggedInUser.Id, contact.UserId))
                 {
                     UserFavouritesStore favTemp = await fav.GetFavourite(loggedInUser.Id, contact.UserId);
 
@@ -104,18 +115,26 @@ namespace Application.Core.ViewModels
             foreach (var user in _contacts)
             {
                 bool tempUserFav = false;
+                var User = new ContactWrapper(new Contact(user, tempUserFav), this);
                 bool doesExist = await fav.favouriteExists(loggedInUser.Id, user.Id);
                 if(doesExist)
                 {
                     var favTemp = await fav.GetFavourite(loggedInUser.Id, user.Id);
                     tempUserFav = favTemp.isFavourite;
+                    if (tempUserFav)
+                    {
+                        User.Item.IsFavourite = true;
+                        Contacts.Insert(_favourites.Count, User);
+                        Debug.WriteLine("Added user"+user.Id+"to list");
+                        _favourites.Add(user.Id);
+                    }
                 }else
                 {
                     await fav.InsertFavourite(loggedInUser.Id, user.Id, false);
 
                 }
-
-                Contacts.Add(new ContactWrapper(new Contact(user, tempUserFav), this));
+                
+                Contacts.Add(User);
 
             }
         }

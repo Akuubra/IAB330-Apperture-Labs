@@ -13,7 +13,7 @@ namespace Application.Core.Models
         public string LastName { get; set; }
         new public string Email { get; set; }
         new public string Location { get; set; }
-        new public string UserId { get; set; }
+        public string UserId { get; set; }
 
         private bool _isFavourite;
         public bool IsFavourite
