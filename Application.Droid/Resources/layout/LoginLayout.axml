@@ -53,7 +53,7 @@
         android:textSize="50dip"
         android:textAllCaps="true"
         android:textColor="#ffffff"
-        android:background="#ffa500"
+        android:background="#ff7300"
         android:id="@+id/button2"
         local:MvxBind="Click CreateUser" />
 </LinearLayout>

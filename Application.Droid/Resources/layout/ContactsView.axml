@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/SettingsBTN"
             android:layout_weight="0.12"
-            android:background="@drawable/user_icon" 
+            android:background="@drawable/user_icon"
             local:MvxBind="Click ShowUserProfile" />
     </LinearLayout>
     <LinearLayout
