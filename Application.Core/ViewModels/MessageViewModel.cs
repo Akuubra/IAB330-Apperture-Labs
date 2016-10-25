@@ -21,7 +21,7 @@ namespace Application.Core.ViewModels
     {
         List<MessageRequestStore> rawMessages = new List<MessageRequestStore>();
         private ObservableCollection<MessageWrapper> messages = new ObservableCollection<MessageWrapper>();
-
+        private ObservableCollection<MessageWrapper> filteredMessages = new ObservableCollection<MessageWrapper>();
         private readonly IMessageStoreDatabase messageStore;
         private readonly IUserStoreDatabase userStore;
         private readonly IUserLogin userLoginDB; 
@@ -61,21 +61,68 @@ namespace Application.Core.ViewModels
 
             }
         }
-        
+
 
         //private async Task<UserStore> GetLoggedInUser()
         //{
-            
+
         //    loggedInUser =  await Task.FromResult(await userStore.GetSingleUserByName("deraj"));
         //    GetMessages();
         //    return loggedInUser;
         //}
+        private ObservableCollection<MessageWrapper> messageList;
+        public ObservableCollection<MessageWrapper> MessageList
+        {
+            get { return messageList; }
+            set { SetProperty(ref messageList, value);}
+        }
         public ObservableCollection<MessageWrapper> Messages
         {
             get { return messages; }
             set { SetProperty(ref messages, value); }
         }
+        public ObservableCollection<MessageWrapper> FilteredMessages
+        {
+            get { return FilteredMessages; }
+            set { SetProperty(ref filteredMessages, value); }
+        }
+        private string _messageSearch;
+        
 
+        public string MessageSearch
+        {
+            get { return _messageSearch; }
+            set
+            {
+                SetProperty(ref _messageSearch, value);
+                if (string.IsNullOrEmpty(value))
+                {
+                    FilteredMessages = messages;
+                    //SearchLocations(searchTerm);
+                }
+                else if(_messageSearch.Length > 3)
+                {
+                    SearchMessages(_messageSearch);
+                    //return filtered list
+                }
+            }
+        }
+        
+        
+        public async void SearchMessages(string searchTerm)
+        {
+
+            foreach(MessageWrapper message in Messages)
+            {
+                if(message.MessageName == searchTerm)
+                {
+                    FilteredMessages.Add(message);
+                }
+            }
+
+            //filteredmessages.add(message.where(filter));
+            MessageList = FilteredMessages;
+        }
 
 
         public ICommand SwitchToContacts { get; private set; }

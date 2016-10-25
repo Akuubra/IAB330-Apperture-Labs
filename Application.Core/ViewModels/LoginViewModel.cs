@@ -38,6 +38,7 @@ namespace Application.Core.ViewModels
         public ICommand Login { get; private set; }
         public async Task<int> LoginUser()
         {
+            
             tempUser = await userStore.GetUserLogin(_userName, _password);
             //Check User validity
             //if okay
