@@ -11,7 +11,7 @@ namespace Application.Core.Interfaces
     {
         Task<IEnumerable<MessageRequestStore>> GetMessages();
 
-        Task<int> DeleteMessage(Object id);
+        Task<int> DeleteMessage(string id);
 
         Task<int> InsertMessage(MessageRequestStore message);
 

@@ -34,6 +34,9 @@ namespace Application.Droid.Database
 
         private void InitializeLocal()
         {
+
+            //Call this in each platform before intializing your Mobile Client
+            SQLitePCL.Batteries.Init();
             var sqliteFilename = "UserStoreSQLite.db3";
             string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var path = Path.Combine(documentsPath, sqliteFilename);
@@ -41,12 +44,18 @@ namespace Application.Droid.Database
             {
                 File.Create(path).Dispose();
             }
+
             var store = new MobileServiceSQLiteStore(path);
             store.DefineTable<UserStore>();
             store.DefineTable<MessageRequestStore>();
             store.DefineTable<MessageResponseStore>();
             store.DefineTable<UserFavouritesStore>();
             azureDatabse.SyncContext.InitializeAsync(store);
+
+            if (!File.Exists(path))
+            {
+               
+            }
         }
 
 

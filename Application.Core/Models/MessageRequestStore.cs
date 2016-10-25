@@ -20,6 +20,7 @@ namespace Application.Core.Models
         public string Meet { get; set; }
         public string MeetingLocation { get; set; }
 
-        public string CreatedAt { get; set; } 
+        public string CreatedAt { get; set; }
+        public string UpdatedAt { get; set; }
     }
 }

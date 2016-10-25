@@ -29,6 +29,7 @@ namespace Application.Core.Database
             var userStore = await azureSyncTable.Where(x => x.Id == (string)id).ToListAsync();
             if (userStore.Any())
             {
+                await SyncAsync(true);
                 await azureSyncTable.DeleteAsync(userStore.FirstOrDefault());
                 await SyncAsync();
                 return 1;
@@ -120,7 +121,7 @@ namespace Application.Core.Database
                 await azureDatabase.SyncContext.PushAsync();
                 if (pullData)
                 {
-                    await azureSyncTable.PullAsync("allUsers", azureSyncTable.CreateQuery());
+                    await azureSyncTable.PullAsync("allFavourites", azureSyncTable.CreateQuery());
                 }
             }catch(Exception e)
             {

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MvvmCross.Platform;
 
 /// <summary>
 /// Author: Jack Hendy
@@ -62,7 +63,22 @@ namespace Application.Core.ViewModels
             }
         }
         
+        private void MessageViewSwitcher(MessageWrapper message)
+        {
+            if(message.GetMessage.Sender == loggedInUser.Id)
+            {
+                ShowViewModel<SenderMessageViewModel>(message.GetMessage);
+            }
+            else if(message.GetMessage.ReceivedBy == loggedInUser.Id)
+            {
 
+            }else
+            {
+
+                Mvx.Resolve<IToast>().Show("Error!");
+            }
+
+        }
         //private async Task<UserStore> GetLoggedInUser()
         //{
             
@@ -77,13 +93,18 @@ namespace Application.Core.ViewModels
         }
 
 
-
+        public ICommand SeeMessageDetails { get; private set; }
         public ICommand SwitchToContacts { get; private set; }
-        public  MessageViewModel(IMessageStoreDatabase messageStore, IUserStoreDatabase userStore, IUserLogin userLoginDB)
+        public  MessageViewModel(IMessageStoreDatabase messageStore, IUserStoreDatabase userStore)
         {
-            this.userLoginDB = userLoginDB;
+           // this.userLoginDB = userLoginDB;
             this.messageStore = messageStore;
             this.userStore = userStore;
+
+            SeeMessageDetails = new  MvxCommand<MessageWrapper>(selectedMessage => {
+                MessageViewSwitcher(selectedMessage);
+            });
+
             SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>( new {  currentUser = loggedInUser.Id }));
             if(!(loggedInUser == null))
             {

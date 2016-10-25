@@ -21,7 +21,7 @@ namespace Application.Core.ViewModels
         private readonly IUserLogin UserDB;
         private string _userName;
         private UserStore tempUser;
-        private LoggedInUser tempUserLoggedIn;
+       // private LoggedInUser tempUserLoggedIn;
         private readonly IUserStoreDatabase userStore;
         public string UserName
         {
@@ -63,9 +63,9 @@ namespace Application.Core.ViewModels
             return 1;
         }
         public ICommand CreateUser { get; private set; }
-        public LoginViewModel(IUserStoreDatabase userStore, IUserLogin UserDB)
+        public LoginViewModel(IUserStoreDatabase userStore)
         {
-            this.UserDB = UserDB;
+          //  this.UserDB = UserDB;
             CreateUser = new MvxCommand(() => ShowViewModel<CreateUserViewModel>());
             this.userStore = userStore;
 

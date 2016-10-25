@@ -19,11 +19,16 @@ namespace Application.Droid.Database
     {
         public SQLiteConnection GetConnection()
         {
+            //Call this in each platform before intializing your Mobile Client
+            SQLitePCL.Batteries.Init();
             var sqliteFilename = "UserStoreSQLite.db3";
 
             string documnetsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var path = Path.Combine(documnetsPath, sqliteFilename);
-            
+            if (!File.Exists(path))
+            {
+                File.Create(path).Dispose();
+            }
             //create the connection
             var conn = new SQLiteConnection(path); 
 

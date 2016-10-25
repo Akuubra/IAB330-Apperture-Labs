@@ -8,12 +8,14 @@ namespace Application.Core.Models
 {
     public class MessageWrapper : MessageRequestStore
     {
+        MessageRequestStore message;
         public string MessageName { get; set; }
         public string MessageContext { get; set; }
 
         public MessageWrapper() { }
         public MessageWrapper(MessageRequestStore message, string receiver, bool sender)
         {
+            this.message = message;
             MessageName = receiver;
             //MessageContext = string.Format("> Requested Location");
             if (sender)
@@ -48,6 +50,12 @@ namespace Application.Core.Models
                     MessageContext = string.Format("< Requested Location");
                 }
             }
+
+        }
+
+        public MessageRequestStore GetMessage
+        {
+            get { return message;  }
 
         }
     }

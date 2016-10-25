@@ -150,6 +150,9 @@ namespace Application.Droid
 			// aapt resource value: 0x7f040001
 			public const int MvxBindingTagUnique = 2130968577;
 			
+			// aapt resource value: 0x7f040018
+			public const int NudgeBTN = 2130968600;
+			
 			// aapt resource value: 0x7f04000f
 			public const int PasswordTag = 2130968591;
 			
@@ -192,8 +195,8 @@ namespace Application.Droid
 			// aapt resource value: 0x7f040010
 			public const int passwordField = 2130968592;
 			
-			// aapt resource value: 0x7f040018
-			public const int profilePicture = 2130968600;
+			// aapt resource value: 0x7f040019
+			public const int profilePicture = 2130968601;
 			
 			// aapt resource value: 0x7f040017
 			public const int timeField = 2130968599;
@@ -236,13 +239,16 @@ namespace Application.Droid
 			public const int MessageView = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int SendMessageView = 2130903047;
+			public const int SenderMessageView = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int SplashScreen = 2130903048;
+			public const int SendMessageView = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int UserProfile = 2130903049;
+			public const int SplashScreen = 2130903049;
+			
+			// aapt resource value: 0x7f03000a
+			public const int UserProfile = 2130903050;
 			
 			static Layout()
 			{

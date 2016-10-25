@@ -26,9 +26,13 @@ namespace Application.Core.Database
         public async Task<int> DeleteUser(object id)
         {
             await SyncAsync(true);
+
             var userStore = await azureSyncTable.Where(x => x.Id == (string)id).ToListAsync();
+
             if (userStore.Any())
             {
+                await SyncAsync(true);
+
                 await azureSyncTable.DeleteAsync(userStore.FirstOrDefault());
                 await SyncAsync();
                 return 1;

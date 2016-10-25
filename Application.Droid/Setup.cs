@@ -34,7 +34,7 @@ namespace Application.Droid
             Mvx.LazyConstructAndRegisterSingleton<IMessageStoreDatabase, MessageRequestStoreDBAzure>();
             Mvx.LazyConstructAndRegisterSingleton<IUserFavouritesStoreDatabase, UserFavouritesStoreDBAzure>();
             Mvx.LazyConstructAndRegisterSingleton<IMessageResponseStoreDatabase, MessageResponseStoreDBAzure>();
-            Mvx.LazyConstructAndRegisterSingleton<IUserLogin, UserLoggedInDB>();
+            //Mvx.LazyConstructAndRegisterSingleton<IUserLogin, UserLoggedInDB>();
             base.InitializeFirstChance();
         }
     }

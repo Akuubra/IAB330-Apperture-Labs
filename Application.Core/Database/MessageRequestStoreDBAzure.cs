@@ -23,10 +23,10 @@ namespace Application.Core.Database
             azureSyncTable = azureDatabase.GetSyncTable<MessageRequestStore>();
         }
 
-        public async Task<int> DeleteMessage(object id)
+        public async Task<int> DeleteMessage(string id)
         {
             await SyncAsync(true);
-            var messageSentStore = await azureSyncTable.Where(x => x.Id == (string)id).ToListAsync();
+            var messageSentStore = await azureSyncTable.Where(x => x.Id == id).ToListAsync();
             if (messageSentStore.Any())
             {
                 await azureSyncTable.DeleteAsync(messageSentStore.FirstOrDefault());
@@ -47,6 +47,7 @@ namespace Application.Core.Database
             var messageRequestStore = await azureSyncTable.Where(x => x.Id == message.Id).ToListAsync();
             if (messageRequestStore.Any())
             {
+                await SyncAsync(true);
                 await azureSyncTable.UpdateAsync(message);
                 await SyncAsync();
                 return 1;
@@ -92,7 +93,7 @@ namespace Application.Core.Database
                 await azureDatabase.SyncContext.PushAsync();
                 if (pullData)
                 {
-                    await azureSyncTable.PullAsync("allMessages", azureSyncTable.CreateQuery());
+                    await azureSyncTable.PullAsync("allMessagesRequests", azureSyncTable.CreateQuery());
                 }
             }catch(Exception e)
             {
@@ -103,16 +104,18 @@ namespace Application.Core.Database
         public async Task<IEnumerable<MessageRequestStore>> GetUsersMessages(string id)
         {
 
-            Debug.WriteLine(id);
+           // Debug.WriteLine(id);
             await SyncAsync(true);
-            var messages = await azureSyncTable.Where(x => x.ReceivedBy == id).ToListAsync();
-            var messages2 = await azureSyncTable.Where(x => x.Sender == id).ToListAsync();
+            var messages = await azureSyncTable.Where(x => x.ReceivedBy == id || x.Sender == id).OrderByDescending(x=> x.UpdatedAt).ToListAsync();
+           // var messages2 = await azureSyncTable.Where(x => x.Sender == id).ToListAsync();
 
-            foreach(var message in messages2)
-            {
-                messages.Add(message);
-            }
 
+            //foreach(var message in messages)
+            //{
+            //    messages.Add(message);
+            //}
+
+          //  var messages3 = messages.OrderByDescending(x => x.UpdatedAt);
             return messages;
 
         }

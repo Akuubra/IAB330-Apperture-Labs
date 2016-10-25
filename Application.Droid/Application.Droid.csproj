@@ -140,6 +140,7 @@
     <Compile Include="SplashScreen.cs" />
     <Compile Include="ValueConverters\ImageValueConverter.cs" />
     <Compile Include="Views\LoginView.cs" />
+    <Compile Include="Views\SenderMessageView.cs" />
     <Compile Include="Views\SendMessageView.cs" />
     <Compile Include="Views\CreateUserView.cs" />
     <Compile Include="Views\ContactsView.cs" />
@@ -179,6 +180,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\MessageResponseLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SenderMessageView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

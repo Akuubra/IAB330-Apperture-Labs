@@ -82,6 +82,6 @@
             android:layout_height="fill_parent"
             android:background="#e6e6e6"
             local:MvxItemTemplate="@layout/messagelayout"
-            local:MvxBind="ItemsSource Messages; ItemClick MakeToast" />
+            local:MvxBind="ItemsSource Messages; ItemLongClick SeeMessageDetails" />
     </GridLayout>
 </LinearLayout>

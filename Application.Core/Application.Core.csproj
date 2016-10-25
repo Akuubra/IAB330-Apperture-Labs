@@ -66,8 +66,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ContactsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainTabbedViewModel.cs" />
     <Compile Include="ViewModels\MessageViewModel.cs" />
     <Compile Include="ViewModels\CreateUserViewModel.cs" />
+    <Compile Include="ViewModels\SenderMessageViewModel.cs" />
     <Compile Include="ViewModels\SendMessageViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
   </ItemGroup>
