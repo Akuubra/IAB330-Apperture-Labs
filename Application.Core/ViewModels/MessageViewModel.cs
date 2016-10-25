@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MvvmCross.Platform;
 
 /// <summary>
 /// Author: Jack Hendy
@@ -24,7 +25,7 @@ namespace Application.Core.ViewModels
         private ObservableCollection<MessageWrapper> filteredMessages = new ObservableCollection<MessageWrapper>();
         private readonly IMessageStoreDatabase messageStore;
         private readonly IUserStoreDatabase userStore;
-        private readonly IUserLogin userLoginDB; 
+       
 
         private UserStore loggedInUser;
 
@@ -124,11 +125,10 @@ namespace Application.Core.ViewModels
             MessageList = FilteredMessages;
         }
 
-
+        public ICommand SeeMessageDetails { get; private set; }
         public ICommand SwitchToContacts { get; private set; }
-        public  MessageViewModel(IMessageStoreDatabase messageStore, IUserStoreDatabase userStore, IUserLogin userLoginDB)
+        public  MessageViewModel(IMessageStoreDatabase messageStore, IUserStoreDatabase userStore)
         {
-            this.userLoginDB = userLoginDB;
             this.messageStore = messageStore;
             this.userStore = userStore;
             SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>( new {  currentUser = loggedInUser.Id }));
@@ -136,7 +136,27 @@ namespace Application.Core.ViewModels
             {
                 GetMessages();
             }
-    
+            SeeMessageDetails = new MvxCommand<MessageWrapper>(selectedMessage => {
+                MessageViewSwitcher(selectedMessage);
+            });
+
+        }
+        private void MessageViewSwitcher(MessageWrapper message)
+        {
+            if (message.GetMessage.Sender == loggedInUser.Id)
+            {
+                ShowViewModel<SenderMessageViewModel>(message.GetMessage);
+            }
+            else if (message.GetMessage.ReceivedBy == loggedInUser.Id)
+            {
+
+            }
+            else
+            {
+
+                Mvx.Resolve<IToast>().Show("Error!");
+            }
+
         }
 
     }
