@@ -1,4 +1,5 @@
-﻿using Application.Core.ViewModels;
+﻿using Application.Core.Interfaces;
+using Application.Core.ViewModels;
 using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,17 +9,19 @@ using System.Threading.Tasks;
 
 namespace Application.Core.Models
 {
-   public  class ContactWrapper
+   public class ContactWrapper : IContactListType
     {
 
         Contact _contact;
         ContactsViewModel _parent;
         public ContactWrapper() { }
+
         public ContactWrapper(Contact contact, ContactsViewModel parent)
         {
             _contact = contact;
             _parent = parent;
         }
+
 
         public IMvxCommand tapFavourite
         {

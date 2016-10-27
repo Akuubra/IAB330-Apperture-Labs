@@ -31,10 +31,10 @@ namespace Application.Core.ViewModels
 
         UserStore loggedInUser;
 
-        private ObservableCollection<ContactWrapper> contacts = new ObservableCollection<ContactWrapper>();
+        private ObservableCollection<IContactListType> contacts = new ObservableCollection<IContactListType>();
         List<UserStore> _contacts = new List<UserStore>();
         List<string> _favourites = new List<string>();
-        public ObservableCollection<ContactWrapper> Contacts
+        public ObservableCollection<IContactListType> Contacts
         {
             get { return contacts; }
             set { SetProperty(ref contacts, value); }
@@ -61,9 +61,14 @@ namespace Application.Core.ViewModels
             {
                 contact.IsFavourite = false;
                 var index = _favourites.IndexOf(contact.UserId);
-                Contacts.RemoveAt(index);
+                Contacts.RemoveAt(index+1);
                 _favourites.RemoveAt(index);
                 RaisePropertyChanged(() => Contacts);
+                //Remove favourites heading if no favourites are there
+                if (_favourites.Count <= 0)
+                {
+                    Contacts.RemoveAt(0);
+                }
                 UserFavouritesStore favTemp = await fav.GetFavourite(loggedInUser.Id, contact.UserId);
 
                 favTemp.isFavourite = false;
@@ -75,10 +80,24 @@ namespace Application.Core.ViewModels
             else
             {
                 contact.IsFavourite = true;
-                _favourites.Add(contact.UserId);
-                var index = _favourites.IndexOf(contact.UserId);
-                Contacts.Insert(index, new ContactWrapper(contact, this));
-                RaisePropertyChanged(() => Contacts);
+                if (!(_favourites.Contains(contact.UserId)))
+                    {
+                    _favourites.Add(contact.UserId);
+                    System.Diagnostics.Debug.WriteLine("num in favourites list: " + _favourites.Count);
+                    var index = _favourites.IndexOf(contact.UserId);
+                    if (_favourites.Count > 1)
+                    {
+                        index++;
+                    }
+                    Contacts.Insert(index, new ContactWrapper(contact, this));
+                    RaisePropertyChanged(() => Contacts);
+
+                    //add faovurites heading if not there
+                    if (!(Contacts[0] is ContactLabel))
+                    {
+                        Contacts.Insert(0, new ContactLabel("Favourites"));
+                    }
+                }
 
                 if (await fav.favouriteExists(loggedInUser.Id, contact.UserId))
                 {
@@ -136,6 +155,12 @@ namespace Application.Core.ViewModels
                 
                 Contacts.Add(User);
 
+            }
+            //add headings for contacts and favourites sections
+            Contacts.Insert(_favourites.Count, new ContactLabel("All Contacts"));
+            if (_favourites.Count > 0)
+            {
+                Contacts.Insert(0, new ContactLabel("Favourites"));
             }
         }
 

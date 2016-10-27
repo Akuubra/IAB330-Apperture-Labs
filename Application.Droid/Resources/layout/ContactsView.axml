@@ -81,7 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:background="#e6e6e6"
-            local:MvxItemTemplate="@layout/contactslayout"
+            android:id="@+id/ContactsListView"
             local:MvxBind="ItemsSource Contacts; ItemClick SelectContactCommandToast; ItemLongClick SelectContactCommandProfile" />
     </GridLayout>
 </LinearLayout>
