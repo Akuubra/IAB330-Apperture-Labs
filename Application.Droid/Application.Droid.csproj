@@ -213,6 +213,12 @@
       <Name>Application.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\drawable\drawable-hdpi\" />
+    <Folder Include="Resources\drawable\drawable-ldpi\" />
+    <Folder Include="Resources\drawable\drawable-mdpi\" />
+    <Folder Include="Resources\drawable\drawable-xhdpi\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
