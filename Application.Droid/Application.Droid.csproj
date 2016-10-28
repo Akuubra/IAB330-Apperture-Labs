@@ -185,6 +185,9 @@
     <AndroidResource Include="Resources\layout\SenderMessageView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\ContactsLabelLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -212,6 +215,12 @@
       <Project>{526d1019-8f25-4fff-b1f7-f46d8a821bd6}</Project>
       <Name>Application.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\drawable\drawable-hdpi\" />
+    <Folder Include="Resources\drawable\drawable-ldpi\" />
+    <Folder Include="Resources\drawable\drawable-mdpi\" />
+    <Folder Include="Resources\drawable\drawable-xhdpi\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
