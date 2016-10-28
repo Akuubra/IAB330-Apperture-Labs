@@ -149,7 +149,7 @@ namespace Glados.Core.ViewModels
             }
             else if (message.GetMessage.ReceivedBy == loggedInUser.Id)
             {
-
+                ShowViewModel<ResponseMessageViewModel>(message.GetMessage);
             }
             else
             {

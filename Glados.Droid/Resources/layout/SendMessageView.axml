@@ -19,14 +19,16 @@
         android:textColor="@android:color/black"
         android:textSize="20dp"
         local:MvxBind="Text Receiver_First_Name" />
-    <CheckBox
+  <CheckBox
+       android:id="@+id/locationCheck"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Request Location?"
         android:textColor="@android:color/black"
         android:textSize="20dp"
         local:MvxBind="Checked LocationSet" />
-    <CheckBox
+  <CheckBox
+     android:id="@+id/meetingCheck"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Request Meeting?"

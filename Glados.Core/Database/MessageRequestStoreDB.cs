@@ -54,18 +54,7 @@ namespace Glados.Core.Database
 
             Debug.WriteLine(id);
             var messages =  database.Table<MessageRequestStore>().Where(x => x.ReceivedBy == id || x.Sender == id).OrderByDescending(x => x.UpdatedAt).ToList();
-           // var messages2 =  database.Table<MessageRequestStore>().Where(x => x.Sender == id).ToList();
 
-
-
-            
-          
-
-          //  foreach (var message in messages)
-          //  {
-         //       messages.Add(message);
-         //   }
-         //   var messages3 = messages.OrderByDescending(x => x.UpdatedAt);
             return messages;
 
         }

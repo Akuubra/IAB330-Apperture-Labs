@@ -153,8 +153,8 @@ namespace Glados.Droid
 			// aapt resource value: 0x7f040001
 			public const int MvxBindingTagUnique = 2130968577;
 			
-			// aapt resource value: 0x7f040019
-			public const int NudgeBTN = 2130968601;
+			// aapt resource value: 0x7f04001b
+			public const int NudgeBTN = 2130968603;
 			
 			// aapt resource value: 0x7f040010
 			public const int PasswordTag = 2130968592;
@@ -189,6 +189,18 @@ namespace Glados.Droid
 			// aapt resource value: 0x7f04000c
 			public const int lastNameTag = 2130968588;
 			
+			// aapt resource value: 0x7f040017
+			public const int locationCheck = 2130968599;
+			
+			// aapt resource value: 0x7f040019
+			public const int locationEdit = 2130968601;
+			
+			// aapt resource value: 0x7f040018
+			public const int locationText = 2130968600;
+			
+			// aapt resource value: 0x7f04001a
+			public const int meetingCheck = 2130968602;
+			
 			// aapt resource value: 0x7f040009
 			public const int nameField = 2130968585;
 			
@@ -198,14 +210,14 @@ namespace Glados.Droid
 			// aapt resource value: 0x7f040011
 			public const int passwordField = 2130968593;
 			
-			// aapt resource value: 0x7f04001a
-			public const int profilePicture = 2130968602;
+			// aapt resource value: 0x7f04001e
+			public const int profilePicture = 2130968606;
 			
-			// aapt resource value: 0x7f040018
-			public const int timeField = 2130968600;
+			// aapt resource value: 0x7f04001d
+			public const int timeField = 2130968605;
 			
-			// aapt resource value: 0x7f040017
-			public const int tmeTag = 2130968599;
+			// aapt resource value: 0x7f04001c
+			public const int tmeTag = 2130968604;
 			
 			static Id()
 			{
@@ -245,16 +257,19 @@ namespace Glados.Droid
 			public const int MessageView = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int SenderMessageView = 2130903048;
+			public const int ResponseMessageView = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int SendMessageView = 2130903049;
+			public const int SenderMessageView = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int SplashScreen = 2130903050;
+			public const int SendMessageView = 2130903050;
 			
 			// aapt resource value: 0x7f03000b
-			public const int UserProfile = 2130903051;
+			public const int SplashScreen = 2130903051;
+			
+			// aapt resource value: 0x7f03000c
+			public const int UserProfile = 2130903052;
 			
 			static Layout()
 			{

@@ -15,7 +15,9 @@ namespace Glados.Core.ViewModels
     {
         private readonly IUserStoreDatabase userStore;
         private readonly IMessageStoreDatabase messageStore;
+        private readonly IMessageResponseStoreDatabase responseStore;
         private MessageRequestStore message;
+        private MessageResponseStore messageResponse; 
 
 
         private UserStore loggedInUser;
@@ -25,14 +27,12 @@ namespace Glados.Core.ViewModels
         public async Task<int> Init(MessageRequestStore message)
         {
             this.message = message;
-            selectedContact = await userStore.GetSingleUser(message.ReceivedBy);
-            loggedInUser = await userStore.GetSingleUser(message.Sender);
+            selectedContact = await userStore.GetSingleUser(message.Sender);
+            loggedInUser = await userStore.GetSingleUser(message.ReceivedBy);
             Sender = loggedInUser.Id;
             UserName = selectedContact.Username;
             Receiver_First_Name = selectedContact.First_Name;
             Receiver = selectedContact.Id;
-            Location = message.Location;
-            LocationSet = setter(message.Location);
             Meet = message.Meet;
             MeetingSet = setter(message.Meet);
             Time = message.Time;
@@ -99,108 +99,62 @@ namespace Glados.Core.ViewModels
 
 
 
-        private void NudgeMessage()
+        private void CreateMessage()
         {
-            SetLocation();
+            messageResponse = new MessageResponseStore();
+           // SetLocation();
             SetMeeting();
             //message = new MessageRequestStore();            
-            message.ReceivedBy = this.Receiver;
-            message.Sender = this.Sender;
-            message.Location = this.Location;
-            message.Meet = this.Meet;
-            message.Time = this.Time;
-
+            messageResponse.MessageID = message.Id;
+            messageResponse.Sender = message.ReceivedBy;
+            messageResponse.Location = this.Location;
+            messageResponse.Meet = this.Meet;
+                
+                
         }
-
-        private void DumbMessage()
-        {
-            SetLocation();
-            SetMeeting();
-            //message = new MessageRequestStore();            
-            message.ReceivedBy = this.Receiver;
-            message.Sender = this.Sender;
-            message.Location = "";
-            message.Meet = "";
-            message.Time = "";
-
-        }
+        
 
 
-        public ICommand NudgeThisMessage { get; private set; }
+        public ICommand RespondToMessage { get; private set; }
+        
 
-        public ICommand CancelThisMessage { get; private set; }
-
-        public ResponseMessageViewModel(IUserStoreDatabase userStore, IMessageStoreDatabase messageStore)
+        public ResponseMessageViewModel(IUserStoreDatabase userStore, IMessageStoreDatabase messageStore, IMessageResponseStoreDatabase responseStore)
         {
             this.userStore = userStore;
             this.messageStore = messageStore;
-            //  SelectContactCommandToast = new MvxCommand(SelectContactToast);
-            //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
+            this.responseStore = responseStore;
 
-            NudgeThisMessage = new MvxCommand(() => {
+
+
+            RespondToMessage = new MvxCommand(() => {
                 UpdateMessage();
             });
 
-            CancelThisMessage = new MvxCommand(() => {
-                DeleteMessage();
-
-            });
         }
 
-        private async Task<int> DeleteMessage()
-        {
-            var delete = await messageStore.DeleteMessage(message.Id);
-            if (delete == 1)
-            {
-                ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });
-                Mvx.Resolve<IToast>().Show("Message Cancelled!");
-            }
-            else
-            {
-                Mvx.Resolve<IToast>().Show("Cancellation Failed!");
-            }
-
-            return 1;
-        }
+     
 
         private async Task<int> UpdateMessage()
         {
-            DumbMessage();
-
-            await messageStore.UpdateMessage(message);
-            NudgeMessage();
-            await messageStore.UpdateMessage(message);
-
-
-            ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });
-            Mvx.Resolve<IToast>().Show("Message Nudged!");
+            CreateMessage();
+          var numSent =  await responseStore.InsertMessage(messageResponse);
+            //await messageStore.UpdateMessage(message);
+            
+            if (numSent>0)
+            {
+                ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });
+                Mvx.Resolve<IToast>().Show("Response Sent!");
+            }else
+            {
+                Mvx.Resolve<IToast>().Show("Response Failed!");
+            }
+            
             return 1;
         }
 
 
 
-        private bool _locationSet;
-        public bool LocationSet
-        {
-            get { return _locationSet; }
-            set
-            {
-                SetProperty(ref _locationSet, value);
-                SetLocation();
-            }
-        }
 
-        private void SetLocation()
-        {
-            if (_locationSet)
-            {
-                _location = "Y";
-            }
-            else
-            {
-                _location = "N";
-            }
-        }
 
         private bool _meetingSet;
         public bool MeetingSet
