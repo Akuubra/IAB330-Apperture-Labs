@@ -61,11 +61,15 @@ namespace Glados.Core.ViewModels
             {
                 contact.IsFavourite = false;
                 var index = _favourites.IndexOf(contact.UserId);
-                Contacts.RemoveAt(index+1);
-                _favourites.RemoveAt(index);
+                _favourites.Remove(contact.UserId);
+                if (Contacts[0] is ContactLabel)
+                {
+                    index = index + 1;
+                }
+                Contacts.RemoveAt(index);              
                 RaisePropertyChanged(() => Contacts);
                 //Remove favourites heading if no favourites are there
-                if (_favourites.Count <= 0)
+                if (_favourites.Count <= 0 && ((Contacts[0] is ContactLabel) && (Contacts[0].Label == "Favourites")))
                 {
                     Contacts.RemoveAt(0);
                 }
@@ -80,23 +84,20 @@ namespace Glados.Core.ViewModels
             else
             {
                 contact.IsFavourite = true;
+                //add favourites heading if not there
+                if (!(Contacts[0] is ContactLabel) || (Contacts[0].Label != "Favourites"))
+                {
+                    Contacts.Insert(0, new ContactLabel("Favourites"));
+                }
                 if (!(_favourites.Contains(contact.UserId)))
-                    {
+                { 
                     _favourites.Add(contact.UserId);
                     System.Diagnostics.Debug.WriteLine("num in favourites list: " + _favourites.Count);
                     var index = _favourites.IndexOf(contact.UserId);
-                    if (_favourites.Count > 1)
-                    {
-                        index++;
-                    }
-                    Contacts.Insert(index, new ContactWrapper(contact, this));
+
+                    Contacts.Insert(index+1, new ContactWrapper(contact, this));
                     RaisePropertyChanged(() => Contacts);
 
-                    //add faovurites heading if not there
-                    if (!(Contacts[0] is ContactLabel))
-                    {
-                        Contacts.Insert(0, new ContactLabel("Favourites"));
-                    }
                 }
 
                 if (await fav.favouriteExists(loggedInUser.Id, contact.UserId))

@@ -8,5 +8,7 @@ namespace Glados.Core.Interfaces
 {
     public interface IContactListType
     {
+
+        string Label { get; set; }
     }
 }
