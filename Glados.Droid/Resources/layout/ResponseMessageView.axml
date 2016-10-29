@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Send to:"
+        android:id="@+id/firstNameTag"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+    <TextView
+        android:id="@+id/firstNameField"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        local:MvxBind="Text Receiver_First_Name" />
+    <CheckBox
+        android:id="@+id/locationCheck"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Send Location?"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+    <TextView
+        android:text="Location"
+        android:id="@+id/locationText"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+    <EditText
+        android:id="@+id/locationEdit"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        local:MvxBind="Text Location, Mode=TwoWay" />
+    <CheckBox
+        android:id="@+id/meetingCheck"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Attend Meeting?"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        local:MvxBind="Checked MeetingSet" />
+<!--<TextView
+        android:text="Meet"
+        android:id="@+id/meetTag"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+    <EditText
+        android:id="@+id/meetField"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        local:MvxBind="Text Meet, Mode=TwoWay" />-->
+<!--<TextView
+      android:text="Time:"
+      android:id="@+id/tmeTag"
+      android:layout_height="wrap_content"
+      android:layout_width="fill_parent"
+      android:textColor="@android:color/black"
+      android:textSize="20dp" />
+  <EditText
+      android:id="@+id/timeField"
+      android:layout_height="wrap_content"
+      android:layout_width="fill_parent"
+      android:textColor="@android:color/black"
+      android:textSize="20dp"
+      local:MvxBind="Text Time, Mode=TwoWay" />-->
+    <LinearLayout
+        android:layout_height="100dip"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal"
+        android:weightSum="1.0">
+        <Button
+            android:text="Send Response"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:textColor="#ffffff"
+            android:background="#00b359"
+            android:textSize="40dp"
+            android:id="@+id/NudgeBTN"
+            local:MvxBind="Click RespondToMessage" />
+    <!--<Button
+        android:text="Cancel"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_weight=".50"
+        android:textColor="#ffffff"
+        android:background="#ff4d4d"
+        android:textSize="40dp"
+        android:id="@+id/ContactsBTN"
+        local:MvxBind="Click CancelThisMessage" />-->
+    </LinearLayout>
+</LinearLayout>
