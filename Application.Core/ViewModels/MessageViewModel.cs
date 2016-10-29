@@ -37,30 +37,32 @@ namespace Application.Core.ViewModels
             GetMessages();
             return 1;
         }
-             
 
+        private ObservableCollection<MessageWrapper> rawMessageList = new ObservableCollection<MessageWrapper>();
         public async void GetMessages()
         {
            
             var rawMessages = await messageStore.GetUsersMessages(loggedInUser.Id);
-            
+            rawMessageList.Clear();
             Messages.Clear();
             foreach (var message in rawMessages)
             {
                 if(message.Sender == loggedInUser.Id)
                 {
                     var receiver = await userStore.GetSingleUser(message.ReceivedBy);
-                    Messages.Add(new MessageWrapper(message, receiver.First_Name, true));
+                    rawMessageList.Add(new MessageWrapper(message, receiver.First_Name, true));
                 }
                 else
                 {
                     var sender = await userStore.GetSingleUser(message.Sender);
-                    Messages.Add(new MessageWrapper(message, sender.First_Name, false));
+                    rawMessageList.Add(new MessageWrapper(message, sender.First_Name, false));
                     
                 }
                 
 
             }
+            Messages = rawMessageList;
+            //MessageList = RawMessageList;
         }
 
 
@@ -71,12 +73,12 @@ namespace Application.Core.ViewModels
         //    GetMessages();
         //    return loggedInUser;
         //}
-        private ObservableCollection<MessageWrapper> messageList;
-        public ObservableCollection<MessageWrapper> MessageList
+       
+        /*public ObservableCollection<MessageWrapper> MessageList
         {
             get { return messageList; }
             set { SetProperty(ref messageList, value);}
-        }
+        }*/
         public ObservableCollection<MessageWrapper> Messages
         {
             get { return messages; }
@@ -98,13 +100,11 @@ namespace Application.Core.ViewModels
                 SetProperty(ref _messageSearch, value);
                 if (string.IsNullOrEmpty(value))
                 {
-                    FilteredMessages = messages;
-                    //SearchLocations(searchTerm);
+
                 }
-                else if(_messageSearch.Length > 3)
+                else if(_messageSearch.Length > 2)
                 {
-                    SearchMessages(_messageSearch);
-                    //return filtered list
+                    
                 }
             }
         }
@@ -112,17 +112,7 @@ namespace Application.Core.ViewModels
         
         public async void SearchMessages(string searchTerm)
         {
-
-            foreach(MessageWrapper message in Messages)
-            {
-                if(message.MessageName == searchTerm)
-                {
-                    FilteredMessages.Add(message);
-                }
-            }
-
-            //filteredmessages.add(message.where(filter));
-            MessageList = FilteredMessages;
+            
         }
 
         public ICommand SeeMessageDetails { get; private set; }
@@ -139,7 +129,6 @@ namespace Application.Core.ViewModels
             SeeMessageDetails = new MvxCommand<MessageWrapper>(selectedMessage => {
                 MessageViewSwitcher(selectedMessage);
             });
-
         }
         private void MessageViewSwitcher(MessageWrapper message)
         {
