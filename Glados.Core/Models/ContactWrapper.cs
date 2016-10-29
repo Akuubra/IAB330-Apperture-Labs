@@ -39,5 +39,7 @@ namespace Glados.Core.Models
             }
         }
 
+
+        public string Label { get; set; }
     }
 }
