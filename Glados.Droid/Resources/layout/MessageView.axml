@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d6d6d6">
+    android:background="#179ef3">
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
@@ -17,13 +17,15 @@
             android:focusableInTouchMode="true" />
         <EditText
             android:hint="Search Messages"
-            android:textColorHint="#7f7f7f"
-            android:textColor="#000000"
+            android:textColorHint="#ffffff"
+            android:textColor="#f5f5f5"
+            android:background="@drawable/SearchBlue"
             android:layout_width="0dp"
+            android:layout_marginLeft="2dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.88"
             android:id="@+id/SearchBTN"
-            android:drawableLeft="@drawable/button_icon"
+            android:drawableLeft="@drawable/search_icon"
             local:MvxBind="Text MessageSearch" />
         <Button
             android:layout_width="0dp"
@@ -38,24 +40,26 @@
         android:layout_width="fill_parent"
         android:gravity="center_horizontal"
         android:weightSum="1.0">
-        <Button
-            android:text="Messages"
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".50"
-            android:textColor="#0c5de2"
-            android:background="#d6d6d6"
+            android:background="#179ef3"
             android:id="@+id/MessagesBTN"
-            android:drawableLeft="@drawable/message_icon" />
-        <Button
-            android:text="Contacts"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/message_icon_messagespage" />
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".50"
-            android:textColor="#ff7300"
-            android:background="#d6d6d6"
+            android:background="#179ef3"
             android:id="@+id/ContactsBTN"
-            android:drawableLeft="@drawable/profile_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/profile_icon"
             local:MvxBind="Click SwitchToContacts" />
     </LinearLayout>
     <LinearLayout
@@ -65,14 +69,14 @@
         android:weightSum="1.0">
         <View
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="4dp"
             android:layout_weight=".50"
-            android:background="#0c5de2" />
+            android:background="#ffffff" />
         <View
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="4dp"
             android:layout_weight=".50"
-            android:background="#d6d6d6" />
+            android:background="#179ef3" />
     </LinearLayout>
     <GridLayout
         android:layout_width="match_parent"
