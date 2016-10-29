@@ -137,7 +137,7 @@ namespace Glados.Core.ViewModels
             //_rawMessage.Clear();
             foreach (MessageWrapper mes in MessageList)
             {
-                if(String.Equals(mes.MessageName,searchTerm,StringComparison.OrdinalIgnoreCase))
+                if(mes.MessageName.ToLower().Contains(searchTerm))//String.Equals(mes.MessageName,searchTerm,StringComparison.OrdinalIgnoreCase))
                 {
                     FilteredMessages.Add(mes);
                     /*if(Messages.Contains(mes))
