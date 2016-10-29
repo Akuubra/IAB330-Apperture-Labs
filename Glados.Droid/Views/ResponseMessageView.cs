@@ -5,7 +5,7 @@ using MvvmCross.Droid.Views;
 
 namespace Glados.Droid.Views
 {
-    [Activity(Label = "View for ResponseMessageView", Theme = "@android:style/Theme.Light.NoTitleBar")]
+    [Activity(Label = "View for ResponseMessageView", Theme = "@android:style/Theme.Light.NoTitleBar", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class ResponseMessageView : MvxActivity
     {
 

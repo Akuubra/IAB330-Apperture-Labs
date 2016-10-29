@@ -10,7 +10,7 @@ using Glados.Core.Models;
 
 namespace Glados.Droid.Views
 {
-    [Activity(Label = "View for ContactsViewModel", Theme = "@android:style/Theme.Light.NoTitleBar")]
+    [Activity(Label = "View for ContactsViewModel", Theme = "@android:style/Theme.Light.NoTitleBar", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class ContactsView : MvxActivity
     {
         protected override void OnCreate(Bundle bundle)

@@ -23,6 +23,7 @@ namespace Glados.Core.ViewModels
         List<MessageRequestStore> rawMessages = new List<MessageRequestStore>();
         private ObservableCollection<MessageWrapper> messages = new ObservableCollection<MessageWrapper>();
         private ObservableCollection<MessageWrapper> filteredMessages = new ObservableCollection<MessageWrapper>();
+        private ObservableCollection<MessageWrapper> messageList = new ObservableCollection<MessageWrapper>();
         private readonly IMessageStoreDatabase messageStore;
         private readonly IUserStoreDatabase userStore;
        
@@ -34,12 +35,12 @@ namespace Glados.Core.ViewModels
              loggedInUser = await userStore.GetSingleUser( currentUser);
 
            // loggedInUser = await userLoginDB.GetSingleUser(true);
-            GetMessages();
+            await GetMessages();
             return 1;
         }
 
         private ObservableCollection<MessageWrapper> rawMessageList = new ObservableCollection<MessageWrapper>();
-        public async void GetMessages()
+        public async Task<int> GetMessages()
         {
            
             var rawMessages = await messageStore.GetUsersMessages(loggedInUser.Id);
@@ -47,7 +48,7 @@ namespace Glados.Core.ViewModels
             Messages.Clear();
             foreach (var message in rawMessages)
             {
-                if(message.Sender == loggedInUser.Id)
+                if (message.Sender == loggedInUser.Id)
                 {
                     var receiver = await userStore.GetSingleUser(message.ReceivedBy);
                     rawMessageList.Add(new MessageWrapper(message, receiver.First_Name, true));
@@ -56,13 +57,19 @@ namespace Glados.Core.ViewModels
                 {
                     var sender = await userStore.GetSingleUser(message.Sender);
                     rawMessageList.Add(new MessageWrapper(message, sender.First_Name, false));
-                    
-                }
-                
 
+                }
             }
-            Messages = rawMessageList;
+
+            foreach(MessageWrapper message in rawMessageList)
+            {
+                Messages.Add(message);
+                MessageList.Add(message);
+                //FilteredMessages.Add(message);
+            }
+            
             //MessageList = RawMessageList;
+            return 1;
         }
 
 
@@ -74,11 +81,11 @@ namespace Glados.Core.ViewModels
         //    return loggedInUser;
         //}
        
-        /*public ObservableCollection<MessageWrapper> MessageList
+        public ObservableCollection<MessageWrapper> MessageList
         {
             get { return messageList; }
             set { SetProperty(ref messageList, value);}
-        }*/
+        }
         public ObservableCollection<MessageWrapper> Messages
         {
             get { return messages; }
@@ -86,33 +93,74 @@ namespace Glados.Core.ViewModels
         }
         public ObservableCollection<MessageWrapper> FilteredMessages
         {
-            get { return FilteredMessages; }
+            get { return filteredMessages; }
             set { SetProperty(ref filteredMessages, value); }
         }
         private string _messageSearch;
-        
-
         public string MessageSearch
         {
             get { return _messageSearch; }
             set
             {
                 SetProperty(ref _messageSearch, value);
-                if (string.IsNullOrEmpty(value))
+                if (String.IsNullOrEmpty(MessageSearch))
                 {
-
+                    Messages.Clear();
+                    foreach(MessageWrapper message in MessageList)
+                    {
+                        Messages.Add(message);
+                    }
+                    //GetMessages();
                 }
-                else if(_messageSearch.Length > 2)
+                else if (_messageSearch.Length > 0)
                 {
-                    
+                    SearchMessages(_messageSearch);
                 }
             }
         }
         
         
-        public async void SearchMessages(string searchTerm)
+        public async Task<int> SearchMessages(string searchTerm)
         {
-            
+            //await GetMessages();
+            //rawMessageList.Clear();
+            FilteredMessages.Clear();
+            foreach (MessageWrapper message in Messages)
+            {
+                if(!MessageList.Contains(message))
+                {
+                    MessageList.Add(message);
+                }
+            }
+            //Messages.Clear();
+            //var _rawMessage = Messages;
+            //_rawMessage.Clear();
+            foreach (MessageWrapper mes in MessageList)
+            {
+                if(String.Equals(mes.MessageName,searchTerm,StringComparison.OrdinalIgnoreCase))
+                {
+                    FilteredMessages.Add(mes);
+                    /*if(Messages.Contains(mes))
+                    {
+                        Messages.Clear();
+                        Messages.Add(mes);
+                    }
+                    else
+                    {
+                        Messages.Add(mes);
+                    }*/
+                                //new MessageWrapper(mes.GetMessage, mes.MessageName, mes.GetMessage.Sender == loggedInUser.Id));
+                }
+            }
+            Messages.Clear();
+            foreach(MessageWrapper message in FilteredMessages)
+            {
+                Messages.Add(message);
+            }
+           // Messages.Clear();
+          //  Messages = rawMessageList;
+            return 1;
+            //FilteredMessages.Clear();
         }
 
         public ICommand SeeMessageDetails { get; private set; }
@@ -122,10 +170,7 @@ namespace Glados.Core.ViewModels
             this.messageStore = messageStore;
             this.userStore = userStore;
             SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>( new {  currentUser = loggedInUser.Id }));
-            if(!(loggedInUser == null))
-            {
-                GetMessages();
-            }
+
             SeeMessageDetails = new MvxCommand<MessageWrapper>(selectedMessage => {
                 MessageViewSwitcher(selectedMessage);
             });
