@@ -69,6 +69,13 @@ namespace Glados.Core.Database
         }
 
 
+        public async Task<bool> IsResponded(string messageId, string receiverId)
+        {
+            await SyncAsync(true);
+            var messages = await azureSyncTable.Where(x => x.MessageID == messageId || x.Sender == receiverId).ToListAsync();
+            return messages.Any();
+        }
+
         private async Task SyncAsync(bool pullData = false)
         {
             try

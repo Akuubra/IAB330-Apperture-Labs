@@ -26,15 +26,15 @@ namespace Glados.Core.ViewModels
         private ObservableCollection<MessageWrapper> messageList = new ObservableCollection<MessageWrapper>();
         private readonly IMessageStoreDatabase messageStore;
         private readonly IUserStoreDatabase userStore;
-       
+       // private readonly IMessageResponseStoreDatabase responseStore;
+
 
         private UserStore loggedInUser;
 
         public async Task<int> Init(string currentUser)
         {
              loggedInUser = await userStore.GetSingleUser( currentUser);
-
-           // loggedInUser = await userLoginDB.GetSingleUser(true);
+            
             await GetMessages();
             return 1;
         }
@@ -51,12 +51,13 @@ namespace Glados.Core.ViewModels
                 if (message.Sender == loggedInUser.Id)
                 {
                     var receiver = await userStore.GetSingleUser(message.ReceivedBy);
-                    rawMessageList.Add(new MessageWrapper(message, receiver.First_Name, true));
+                   // var message_received = await responseStore.IsResponded(message.Id, message.ReceivedBy);
+                    rawMessageList.Add(new MessageWrapper(message, receiver.First_Name, true, false));
                 }
                 else
                 {
                     var sender = await userStore.GetSingleUser(message.Sender);
-                    rawMessageList.Add(new MessageWrapper(message, sender.First_Name, false));
+                    rawMessageList.Add(new MessageWrapper(message, sender.First_Name, false, false));
 
                 }
             }
@@ -65,22 +66,12 @@ namespace Glados.Core.ViewModels
             {
                 Messages.Add(message);
                 MessageList.Add(message);
-                //FilteredMessages.Add(message);
             }
             
-            //MessageList = RawMessageList;
             return 1;
         }
 
-
-        //private async Task<UserStore> GetLoggedInUser()
-        //{
-
-        //    loggedInUser =  await Task.FromResult(await userStore.GetSingleUserByName("deraj"));
-        //    GetMessages();
-        //    return loggedInUser;
-        //}
-       
+               
         public ObservableCollection<MessageWrapper> MessageList
         {
             get { return messageList; }
@@ -110,7 +101,6 @@ namespace Glados.Core.ViewModels
                     {
                         Messages.Add(message);
                     }
-                    //GetMessages();
                 }
                 else if (_messageSearch.Length > 0)
                 {
@@ -122,8 +112,7 @@ namespace Glados.Core.ViewModels
         
         public async Task<int> SearchMessages(string searchTerm)
         {
-            //await GetMessages();
-            //rawMessageList.Clear();
+
             FilteredMessages.Clear();
             foreach (MessageWrapper message in Messages)
             {
@@ -132,24 +121,12 @@ namespace Glados.Core.ViewModels
                     MessageList.Add(message);
                 }
             }
-            //Messages.Clear();
-            //var _rawMessage = Messages;
-            //_rawMessage.Clear();
+
             foreach (MessageWrapper mes in MessageList)
             {
-                if(mes.MessageName.ToLower().Contains(searchTerm))//String.Equals(mes.MessageName,searchTerm,StringComparison.OrdinalIgnoreCase))
+                if(mes.MessageName.ToLower().Contains(searchTerm))
                 {
                     FilteredMessages.Add(mes);
-                    /*if(Messages.Contains(mes))
-                    {
-                        Messages.Clear();
-                        Messages.Add(mes);
-                    }
-                    else
-                    {
-                        Messages.Add(mes);
-                    }*/
-                                //new MessageWrapper(mes.GetMessage, mes.MessageName, mes.GetMessage.Sender == loggedInUser.Id));
                 }
             }
             Messages.Clear();
@@ -157,16 +134,14 @@ namespace Glados.Core.ViewModels
             {
                 Messages.Add(message);
             }
-           // Messages.Clear();
-          //  Messages = rawMessageList;
             return 1;
-            //FilteredMessages.Clear();
         }
 
         public ICommand SeeMessageDetails { get; private set; }
         public ICommand SwitchToContacts { get; private set; }
         public  MessageViewModel(IMessageStoreDatabase messageStore, IUserStoreDatabase userStore)
         {
+
             this.messageStore = messageStore;
             this.userStore = userStore;
             SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>( new {  currentUser = loggedInUser.Id }));

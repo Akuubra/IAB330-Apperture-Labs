@@ -16,7 +16,7 @@ namespace Glados.Core.ViewModels
         private readonly IUserStoreDatabase userStore;
         private readonly IMessageStoreDatabase messageStore;
         private readonly IMessageResponseStoreDatabase responseStore;
-        private MessageRequestStore message;
+        private MessageWrapper message;
         private MessageResponseStore messageResponse; 
 
 
@@ -26,24 +26,48 @@ namespace Glados.Core.ViewModels
 
         public async Task<int> Init(MessageRequestStore message)
         {
-            this.message = message;
+
             selectedContact = await userStore.GetSingleUser(message.Sender);
             loggedInUser = await userStore.GetSingleUser(message.ReceivedBy);
+            this.message = new MessageWrapper(message, loggedInUser.First_Name, false,false);
+            MeetingRequested = this.message.GetMessage.Meet == "Y";
             Sender = loggedInUser.Id;
             UserName = selectedContact.Username;
             Receiver_First_Name = selectedContact.First_Name;
             Receiver = selectedContact.Id;
-            Meet = message.Meet;
-            MeetingSet = setter(message.Meet);
+            Meet = "N";//message.Meet;
+            MeetingSet = setter("N");
             Time = message.Time;
+            MessageText = this.message.MessageContext;
 
             return 1;
+        }
+
+
+
+        private bool _meetingRequested;
+        public bool MeetingRequested
+        {
+            get { return _meetingRequested; }
+            set { SetProperty(ref _meetingRequested, value); }
         }
 
         private bool setter(string indicator)
         {
             return indicator == "Y";
         }
+
+        private string _messageText;
+
+        public string MessageText
+        {
+            get { return _messageText; }
+            set { SetProperty(ref _messageText, value); }
+        }
+
+
+
+
         private string _userName;
 
         public string UserName

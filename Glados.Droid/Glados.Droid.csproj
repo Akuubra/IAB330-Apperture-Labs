@@ -144,6 +144,8 @@
     <Compile Include="Services\ToastService.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreen.cs" />
+    <Compile Include="ValueConverters\ResponseImageValueConverter.cs" />
+    <Compile Include="ValueConverters\SendImageValueConverter.cs" />
     <Compile Include="ValueConverters\ImageValueConverter.cs" />
     <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\ResponseMessageView.cs" />
@@ -204,6 +206,9 @@
     <AndroidResource Include="Resources\drawable\SearchBlue.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\drawable\rounded_corner.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -228,6 +233,18 @@
     <AndroidResource Include="Resources\drawable\message_icon2.png" />
     <AndroidResource Include="Resources\drawable\profile_icon2.png" />
     <AndroidResource Include="Resources\drawable\search_icon.png" />
+    <AndroidResource Include="Resources\drawable\rounded_corner_green.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\rounded_corner_blue.xml" />
+    <AndroidResource Include="Resources\drawable\rounded_corner_half_green.xml" />
+    <AndroidResource Include="Resources\drawable\rounded_corner_half_red.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\back_orange.png" />
+    <AndroidResource Include="Resources\drawable\forward_blue.png" />
+    <AndroidResource Include="Resources\drawable\not_received.png" />
+    <AndroidResource Include="Resources\drawable\response_received.png" />
     <Content Include="ToDo-MvvmCross\_ Droid UI.txt" />
   </ItemGroup>
   <ItemGroup>

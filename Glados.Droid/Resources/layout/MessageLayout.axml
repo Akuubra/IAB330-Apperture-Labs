@@ -24,13 +24,32 @@
             android:layout_weight="0.89"
             android:layout_marginLeft="20dp"
             android:orientation="vertical">
+          <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                local:MvxBind="DrawableName MessageSender, Converter=SendImage" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
                 android:textColor="#000000"
-                android:layout_marginLeft="0dp"
+                android:layout_marginLeft="30dp"
                 local:MvxBind="Text MessageName" />
+             <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentRight="true"
+                local:MvxBind="DrawableName ResponseReceived, Converter=ResponseImage" />
+        
+            </RelativeLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

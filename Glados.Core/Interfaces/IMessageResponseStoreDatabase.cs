@@ -14,6 +14,7 @@ namespace Glados.Core.Interfaces
         Task<int> DeleteMessage(Object id);
 
         Task<int> InsertMessage(MessageResponseStore response);
-        
+        Task<bool> IsResponded(string messageId, string receiverId);
+
     }
 }

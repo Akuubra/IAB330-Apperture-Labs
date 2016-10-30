@@ -20,7 +20,7 @@ namespace Glados.Core.ViewModels
             selectedContact = parameters;
         }
         private string _userName;
-        //= "Jared";
+        //= "Jared";v
 
 		public string UserName {
 			get { return _userName; }

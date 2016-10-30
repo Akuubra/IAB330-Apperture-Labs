@@ -123,16 +123,26 @@ namespace Glados.Core.ViewModels
 
             CreateMessage = new MvxCommand(() => {
                 createNewMessage();
-                 ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });
-                Mvx.Resolve<IToast>().Show("Message Sent!");
+                 
             });
         }
 
         private async Task<int> createNewMessage()
         {
             generateMessage();
-            await messageStore.InsertMessage(message);
-            return 1;
+            var numNew = await messageStore.InsertMessage(message);
+            if (numNew > 0)
+            {
+                ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });
+                Mvx.Resolve<IToast>().Show("Message Sent!");
+                return 1;
+            }
+            else
+            {
+                Mvx.Resolve<IToast>().Show("Send Error");
+               
+            }
+            return 0;
         }
 
 
