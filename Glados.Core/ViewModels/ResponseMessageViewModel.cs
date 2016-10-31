@@ -18,6 +18,7 @@ namespace Glados.Core.ViewModels
         private readonly IMessageResponseStoreDatabase responseStore;
         private MessageWrapper message;
         private MessageResponseStore messageResponse; 
+        private MessageRequestStore originalMessage;
 
 
         private UserStore loggedInUser;
@@ -26,7 +27,7 @@ namespace Glados.Core.ViewModels
 
         public async Task<int> Init(MessageRequestStore message)
         {
-
+            originalMessage = message;
             selectedContact = await userStore.GetSingleUser(message.Sender);
             loggedInUser = await userStore.GetSingleUser(message.ReceivedBy);
             this.message = new MessageWrapper(message, loggedInUser.First_Name, false,false);
@@ -129,14 +130,39 @@ namespace Glados.Core.ViewModels
            // SetLocation();
             SetMeeting();
             //message = new MessageRequestStore();            
-            messageResponse.MessageID = message.Id;
-            messageResponse.Sender = message.ReceivedBy;
+            messageResponse.MessageID = originalMessage.Id;
+            messageResponse.Sender = originalMessage.ReceivedBy;
             messageResponse.Location = this.Location;
             messageResponse.Meet = this.Meet;
                 
                 
         }
-        
+        private void NudgeMessage()
+        {
+            
+            //message = new MessageRequestStore();            
+            message.ReceivedBy = this.Receiver;
+            message.Sender = this.Sender;
+            message.Location = this.Location;
+            message.Meet = this.Meet;
+            message.Time = this.Time;
+
+        }
+
+        private MessageRequestStore DumbMessage()
+        {
+            MessageRequestStore _message = new MessageRequestStore();
+
+
+            //message = new MessageRequestStore();            
+            _message.Id = originalMessage.Id;
+            _message.Sender = originalMessage.Sender;
+            _message.ReceivedBy = originalMessage.ReceivedBy; 
+            _message.Location = "";
+            _message.Meet = "";
+            _message.Time = "";
+            return _message;
+        }
 
 
         public ICommand RespondToMessage { get; private set; }
@@ -162,10 +188,11 @@ namespace Glados.Core.ViewModels
         {
             CreateMessage();
           var numSent =  await responseStore.InsertMessage(messageResponse);
-            //await messageStore.UpdateMessage(message);
-            
+
             if (numSent>0)
             {
+                await messageStore.UpdateMessage(DumbMessage());
+                await messageStore.UpdateMessage(originalMessage);
                 ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });
                 Mvx.Resolve<IToast>().Show("Response Sent!");
             }else

@@ -38,8 +38,14 @@ namespace Glados.Core.Database
 
         public async Task<bool> IsResponded(string messageId, string receiverId)
         {
-            var messages = database.Table<MessageResponseStore>().Where(x => x.MessageID == messageId || x.Sender == receiverId).ToList();
+            var messages = database.Table<MessageResponseStore>().Where(x => x.MessageID == messageId && x.Sender == receiverId).ToList();
             return messages.Any();
+        }
+
+        public async Task<MessageResponseStore> GetResponse(string messageId, string receiverId)
+        {
+            var messages = database.Table<MessageResponseStore>().Where(x => x.MessageID == messageId).ToList();
+            return messages.FirstOrDefault();
         }
 
         public async Task<int> DeleteMessage(object id)

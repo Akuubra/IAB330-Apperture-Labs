@@ -19,6 +19,8 @@ namespace Glados.Core.ViewModels
     {
         private readonly IUserStoreDatabase userStore;
         private readonly IMessageStoreDatabase messageStore;
+        private readonly IMessageResponseStoreDatabase responseStore;
+        private MessageResponseStore response;
         private MessageRequestStore message;
          
 
@@ -31,6 +33,7 @@ namespace Glados.Core.ViewModels
             this.message = message; 
             selectedContact = await userStore.GetSingleUser(message.ReceivedBy);
             loggedInUser = await userStore.GetSingleUser(message.Sender);
+            response = await responseStore.GetResponse(message.Id, message.ReceivedBy);
             Sender = loggedInUser.Id;
             UserName = selectedContact.Username;
             Receiver_First_Name = selectedContact.First_Name;
@@ -40,6 +43,12 @@ namespace Glados.Core.ViewModels
             Meet = message.Meet;
             MeetingSet = setter(message.Meet);
             Time = message.Time;
+
+            /// response details 
+            /// 
+            AcceptedMeeting = response.Meet == "Y" ? "I will attend": "I can't attend";
+            LocationReceived = response.Location; 
+
 
             return 1;
         }
@@ -101,7 +110,19 @@ namespace Glados.Core.ViewModels
             set { SetProperty(ref _receiver_first_name, value); }
         }
 
-              
+        private string _locationReceived;
+        public string LocationReceived {
+            get { return _locationReceived; }
+            set { SetProperty(ref _locationReceived, value); }
+        }
+
+        private string _acceptedMeeting;
+        public string AcceptedMeeting
+        {
+            get { return _acceptedMeeting; }
+            set { SetProperty(ref _acceptedMeeting, value); }
+        }
+
 
         private void  NudgeMessage()
         {
@@ -134,8 +155,9 @@ namespace Glados.Core.ViewModels
 
         public ICommand CancelThisMessage { get; private set; }
 
-        public SenderMessageViewModel(IUserStoreDatabase userStore, IMessageStoreDatabase messageStore)
+        public SenderMessageViewModel(IUserStoreDatabase userStore, IMessageStoreDatabase messageStore, IMessageResponseStoreDatabase responseStore)
         {
+            this.responseStore = responseStore;
             this.userStore = userStore;
             this.messageStore = messageStore;
             //  SelectContactCommandToast = new MvxCommand(SelectContactToast);

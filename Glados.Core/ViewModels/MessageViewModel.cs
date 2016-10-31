@@ -26,7 +26,7 @@ namespace Glados.Core.ViewModels
         private ObservableCollection<MessageWrapper> messageList = new ObservableCollection<MessageWrapper>();
         private readonly IMessageStoreDatabase messageStore;
         private readonly IUserStoreDatabase userStore;
-       // private readonly IMessageResponseStoreDatabase responseStore;
+      // private readonly IMessageResponseStoreDatabase responseStore;
 
 
         private UserStore loggedInUser;
@@ -48,11 +48,13 @@ namespace Glados.Core.ViewModels
             Messages.Clear();
             foreach (var message in rawMessages)
             {
+                bool message_received = true;
+               // message_received = await responseStore.IsResponded(message.Id, message.ReceivedBy);
                 if (message.Sender == loggedInUser.Id)
                 {
                     var receiver = await userStore.GetSingleUser(message.ReceivedBy);
-                   // var message_received = await responseStore.IsResponded(message.Id, message.ReceivedBy);
-                    rawMessageList.Add(new MessageWrapper(message, receiver.First_Name, true, false));
+                  
+                    rawMessageList.Add(new MessageWrapper(message, receiver.First_Name, true, message_received));
                 }
                 else
                 {
@@ -141,7 +143,7 @@ namespace Glados.Core.ViewModels
         public ICommand SwitchToContacts { get; private set; }
         public  MessageViewModel(IMessageStoreDatabase messageStore, IUserStoreDatabase userStore)
         {
-
+           // responseStore = resStore;
             this.messageStore = messageStore;
             this.userStore = userStore;
             SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>( new {  currentUser = loggedInUser.Id }));

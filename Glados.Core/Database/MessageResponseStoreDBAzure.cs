@@ -72,8 +72,16 @@ namespace Glados.Core.Database
         public async Task<bool> IsResponded(string messageId, string receiverId)
         {
             await SyncAsync(true);
-            var messages = await azureSyncTable.Where(x => x.MessageID == messageId || x.Sender == receiverId).ToListAsync();
+            var messages = await azureSyncTable.Where(x => x.MessageID == messageId && x.Sender == receiverId).ToListAsync();
             return messages.Any();
+        }
+
+
+        public async Task<MessageResponseStore> GetResponse(string messageId, string receiverId)
+        {
+            await SyncAsync(true);
+            var messages = await azureSyncTable.Where(x => x.MessageID == messageId && x.Sender == receiverId).ToListAsync();
+            return messages.FirstOrDefault();
         }
 
         private async Task SyncAsync(bool pullData = false)
@@ -83,7 +91,7 @@ namespace Glados.Core.Database
                 await azureDatabase.SyncContext.PushAsync();
                 if (pullData)
                 {
-                    await azureSyncTable.PullAsync("allMessages", azureSyncTable.CreateQuery());
+                    await azureSyncTable.PullAsync("allMessagesResponses", azureSyncTable.CreateQuery());
                 }
             }catch(Exception e)
             {
