@@ -32,6 +32,7 @@ namespace Glados.Core.ViewModels
             loggedInUser = await userStore.GetSingleUser(message.ReceivedBy);
             this.message = new MessageWrapper(message, loggedInUser.First_Name, false,false);
             MeetingRequested = this.message.GetMessage.Meet == "Y";
+            LocationRequested = this.message.GetMessage.Location == "Y";
             Sender = loggedInUser.Id;
             UserName = selectedContact.Username;
             Receiver_First_Name = selectedContact.First_Name;
@@ -51,6 +52,12 @@ namespace Glados.Core.ViewModels
         {
             get { return _meetingRequested; }
             set { SetProperty(ref _meetingRequested, value); }
+        }
+        private bool _locationRequested;
+        public bool LocationRequested
+        {
+            get { return _locationRequested; }
+            set { SetProperty(ref _locationRequested, value); }
         }
 
         private bool setter(string indicator)

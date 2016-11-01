@@ -30,25 +30,15 @@ namespace Glados.Droid.Views
             locationEdit = (EditText)FindViewById(Resource.Id.locationEdit);
 
             locationText = (TextView)FindViewById(Resource.Id.locationText);
-            locationEdit.Visibility = Android.Views.ViewStates.Invisible;
-            locationText.Visibility = Android.Views.ViewStates.Invisible;
-            meetingCheck.Visibility = Android.Views.ViewStates.Invisible;
+            locationCheck.Visibility = Android.Views.ViewStates.Gone;
+            locationEdit.Visibility = Android.Views.ViewStates.Gone;
+            locationText.Visibility = Android.Views.ViewStates.Gone;
+            meetingCheck.Visibility = Android.Views.ViewStates.Gone;
 
-            if (ResponseMessageViewModel.MeetingRequested)
-            {
-                meetingCheck.Visibility = Android.Views.ViewStates.Visible;
-            }
+   
 
         }
-        protected override void OnStart()
-        {
-            base.OnStart();
-
-            if (ResponseMessageViewModel.MeetingRequested)
-            {
-                meetingCheck.Visibility = Android.Views.ViewStates.Visible;
-            }
-        }
+   
         protected override void OnResume()
         {
             base.OnResume();
@@ -57,6 +47,11 @@ namespace Glados.Droid.Views
                 if (ResponseMessageViewModel.MeetingRequested)
                 {
                     meetingCheck.Visibility = Android.Views.ViewStates.Visible;
+                }
+
+                if (ResponseMessageViewModel.LocationRequested)
+                {
+                    locationCheck.Visibility = Android.Views.ViewStates.Visible;
                 }
             };
            
