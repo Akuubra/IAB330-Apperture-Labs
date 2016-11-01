@@ -114,17 +114,10 @@ namespace Glados.Core.ViewModels
         {
 
             FilteredMessages.Clear();
-            foreach (MessageWrapper message in Messages)
-            {
-                if(!MessageList.Contains(message))
-                {
-                    MessageList.Add(message);
-                }
-            }
 
             foreach (MessageWrapper mes in MessageList)
             {
-                if(mes.MessageName.ToLower().Contains(searchTerm))
+                if(mes.MessageName.ToLower().Contains(searchTerm) && !FilteredMessages.Contains(mes))
                 {
                     FilteredMessages.Add(mes);
                 }

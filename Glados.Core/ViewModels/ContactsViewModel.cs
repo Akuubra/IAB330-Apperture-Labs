@@ -32,12 +32,27 @@ namespace Glados.Core.ViewModels
         UserStore loggedInUser;
 
         private ObservableCollection<IContactListType> contacts = new ObservableCollection<IContactListType>();
+        private ObservableCollection<IContactListType> contactList = new ObservableCollection<IContactListType>();
+        private ObservableCollection<IContactListType> filteredContacts = new ObservableCollection<IContactListType>();
+
         List<UserStore> _contacts = new List<UserStore>();
+        List<UserStore> _contactList = new List<UserStore>();
+        List<UserStore> _filteredContacts = new List<UserStore>();
         List<string> _favourites = new List<string>();
         public ObservableCollection<IContactListType> Contacts
         {
             get { return contacts; }
             set { SetProperty(ref contacts, value); }
+        }
+        public ObservableCollection<IContactListType> ContactList
+        {
+            get { return contactList; }
+            set { SetProperty(ref contactList, value); }
+        }
+        public ObservableCollection<IContactListType> FilteredContacts
+        {
+            get { return filteredContacts; }
+            set { SetProperty(ref filteredContacts, value); }
         }
 
         private string contactSearch;
@@ -47,12 +62,43 @@ namespace Glados.Core.ViewModels
             set
             {
                 SetProperty(ref contactSearch, value);
-                if (contactSearch.Length > 3)
+                if (String.IsNullOrEmpty(ContactSearch))
                 {
-
-                    //SearchLocations(searchTerm);
+                    Contacts.Clear();
+                    /*foreach (ContactWrapper contact in ContactList)
+                    {
+                        Contacts.Add(contact);
+                    }*/
+                    GetContacts();
+                }
+                else if(contactSearch.Length > 0)
+                {
+                    SearchContacts(contactSearch);
                 }
             }
+        }
+
+        public async Task<int> SearchContacts(string searchTerm)
+        {
+            FilteredContacts.Clear();
+
+            foreach(IContactListType contact in Contacts)
+            {
+                var cont = (ContactWrapper)contact;
+                if(!FilteredContacts.Contains(contact) && cont.Item.First_Name.ToLower().Contains(searchTerm))//First_Name.ToLower().Contains(searchTerm))
+                {
+                    FilteredContacts.Add(contact);
+                }
+            }
+
+            Contacts.Clear();
+            foreach(ContactWrapper con in FilteredContacts)
+            {
+                Contacts.Add(con);
+            }
+            //GetContacts(_contacts);
+
+            return 1;
         }
 
         public async Task<int> favClick(Contact contact)
@@ -130,9 +176,9 @@ namespace Glados.Core.ViewModels
 
         public async void  GetContacts()
         {
-            var _contacts = await database.GetUsers(); /// need to add in wrapping for favourites and also separate details for groups
+            var contacts = await database.GetUsers(); /// need to add in wrapping for favourites and also separate details for groups
             Contacts.Clear();
-            foreach (var user in _contacts)
+            foreach (var user in contacts)
             {
                 bool tempUserFav = false;
                 var User = new ContactWrapper(new Contact(user, tempUserFav), this);
@@ -155,6 +201,7 @@ namespace Glados.Core.ViewModels
                 }
                 
                 Contacts.Add(User);
+                ContactList.Add(User);
 
             }
             //add headings for contacts and favourites sections
