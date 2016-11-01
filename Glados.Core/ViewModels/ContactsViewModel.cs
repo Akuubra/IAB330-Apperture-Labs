@@ -25,8 +25,8 @@ namespace Glados.Core.ViewModels
 
     public class ContactsViewModel : MvxViewModel
     {
-        private readonly IUserStoreDatabase database;
-        private readonly IUserFavouritesStoreDatabase fav;
+        private readonly IDatabase database;
+       // private readonly IUserFavouritesStoreDatabase fav;
 
 
         UserStore loggedInUser;
@@ -115,11 +115,11 @@ namespace Glados.Core.ViewModels
                 {
                     Contacts.RemoveAt(0);
                 }
-                UserFavouritesStore favTemp = await fav.GetFavourite(loggedInUser.Id, contact.UserId);
+                UserFavouritesStore favTemp = await database.GetFavourite(loggedInUser.Id, contact.UserId);
 
                 favTemp.isFavourite = false;
 
-                await fav.UpdateFavourite(loggedInUser.Id, contact.UserId, false);
+                await database.UpdateFavourite(loggedInUser.Id, contact.UserId, false);
                 System.Diagnostics.Debug.WriteLine("set to false: " + contact.IsFavourite);
                 return 1;
             }
@@ -142,16 +142,16 @@ namespace Glados.Core.ViewModels
 
                 }
 
-                if (await fav.favouriteExists(loggedInUser.Id, contact.UserId))
+                if (await database.favouriteExists(loggedInUser.Id, contact.UserId))
                 {
-                    UserFavouritesStore favTemp = await fav.GetFavourite(loggedInUser.Id, contact.UserId);
+                    UserFavouritesStore favTemp = await database.GetFavourite(loggedInUser.Id, contact.UserId);
 
                     favTemp.isFavourite = true ;
-                    await fav.UpdateFavourite(loggedInUser.Id, contact.UserId, true);
+                    await database.UpdateFavourite(loggedInUser.Id, contact.UserId, true);
                 }
                 else
                 {
-                    await fav.InsertFavourite(loggedInUser.Id, contact.UserId, true);
+                    await database.InsertFavourite(loggedInUser.Id, contact.UserId, true);
                 }
 
                 System.Diagnostics.Debug.WriteLine("set to true: " + contact.IsFavourite);
@@ -197,12 +197,12 @@ namespace Glados.Core.ViewModels
                 var User = new ContactWrapper(new Contact(user, tempUserFav), this);
                 if (String.IsNullOrEmpty(ContactSearch))
                 {
-                    doesExist = await fav.favouriteExists(loggedInUser.Id, user.Id);
+                    doesExist = await database.favouriteExists(loggedInUser.Id, user.Id);
                 }
                 //bool doesExist = await fav.favouriteExists(loggedInUser.Id, user.Id);
                 if (doesExist)
                 {
-                    var favTemp = await fav.GetFavourite(loggedInUser.Id, user.Id);
+                    var favTemp = await database.GetFavourite(loggedInUser.Id, user.Id);
                     tempUserFav = favTemp.isFavourite;
                     if (tempUserFav && getDatabase || (tempUserFav && !getDatabase && String.IsNullOrEmpty(ContactSearch)))
                     {
@@ -213,7 +213,7 @@ namespace Glados.Core.ViewModels
                     }
                 }else if(!doesExist && getDatabase)
                 {
-                    await fav.InsertFavourite(loggedInUser.Id, user.Id, false);
+                    await database.InsertFavourite(loggedInUser.Id, user.Id, false);
 
                 }
                 
@@ -263,11 +263,11 @@ namespace Glados.Core.ViewModels
 
 
 
-        public ContactsViewModel(IUserStoreDatabase contactDatbase, IUserFavouritesStoreDatabase fav)
+        public ContactsViewModel(IDatabase database)
         {
             //ShowUserPRofile = new MvxCommand(() => )
-            this.fav = fav; 
-            database = contactDatbase;
+            //this.fav = fav; 
+            this.database = database;
             SelectContactCommandToast = new MvxCommand<ContactWrapper>(
                 selectedContact => 
                 

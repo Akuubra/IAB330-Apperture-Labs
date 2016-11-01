@@ -18,7 +18,7 @@ namespace Glados.Core.ViewModels
 {
 	public class CreateUserViewModel : MvxViewModel
 	{
-        IUserStoreDatabase userStore;
+        IDatabase userStore;
 
         UserStore userTemp;
 
@@ -79,7 +79,7 @@ namespace Glados.Core.ViewModels
 
         public ICommand AddUser { get; private set; }
 
-        public CreateUserViewModel(IUserStoreDatabase userStore)
+        public CreateUserViewModel(IDatabase userStore)
         {
             this.userStore = userStore;
           //  SelectContactCommandToast = new MvxCommand(SelectContactToast);

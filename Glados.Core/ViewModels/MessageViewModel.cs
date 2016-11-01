@@ -24,8 +24,7 @@ namespace Glados.Core.ViewModels
         private ObservableCollection<MessageWrapper> messages = new ObservableCollection<MessageWrapper>();
         private ObservableCollection<MessageWrapper> filteredMessages = new ObservableCollection<MessageWrapper>();
         private ObservableCollection<MessageWrapper> messageList = new ObservableCollection<MessageWrapper>();
-        private readonly IMessageStoreDatabase messageStore;
-        private readonly IUserStoreDatabase userStore;
+        private readonly IDatabase database;
       // private readonly IMessageResponseStoreDatabase responseStore;
 
 
@@ -33,7 +32,7 @@ namespace Glados.Core.ViewModels
 
         public async Task<int> Init(string currentUser)
         {
-             loggedInUser = await userStore.GetSingleUser( currentUser);
+             loggedInUser = await database.GetSingleUser( currentUser);
             
             await GetMessages();
             return 1;
@@ -43,23 +42,27 @@ namespace Glados.Core.ViewModels
         public async Task<int> GetMessages()
         {
            
-            var rawMessages = await messageStore.GetUsersMessages(loggedInUser.Id);
+            var rawMessages = await database.GetUsersMessages(loggedInUser.Id);
             rawMessageList.Clear();
             Messages.Clear();
             foreach (var message in rawMessages)
             {
                 bool message_received = true;
-               // message_received = await responseStore.IsResponded(message.Id, message.ReceivedBy);
+                message_received = await database.IsResponded(message.Id, message.ReceivedBy);
                 if (message.Sender == loggedInUser.Id)
                 {
-                    var receiver = await userStore.GetSingleUser(message.ReceivedBy);
+                    var receiver = await database.GetSingleUser(message.ReceivedBy);
                   
                     rawMessageList.Add(new MessageWrapper(message, receiver.First_Name, true, message_received));
                 }
                 else
                 {
-                    var sender = await userStore.GetSingleUser(message.Sender);
-                    rawMessageList.Add(new MessageWrapper(message, sender.First_Name, false, false));
+                    if (!message_received)
+                    {
+                        var sender = await database.GetSingleUser(message.Sender);
+                        rawMessageList.Add(new MessageWrapper(message, sender.First_Name, false, false));
+                    }
+                   
 
                 }
             }
@@ -134,11 +137,10 @@ namespace Glados.Core.ViewModels
 
         public ICommand SeeMessageDetails { get; private set; }
         public ICommand SwitchToContacts { get; private set; }
-        public  MessageViewModel(IMessageStoreDatabase messageStore, IUserStoreDatabase userStore)
+        public  MessageViewModel(IDatabase database)
         {
            // responseStore = resStore;
-            this.messageStore = messageStore;
-            this.userStore = userStore;
+            this.database = database;
             SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>( new {  currentUser = loggedInUser.Id }));
 
             SeeMessageDetails = new MvxCommand<MessageWrapper>(selectedMessage => {

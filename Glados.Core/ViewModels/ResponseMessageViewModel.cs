@@ -13,9 +13,7 @@ namespace Glados.Core.ViewModels
 {
     public class ResponseMessageViewModel : MvxViewModel
     {
-        private readonly IUserStoreDatabase userStore;
-        private readonly IMessageStoreDatabase messageStore;
-        private readonly IMessageResponseStoreDatabase responseStore;
+        private readonly IDatabase database;
         private MessageWrapper message;
         private MessageResponseStore messageResponse; 
         private MessageRequestStore originalMessage;
@@ -28,8 +26,8 @@ namespace Glados.Core.ViewModels
         public async Task<int> Init(MessageRequestStore message)
         {
             originalMessage = message;
-            selectedContact = await userStore.GetSingleUser(message.Sender);
-            loggedInUser = await userStore.GetSingleUser(message.ReceivedBy);
+            selectedContact = await database.GetSingleUser(message.Sender);
+            loggedInUser = await database.GetSingleUser(message.ReceivedBy);
             this.message = new MessageWrapper(message, loggedInUser.First_Name, false,false);
             MeetingRequested = this.message.GetMessage.Meet == "Y";
             LocationRequested = this.message.GetMessage.Location == "Y";
@@ -175,11 +173,9 @@ namespace Glados.Core.ViewModels
         public ICommand RespondToMessage { get; private set; }
         
 
-        public ResponseMessageViewModel(IUserStoreDatabase userStore, IMessageStoreDatabase messageStore, IMessageResponseStoreDatabase responseStore)
+        public ResponseMessageViewModel(IDatabase database)
         {
-            this.userStore = userStore;
-            this.messageStore = messageStore;
-            this.responseStore = responseStore;
+            this.database = database;
 
 
 
@@ -194,12 +190,12 @@ namespace Glados.Core.ViewModels
         private async Task<int> UpdateMessage()
         {
             CreateMessage();
-          var numSent =  await responseStore.InsertMessage(messageResponse);
+          var numSent =  await database.InsertMessage(messageResponse);
 
             if (numSent>0)
             {
-                await messageStore.UpdateMessage(DumbMessage());
-                await messageStore.UpdateMessage(originalMessage);
+                await database.UpdateMessage(DumbMessage());
+                await database.UpdateMessage(originalMessage);
                 ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });
                 Mvx.Resolve<IToast>().Show("Response Sent!");
             }else

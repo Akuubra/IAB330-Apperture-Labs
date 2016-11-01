@@ -174,6 +174,12 @@ namespace Glados.Droid
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f04002c
+			public const int CancelBTN = 2130968620;
+			
+			// aapt resource value: 0x7f040029
+			public const int CompleteBTN = 2130968617;
+			
 			// aapt resource value: 0x7f040006
 			public const int ContactsBTN = 2130968582;
 			
@@ -218,6 +224,9 @@ namespace Glados.Droid
 			
 			// aapt resource value: 0x7f040016
 			public const int button2 = 2130968598;
+			
+			// aapt resource value: 0x7f040028
+			public const int completeButton = 2130968616;
 			
 			// aapt resource value: 0x7f040014
 			public const int editText1 = 2130968596;
@@ -279,11 +288,17 @@ namespace Glados.Droid
 			// aapt resource value: 0x7f040008
 			public const int nameTag = 2130968584;
 			
+			// aapt resource value: 0x7f04002a
+			public const int nudgeCancelButton = 2130968618;
+			
+			// aapt resource value: 0x7f04002b
+			public const int nudgeCancelButton2 = 2130968619;
+			
 			// aapt resource value: 0x7f040011
 			public const int passwordField = 2130968593;
 			
-			// aapt resource value: 0x7f040028
-			public const int profilePicture = 2130968616;
+			// aapt resource value: 0x7f04002d
+			public const int profilePicture = 2130968621;
 			
 			// aapt resource value: 0x7f040021
 			public const int responseLayout = 2130968609;

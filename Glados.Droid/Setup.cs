@@ -30,10 +30,11 @@ namespace Glados.Droid
             Mvx.LazyConstructAndRegisterSingleton<IToast, ToastService>();
             Mvx.LazyConstructAndRegisterSingleton<ISqlite, SqliteDroid>();
             Mvx.LazyConstructAndRegisterSingleton<IAzureDatabase, AzureDatabase>();
-            Mvx.LazyConstructAndRegisterSingleton<IUserStoreDatabase, UserStoreDBAzure>();
-            Mvx.LazyConstructAndRegisterSingleton<IMessageStoreDatabase, MessageRequestStoreDBAzure>();
-            Mvx.LazyConstructAndRegisterSingleton<IUserFavouritesStoreDatabase, UserFavouritesStoreDBAzure>();
-            Mvx.LazyConstructAndRegisterSingleton<IMessageResponseStoreDatabase, MessageResponseStoreDBAzure>();
+            //Mvx.LazyConstructAndRegisterSingleton<IUserStoreDatabase, UserStoreDBAzure>();
+            //Mvx.LazyConstructAndRegisterSingleton<IMessageStoreDatabase, MessageRequestStoreDBAzure>();
+            //Mvx.LazyConstructAndRegisterSingleton<IUserFavouritesStoreDatabase, UserFavouritesStoreDBAzure>();
+            //Mvx.LazyConstructAndRegisterSingleton<IMessageResponseStoreDatabase, MessageResponseStoreDBAzure>();
+            Mvx.LazyConstructAndRegisterSingleton<IDatabase, TableStoreDBAzure>();
             //Mvx.LazyConstructAndRegisterSingleton<IUserLogin, UserLoggedInDB>();
             base.InitializeFirstChance();
         }

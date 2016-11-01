@@ -17,9 +17,7 @@ namespace Glados.Core.ViewModels
 {
     public class SenderMessageViewModel : MvxViewModel
     {
-        private readonly IUserStoreDatabase userStore;
-        private readonly IMessageStoreDatabase messageStore;
-        private readonly IMessageResponseStoreDatabase responseStore;
+        private readonly IDatabase database;
         private MessageResponseStore response;
         private MessageRequestStore message;
          
@@ -31,8 +29,8 @@ namespace Glados.Core.ViewModels
         public async Task<int> Init(MessageRequestStore message)
         {
             this.message = message; 
-            selectedContact = await userStore.GetSingleUser(message.ReceivedBy);
-            loggedInUser = await userStore.GetSingleUser(message.Sender);
+            selectedContact = await database.GetSingleUser(message.ReceivedBy);
+            loggedInUser = await database.GetSingleUser(message.Sender);
           
             Sender = loggedInUser.Id;
             UserName = selectedContact.Username;
@@ -44,11 +42,11 @@ namespace Glados.Core.ViewModels
             MeetingSet = setter(message.Meet);
             Time = message.Time;
             MeetingLocation = message.MeetingLocation;
-            ResponseReceived = await responseStore.IsResponded(message.Id, message.ReceivedBy);
+            ResponseReceived = await database.IsResponded(message.Id, message.ReceivedBy);
 
             if (ResponseReceived)
             {
-                response = await responseStore.GetResponse(message.Id, message.ReceivedBy);
+                response = await database.GetResponse(message.Id, message.ReceivedBy);
                 /// response details 
                 /// 
                 AcceptedMeeting = response.Meet == "Y" ? "I will attend" : "I can't attend";
@@ -179,11 +177,11 @@ namespace Glados.Core.ViewModels
 
         public ICommand CancelThisMessage { get; private set; }
 
-        public SenderMessageViewModel(IUserStoreDatabase userStore, IMessageStoreDatabase messageStore, IMessageResponseStoreDatabase responseStore)
+        public ICommand CompleteThisMessage { get; private set; }
+
+        public SenderMessageViewModel(IDatabase database )
         {
-            this.responseStore = responseStore;
-            this.userStore = userStore;
-            this.messageStore = messageStore;
+            this.database = database;
             //  SelectContactCommandToast = new MvxCommand(SelectContactToast);
             //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
 
@@ -195,11 +193,16 @@ namespace Glados.Core.ViewModels
                 DeleteMessage();
                
             });
+
+            CompleteThisMessage = new MvxCommand(() => {
+                CompleteMessage();
+
+            });
         }
 
         private async Task<int> DeleteMessage()
         {
-            var delete = await messageStore.DeleteMessage(message.Id);
+            var delete = await database.DeleteMessage(message.Id);
             if(delete == 1)
             {
                 ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });
@@ -212,14 +215,29 @@ namespace Glados.Core.ViewModels
         
             return 1;
         }
+        private async Task<int> CompleteMessage()
+        {
+            var delete = await database.DeleteMessage(message.Id);
+            if (delete == 1)
+            {
+                ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });
+                Mvx.Resolve<IToast>().Show("Message Finalised.");
+            }
+            else
+            {
+                Mvx.Resolve<IToast>().Show("Finalisation Failed!");
+            }
+
+            return 1;
+        }
 
         private async Task<int> UpdateMessage()
         {
             DumbMessage();
 
-            await messageStore.UpdateMessage(message);
+            await database.UpdateMessage(message);
             NudgeMessage();
-            await messageStore.UpdateMessage(message);
+            await database.UpdateMessage(message);
 
 
             ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });

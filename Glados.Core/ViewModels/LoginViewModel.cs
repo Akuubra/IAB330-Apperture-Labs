@@ -18,11 +18,11 @@ namespace Glados.Core.ViewModels
       //  private MobileServiceUser user;
 
 
-        private readonly IUserLogin UserDB;
+        private readonly IDatabase UserDB;
         private string _userName;
         private UserStore tempUser;
        // private LoggedInUser tempUserLoggedIn;
-        private readonly IUserStoreDatabase userStore;
+        private readonly IDatabase userStore;
         public string UserName
         {
             get { return _userName; }
@@ -64,7 +64,7 @@ namespace Glados.Core.ViewModels
             return 1;
         }
         public ICommand CreateUser { get; private set; }
-        public LoginViewModel(IUserStoreDatabase userStore)
+        public LoginViewModel(IDatabase userStore)
         {
           //  this.UserDB = UserDB;
             CreateUser = new MvxCommand(() => ShowViewModel<CreateUserViewModel>());

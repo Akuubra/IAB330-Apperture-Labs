@@ -17,8 +17,7 @@ namespace Glados.Core.ViewModels
 {
     public class SendMessageViewModel : MvxViewModel
     {
-        private readonly IUserStoreDatabase userStore;
-        private readonly IMessageStoreDatabase messageStore;
+        private readonly IDatabase database;
         private MessageRequestStore message;
          
 
@@ -28,8 +27,8 @@ namespace Glados.Core.ViewModels
      
         public async Task<int> Init(string receiver, string sender)
         {
-            selectedContact = await userStore.GetSingleUser(receiver);
-            loggedInUser = await userStore.GetSingleUser(sender);
+            selectedContact = await database.GetSingleUser(receiver);
+            loggedInUser = await database.GetSingleUser(sender);
             Sender = loggedInUser.Id;
             UserName = selectedContact.Username;
             Receiver_First_Name = selectedContact.First_Name;
@@ -123,10 +122,9 @@ namespace Glados.Core.ViewModels
 
         public ICommand CreateMessage { get; private set; }
 
-        public SendMessageViewModel(IUserStoreDatabase userStore, IMessageStoreDatabase messageStore)
+        public SendMessageViewModel(IDatabase database)
         {
-            this.userStore = userStore;
-            this.messageStore = messageStore;
+            this.database = database;
             //  SelectContactCommandToast = new MvxCommand(SelectContactToast);
             //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
 
@@ -139,7 +137,7 @@ namespace Glados.Core.ViewModels
         private async Task<int> createNewMessage()
         {
             generateMessage();
-            var numNew = await messageStore.InsertMessage(message);
+            var numNew = await database.InsertMessage(message);
             if (numNew > 0)
             {
                 ShowViewModel<MessageViewModel>(new { currentUser = loggedInUser.Id });

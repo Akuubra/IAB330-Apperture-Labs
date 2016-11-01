@@ -37,9 +37,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Database\TableStoreDBAzure.cs" />
     <Compile Include="Database\MessageResponseStoreDB.cs" />
     <Compile Include="Database\MessageRequestStoreDB.cs" />
     <Compile Include="Database\MessageResponseStoreDBAzure.cs" />
+    <Compile Include="Database\TableStoreDB.cs" />
     <Compile Include="Database\UserFavouritesStoreDB.cs" />
     <Compile Include="Database\UserLoggedInDB.cs" />
     <Compile Include="Database\UserStoreDB.cs" />
@@ -49,6 +51,7 @@
     <Compile Include="Interfaces\IAzureDatabase.cs" />
     <Compile Include="Interfaces\IContactListType.cs" />
     <Compile Include="Interfaces\IMessageResponseStoreDatabase.cs" />
+    <Compile Include="Interfaces\IDatabase.cs" />
     <Compile Include="Interfaces\IMessageStoreDatabase.cs" />
     <Compile Include="Interfaces\IUserLogin.cs" />
     <Compile Include="Interfaces\IUserFavouritesStoreDatabase.cs" />

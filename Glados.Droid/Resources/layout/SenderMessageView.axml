@@ -92,8 +92,8 @@
                 android:textSize="20dp"
                 local:MvxBind="Text Time, Mode=TwoWay" />
         </LinearLayout>
-      <LinearLayout
-              android:id="@+id/responseLayout"
+        <LinearLayout
+            android:id="@+id/responseLayout"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -121,13 +121,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                      <TextView
-                           android:text="Response from "
-                           android:id="@+id/firstNameTag2"
-                           android:layout_height="wrap_content"
-                           android:layout_width="fill_parent"
-                           android:textColor="@android:color/white"
-                           android:textSize="20dp" />
+                        <TextView
+                            android:text="Response from "
+                            android:id="@+id/firstNameTag2"
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:textColor="@android:color/white"
+                            android:textSize="20dp" />
                         <TextView
                             android:id="@+id/firstNameField2"
                             android:layout_height="wrap_content"
@@ -135,7 +135,6 @@
                             android:textColor="@android:color/white"
                             android:textSize="20dp"
                             local:MvxBind="Text Receiver_First_Name" />
-                       
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -183,10 +182,30 @@
             android:layout_width="fill_parent"
             android:orientation="vertical"
             android:gravity="center|bottom"
+            android:id="@+id/completeButton"
+            android:layout_weight="1">
+            <Button
+                android:text="Read"
+                android:layout_width="fill_parent"
+                android:layout_height="100dip"
+                android:textColor="#ffffff"
+                android:background="@drawable/rounded_corner_green"
+                android:textSize="40dp"
+                android:id="@+id/CompleteBTN"
+                local:MvxBind="Click CompleteThisMessage" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:id="@+id/nudgeCancelButton"
+            android:gravity="center|bottom"
             android:layout_weight="1">
             <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
+                
+            android:id="@+id/nudgeCancelButton2"
                 android:orientation="horizontal">
                 <Button
                     android:text="Nudge"
@@ -206,7 +225,7 @@
                     android:textColor="#ffffff"
                     android:background="@drawable/rounded_corner_half_red"
                     android:textSize="40dp"
-                    android:id="@+id/ContactsBTN"
+                    android:id="@+id/CancelBTN"
                     local:MvxBind="Click CancelThisMessage" />
             </LinearLayout>
         </LinearLayout>

@@ -23,6 +23,13 @@ namespace Glados.Droid.Views
         EditText meetLocEdit;
         TextView meetLocText;
         LinearLayout responseLayout;
+        LinearLayout completeButton;
+        LinearLayout nudgeCancelButton;
+        LinearLayout nudgeCancelButton2;
+        Button cancel;
+        Button nudge;
+        Button complete;
+
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -38,6 +45,19 @@ namespace Glados.Droid.Views
 
             responseLayout = (LinearLayout)FindViewById(Resource.Id.responseLayout);
             responseLayout.Visibility = Android.Views.ViewStates.Gone;
+            completeButton = (LinearLayout)FindViewById(Resource.Id.completeButton);
+            completeButton.Visibility = Android.Views.ViewStates.Gone;
+            nudgeCancelButton = (LinearLayout)FindViewById(Resource.Id.nudgeCancelButton);
+            nudgeCancelButton.Visibility = Android.Views.ViewStates.Gone;
+            nudgeCancelButton2 = (LinearLayout)FindViewById(Resource.Id.nudgeCancelButton2);
+            nudgeCancelButton2.Visibility = Android.Views.ViewStates.Gone;
+
+            cancel = (Button)FindViewById(Resource.Id.CancelBTN);
+            cancel.Visibility = Android.Views.ViewStates.Gone;
+            nudge = (Button)FindViewById(Resource.Id.NudgeBTN);
+            nudge.Visibility = Android.Views.ViewStates.Gone;
+            complete = (Button)FindViewById(Resource.Id.CompleteBTN);
+            complete.Visibility = Android.Views.ViewStates.Gone;
 
             if (meetingCheck.Checked)
             {
@@ -64,6 +84,24 @@ namespace Glados.Droid.Views
                 if (SenderMessageViewModel.ResponseReceived)
                 {
                     responseLayout.Visibility = Android.Views.ViewStates.Visible;
+                    completeButton.Visibility = Android.Views.ViewStates.Visible;
+                    complete.Visibility = Android.Views.ViewStates.Visible;
+
+                    nudgeCancelButton.Visibility = Android.Views.ViewStates.Gone;
+                    nudgeCancelButton2.Visibility = Android.Views.ViewStates.Gone;
+                    cancel.Visibility = Android.Views.ViewStates.Gone;
+                    nudge.Visibility = Android.Views.ViewStates.Gone;
+                }
+                else
+                {
+                    responseLayout.Visibility = Android.Views.ViewStates.Gone;
+                    completeButton.Visibility = Android.Views.ViewStates.Gone;
+                    complete.Visibility = Android.Views.ViewStates.Gone;
+
+                    nudgeCancelButton.Visibility = Android.Views.ViewStates.Visible;
+                    nudgeCancelButton2.Visibility = Android.Views.ViewStates.Visible;
+                    cancel.Visibility = Android.Views.ViewStates.Visible;
+                    nudge.Visibility = Android.Views.ViewStates.Visible;
                 }
             };
 
