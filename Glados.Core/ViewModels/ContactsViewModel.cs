@@ -77,7 +77,7 @@ namespace Glados.Core.ViewModels
         public async Task<int> SearchContacts(string searchTerm)
         {
             _filteredContacts.Clear();
-
+            _contacts = null;
             foreach(UserStore contact in _contactList)
             {
                 //var cont = (ContactWrapper)contact;
@@ -94,7 +94,6 @@ namespace Glados.Core.ViewModels
                 _contacts.Add(con);
             }*/
             GetContacts(false);
-
             return 1;
         }
 
@@ -201,7 +200,7 @@ namespace Glados.Core.ViewModels
                 {
                     var favTemp = await fav.GetFavourite(loggedInUser.Id, user.Id);
                     tempUserFav = favTemp.isFavourite;
-                    if (tempUserFav)
+                    if (tempUserFav && getDatabase || (tempUserFav && !getDatabase && String.IsNullOrEmpty(ContactSearch)))
                     {
                         User.Item.IsFavourite = true;
                         Contacts.Insert(_favourites.Count, User);
@@ -219,10 +218,13 @@ namespace Glados.Core.ViewModels
 
             }
             //add headings for contacts and favourites sections
-            Contacts.Insert(_favourites.Count, new ContactLabel("All Contacts"));
-            if (_favourites.Count > 0)
+            if(getDatabase || (!getDatabase && String.IsNullOrEmpty(ContactSearch)))
             {
-                Contacts.Insert(0, new ContactLabel("Favourites"));
+                Contacts.Insert(_favourites.Count, new ContactLabel("All Contacts"));
+                if (_favourites.Count > 0)
+                {
+                    Contacts.Insert(0, new ContactLabel("Favourites"));
+                }
             }
         }
 
