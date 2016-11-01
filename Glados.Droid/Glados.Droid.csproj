@@ -245,6 +245,7 @@
     <AndroidResource Include="Resources\drawable\forward_blue.png" />
     <AndroidResource Include="Resources\drawable\not_received.png" />
     <AndroidResource Include="Resources\drawable\response_received.png" />
+    <AndroidResource Include="Resources\drawable\rounded_corner_blue_complete.xml" />
     <Content Include="ToDo-MvvmCross\_ Droid UI.txt" />
   </ItemGroup>
   <ItemGroup>
