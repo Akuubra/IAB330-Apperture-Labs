@@ -172,7 +172,7 @@ namespace Glados.Core.ViewModels
 
         public async void  GetContacts(bool getDatabase)
         {
-            //bool doesExist = false;
+            bool doesExist = false;
             if(getDatabase)
             {
                 _contacts = await database.GetUsers(); /// need to add in wrapping for favourites and also separate details for groups
@@ -195,11 +195,11 @@ namespace Glados.Core.ViewModels
             {
                 bool tempUserFav = false;
                 var User = new ContactWrapper(new Contact(user, tempUserFav), this);
-                /*if (getDatabase)
+                if (String.IsNullOrEmpty(ContactSearch))
                 {
                     doesExist = await fav.favouriteExists(loggedInUser.Id, user.Id);
-                }*/
-                bool doesExist = await fav.favouriteExists(loggedInUser.Id, user.Id);
+                }
+                //bool doesExist = await fav.favouriteExists(loggedInUser.Id, user.Id);
                 if (doesExist)
                 {
                     var favTemp = await fav.GetFavourite(loggedInUser.Id, user.Id);
