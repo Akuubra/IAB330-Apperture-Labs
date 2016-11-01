@@ -35,8 +35,8 @@ namespace Glados.Core.ViewModels
         private ObservableCollection<IContactListType> contactList = new ObservableCollection<IContactListType>();
         private ObservableCollection<IContactListType> filteredContacts = new ObservableCollection<IContactListType>();
 
-        List<UserStore> _contacts = new List<UserStore>();
-        List<UserStore> _contactList = new List<UserStore>();
+        IEnumerable<UserStore> _contacts = new List<UserStore>();
+        IEnumerable<UserStore> _contactList = new List<UserStore>();
         List<UserStore> _filteredContacts = new List<UserStore>();
         List<string> _favourites = new List<string>();
         public ObservableCollection<IContactListType> Contacts
@@ -65,38 +65,35 @@ namespace Glados.Core.ViewModels
                 if (String.IsNullOrEmpty(ContactSearch))
                 {
                     Contacts.Clear();
-                    /*foreach (ContactWrapper contact in ContactList)
-                    {
-                        Contacts.Add(contact);
-                    }*/
-                    GetContacts();
+                    GetContacts(false);
                 }
                 else if(contactSearch.Length > 0)
                 {
-                    SearchContacts(contactSearch);
+                   SearchContacts(contactSearch);
                 }
             }
         }
 
         public async Task<int> SearchContacts(string searchTerm)
         {
-            FilteredContacts.Clear();
+            _filteredContacts.Clear();
 
-            foreach(IContactListType contact in Contacts)
+            foreach(UserStore contact in _contactList)
             {
-                var cont = (ContactWrapper)contact;
-                if(!FilteredContacts.Contains(contact) && cont.Item.First_Name.ToLower().Contains(searchTerm))//First_Name.ToLower().Contains(searchTerm))
+                //var cont = (ContactWrapper)contact;
+                if(!_filteredContacts.Contains(contact) && contact.First_Name.ToLower().Contains(searchTerm))//First_Name.ToLower().Contains(searchTerm))
                 {
-                    FilteredContacts.Add(contact);
+                    _filteredContacts.Add(contact);
                 }
             }
 
             Contacts.Clear();
-            foreach(ContactWrapper con in FilteredContacts)
+            _contacts = _filteredContacts;
+            /*foreach(UserStore con in _filteredContacts)
             {
-                Contacts.Add(con);
-            }
-            //GetContacts(_contacts);
+                _contacts.Add(con);
+            }*/
+            GetContacts(false);
 
             return 1;
         }
@@ -170,15 +167,32 @@ namespace Glados.Core.ViewModels
         {
             loggedInUser = await database.GetSingleUser(currentUser);
 
-            GetContacts();
+            GetContacts(true);
             return 1;
         }
 
-        public async void  GetContacts()
+        public async void  GetContacts(bool getDatabase)
         {
-            var contacts = await database.GetUsers(); /// need to add in wrapping for favourites and also separate details for groups
+            
+            if(getDatabase)
+            {
+                _contacts = await database.GetUsers(); /// need to add in wrapping for favourites and also separate details for groups
+                _contactList = _contacts;
+            }
+            else
+            {
+                if (String.IsNullOrEmpty(ContactSearch))
+                {   
+                    _contacts = _contactList;
+                }
+                else
+                {
+                    _contacts = _filteredContacts;
+                }
+            }
             Contacts.Clear();
-            foreach (var user in contacts)
+            _favourites.Clear();
+            foreach (var user in _contacts)
             {
                 bool tempUserFav = false;
                 var User = new ContactWrapper(new Contact(user, tempUserFav), this);
@@ -201,7 +215,7 @@ namespace Glados.Core.ViewModels
                 }
                 
                 Contacts.Add(User);
-                ContactList.Add(User);
+                //ContactList.Add(User);
 
             }
             //add headings for contacts and favourites sections
@@ -214,7 +228,7 @@ namespace Glados.Core.ViewModels
 
         public void OnResume()
         {
-            GetContacts();
+            GetContacts(true);
         }
         /*private string contactFirstName;
         public string ContactFirstName
