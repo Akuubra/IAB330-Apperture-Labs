@@ -34,10 +34,6 @@ namespace Glados.Droid.Views
             locationText.Visibility = Android.Views.ViewStates.Invisible;
             meetingCheck.Visibility = Android.Views.ViewStates.Invisible;
 
-            while(ResponseMessageViewModel == null)
-            {
-
-            }
             if (ResponseMessageViewModel.MeetingRequested)
             {
                 meetingCheck.Visibility = Android.Views.ViewStates.Visible;

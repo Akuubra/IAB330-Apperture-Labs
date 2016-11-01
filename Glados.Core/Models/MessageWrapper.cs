@@ -28,11 +28,11 @@ namespace Glados.Core.Models
             {
                 if (message.Location == "Y" & message.Meet == "Y")
                 {
-                    MessageContext = string.Format("Requested their location and meet them at {0}", message.Time);
+                    MessageContext = string.Format("Requested their location and meet them at {0} in {1}", message.Time, message.MeetingLocation);
                 }
                 else if (message.Location == "N" & message.Meet == "Y")
                 {
-                    MessageContext = string.Format("Requested to meet them at {0}", message.Time);
+                    MessageContext = string.Format("Requested to meet them at {0} in {1}", message.Time, message.MeetingLocation);
 
                 }
                 else
@@ -44,11 +44,11 @@ namespace Glados.Core.Models
             {
                 if (message.Location == "Y" & message.Meet == "Y")
                 {
-                    MessageContext = string.Format("Requested your location and meet you at {0}", message.Time);
+                    MessageContext = string.Format("Requested your location and meet you at {0} in {1}", message.Time, message.MeetingLocation);
                 }
                 else if (message.Location == "N" & message.Meet == "Y")
                 {
-                    MessageContext = string.Format("Requested to meet you at {0}", message.Time);
+                    MessageContext = string.Format("Requested to meet you at {0} in {1}", message.Time, message.MeetingLocation);
 
                 }
                 else

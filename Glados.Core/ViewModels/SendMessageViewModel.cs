@@ -80,6 +80,14 @@ namespace Glados.Core.ViewModels
             get { return _meet; }
             set { SetProperty(ref _meet, value); }
         }
+
+        private string _meetingLocation;
+
+        public string MeetingLocation
+        {
+            get { return _meetingLocation; }
+            set { SetProperty(ref _meetingLocation, value); }
+        }
         private string _receiver;
 
         public string Receiver
@@ -108,6 +116,7 @@ namespace Glados.Core.ViewModels
             message.Location = this.Location;
             message.Meet = this.Meet;
             message.Time = this.Time;
+            message.MeetingLocation = this.MeetingLocation;
 
         }
 

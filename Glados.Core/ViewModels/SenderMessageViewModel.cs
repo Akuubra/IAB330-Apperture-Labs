@@ -33,7 +33,7 @@ namespace Glados.Core.ViewModels
             this.message = message; 
             selectedContact = await userStore.GetSingleUser(message.ReceivedBy);
             loggedInUser = await userStore.GetSingleUser(message.Sender);
-            response = await responseStore.GetResponse(message.Id, message.ReceivedBy);
+          
             Sender = loggedInUser.Id;
             UserName = selectedContact.Username;
             Receiver_First_Name = selectedContact.First_Name;
@@ -43,11 +43,18 @@ namespace Glados.Core.ViewModels
             Meet = message.Meet;
             MeetingSet = setter(message.Meet);
             Time = message.Time;
+            MeetingLocation = message.MeetingLocation;
+            ResponseReceived = await responseStore.IsResponded(message.Id, message.ReceivedBy);
 
-            /// response details 
-            /// 
-            AcceptedMeeting = response.Meet == "Y" ? "I will attend": "I can't attend";
-            LocationReceived = response.Location; 
+            if (ResponseReceived)
+            {
+                response = await responseStore.GetResponse(message.Id, message.ReceivedBy);
+                /// response details 
+                /// 
+                AcceptedMeeting = response.Meet == "Y" ? "I will attend" : "I can't attend";
+                LocationReceived = response.Location;
+          }
+            
 
 
             return 1;
@@ -64,7 +71,13 @@ namespace Glados.Core.ViewModels
             get { return _userName; }
             set { SetProperty(ref _userName, value); }
         }
+        private bool _responseReceived;
 
+        public bool ResponseReceived
+        {
+            get { return _responseReceived; }
+            set { SetProperty(ref _responseReceived, value); }
+        }
         private string _sender;
 
         public string Sender
@@ -72,6 +85,15 @@ namespace Glados.Core.ViewModels
             get { return _sender; }
             set { SetProperty(ref _sender, value); }
         }
+
+        private string _meetingLocation;
+
+        public string MeetingLocation
+        {
+            get { return _meetingLocation; }
+            set { SetProperty(ref _meetingLocation, value); }
+        }
+
 
         private string _location;
 
@@ -134,6 +156,7 @@ namespace Glados.Core.ViewModels
             message.Location = this.Location;
             message.Meet = this.Meet;
             message.Time = this.Time;
+            message.MeetingLocation = this.MeetingLocation;
 
         }
 
@@ -147,6 +170,7 @@ namespace Glados.Core.ViewModels
             message.Location = "";
             message.Meet = "";
             message.Time = "";
+            message.MeetingLocation = "";
 
         }
 
