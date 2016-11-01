@@ -96,70 +96,76 @@ namespace Glados.Droid
 			public const int forward_blue = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int Icon = 2130837507;
+			public const int Glados = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int message_icon2 = 2130837508;
+			public const int glados_icon = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int message_icon_contactspage = 2130837509;
+			public const int Icon = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int message_icon_messagespage = 2130837510;
+			public const int message_icon2 = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int not_received = 2130837511;
+			public const int message_icon_contactspage = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int profile_icon = 2130837512;
+			public const int message_icon_messagespage = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int profile_icon2 = 2130837513;
+			public const int not_received = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int response_received = 2130837514;
+			public const int profile_icon = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int rounded_corner = 2130837515;
+			public const int profile_icon2 = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int rounded_corner_blue = 2130837516;
+			public const int response_received = 2130837516;
 			
 			// aapt resource value: 0x7f02000d
-			public const int rounded_corner_blue_complete = 2130837517;
+			public const int rounded_corner = 2130837517;
 			
 			// aapt resource value: 0x7f02000e
-			public const int rounded_corner_green = 2130837518;
+			public const int rounded_corner_blue = 2130837518;
 			
 			// aapt resource value: 0x7f02000f
-			public const int rounded_corner_half_green = 2130837519;
+			public const int rounded_corner_blue_complete = 2130837519;
 			
 			// aapt resource value: 0x7f020010
-			public const int rounded_corner_half_red = 2130837520;
+			public const int rounded_corner_green = 2130837520;
 			
 			// aapt resource value: 0x7f020011
-			public const int search_icon = 2130837521;
+			public const int rounded_corner_half_green = 2130837521;
 			
 			// aapt resource value: 0x7f020012
-			public const int SearchBlue = 2130837522;
+			public const int rounded_corner_half_red = 2130837522;
 			
 			// aapt resource value: 0x7f020013
-			public const int SearchOrange = 2130837523;
+			public const int search_icon = 2130837523;
 			
 			// aapt resource value: 0x7f020014
-			public const int settings_icon = 2130837524;
+			public const int SearchBlue = 2130837524;
 			
 			// aapt resource value: 0x7f020015
-			public const int splash = 2130837525;
+			public const int SearchOrange = 2130837525;
 			
 			// aapt resource value: 0x7f020016
-			public const int star_gold_icon = 2130837526;
+			public const int settings_icon = 2130837526;
 			
 			// aapt resource value: 0x7f020017
-			public const int star_grey_icon = 2130837527;
+			public const int splash = 2130837527;
 			
 			// aapt resource value: 0x7f020018
-			public const int user_icon = 2130837528;
+			public const int star_gold_icon = 2130837528;
+			
+			// aapt resource value: 0x7f020019
+			public const int star_grey_icon = 2130837529;
+			
+			// aapt resource value: 0x7f02001a
+			public const int user_icon = 2130837530;
 			
 			static Drawable()
 			{
@@ -186,17 +192,17 @@ namespace Glados.Droid
 			// aapt resource value: 0x7f040007
 			public const int ContactsListView = 2130968583;
 			
-			// aapt resource value: 0x7f040013
-			public const int CreateUserBTN = 2130968595;
+			// aapt resource value: 0x7f04002d
+			public const int CreateUserBTN = 2130968621;
+			
+			// aapt resource value: 0x7f040010
+			public const int EmailField = 2130968592;
 			
 			// aapt resource value: 0x7f04000f
-			public const int EmailField = 2130968591;
+			public const int EmailTag = 2130968591;
 			
-			// aapt resource value: 0x7f04000e
-			public const int EmailTag = 2130968590;
-			
-			// aapt resource value: 0x7f040012
-			public const int LocationTag = 2130968594;
+			// aapt resource value: 0x7f040013
+			public const int LocationTag = 2130968595;
 			
 			// aapt resource value: 0x7f040005
 			public const int MessagesBTN = 2130968581;
@@ -210,8 +216,8 @@ namespace Glados.Droid
 			// aapt resource value: 0x7f04001c
 			public const int NudgeBTN = 2130968604;
 			
-			// aapt resource value: 0x7f040010
-			public const int PasswordTag = 2130968592;
+			// aapt resource value: 0x7f040011
+			public const int PasswordTag = 2130968593;
 			
 			// aapt resource value: 0x7f040003
 			public const int SearchBTN = 2130968579;
@@ -219,26 +225,26 @@ namespace Glados.Droid
 			// aapt resource value: 0x7f040004
 			public const int SettingsBTN = 2130968580;
 			
-			// aapt resource value: 0x7f040015
-			public const int button1 = 2130968597;
-			
 			// aapt resource value: 0x7f040016
-			public const int button2 = 2130968598;
+			public const int button1 = 2130968598;
+			
+			// aapt resource value: 0x7f040017
+			public const int button2 = 2130968599;
 			
 			// aapt resource value: 0x7f040028
 			public const int completeButton = 2130968616;
 			
-			// aapt resource value: 0x7f040014
-			public const int editText1 = 2130968596;
+			// aapt resource value: 0x7f040015
+			public const int editText1 = 2130968597;
 			
-			// aapt resource value: 0x7f04000b
-			public const int firstNameField = 2130968587;
+			// aapt resource value: 0x7f04000c
+			public const int firstNameField = 2130968588;
 			
 			// aapt resource value: 0x7f040023
 			public const int firstNameField2 = 2130968611;
 			
-			// aapt resource value: 0x7f04000a
-			public const int firstNameTag = 2130968586;
+			// aapt resource value: 0x7f04000b
+			public const int firstNameTag = 2130968587;
 			
 			// aapt resource value: 0x7f040022
 			public const int firstNameTag2 = 2130968610;
@@ -246,11 +252,11 @@ namespace Glados.Droid
 			// aapt resource value: 0x7f040002
 			public const int focus_thief = 2130968578;
 			
-			// aapt resource value: 0x7f04000d
-			public const int lastNameField = 2130968589;
+			// aapt resource value: 0x7f04000e
+			public const int lastNameField = 2130968590;
 			
-			// aapt resource value: 0x7f04000c
-			public const int lastNameTag = 2130968588;
+			// aapt resource value: 0x7f04000d
+			public const int lastNameTag = 2130968589;
 			
 			// aapt resource value: 0x7f040018
 			public const int locationCheck = 2130968600;
@@ -282,11 +288,11 @@ namespace Glados.Droid
 			// aapt resource value: 0x7f04001b
 			public const int meetingCheck = 2130968603;
 			
-			// aapt resource value: 0x7f040009
-			public const int nameField = 2130968585;
+			// aapt resource value: 0x7f04000a
+			public const int nameField = 2130968586;
 			
-			// aapt resource value: 0x7f040008
-			public const int nameTag = 2130968584;
+			// aapt resource value: 0x7f040009
+			public const int nameTag = 2130968585;
 			
 			// aapt resource value: 0x7f04002a
 			public const int nudgeCancelButton = 2130968618;
@@ -294,17 +300,20 @@ namespace Glados.Droid
 			// aapt resource value: 0x7f04002b
 			public const int nudgeCancelButton2 = 2130968619;
 			
-			// aapt resource value: 0x7f040011
-			public const int passwordField = 2130968593;
+			// aapt resource value: 0x7f040012
+			public const int passwordField = 2130968594;
 			
-			// aapt resource value: 0x7f04002d
-			public const int profilePicture = 2130968621;
+			// aapt resource value: 0x7f04002e
+			public const int profilePicture = 2130968622;
 			
 			// aapt resource value: 0x7f040021
 			public const int responseLayout = 2130968609;
 			
-			// aapt resource value: 0x7f040017
-			public const int sendTag = 2130968599;
+			// aapt resource value: 0x7f040008
+			public const int sendTag = 2130968584;
+			
+			// aapt resource value: 0x7f040014
+			public const int signUpBTN = 2130968596;
 			
 			// aapt resource value: 0x7f040020
 			public const int timeField = 2130968608;

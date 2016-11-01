@@ -217,7 +217,9 @@
     <AndroidResource Include="Resources\drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\SplashStyle.xml" />
@@ -246,6 +248,8 @@
     <AndroidResource Include="Resources\drawable\not_received.png" />
     <AndroidResource Include="Resources\drawable\response_received.png" />
     <AndroidResource Include="Resources\drawable\rounded_corner_blue_complete.xml" />
+    <AndroidResource Include="Resources\drawable\Glados.png" />
+    <AndroidResource Include="Resources\drawable\glados_icon.png" />
     <Content Include="ToDo-MvvmCross\_ Droid UI.txt" />
   </ItemGroup>
   <ItemGroup>

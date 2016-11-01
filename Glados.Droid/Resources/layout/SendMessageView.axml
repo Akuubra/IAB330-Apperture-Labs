@@ -77,34 +77,34 @@
         android:textColor="@android:color/black"
         android:textSize="20dp"
         local:MvxBind="Text Meet, Mode=TwoWay" />-->
-          <TextView
-              android:text="Meet at:"
-              android:id="@+id/meetLocTag"
-              android:layout_height="wrap_content"
-              android:layout_width="fill_parent"
-              android:textColor="@android:color/black"
-              android:textSize="20dp" />
-          <EditText
-              android:id="@+id/meetLocField"
-              android:layout_height="wrap_content"
-              android:layout_width="fill_parent"
-              android:textColor="@android:color/black"
-              android:textSize="20dp"
-              local:MvxBind="Text MeetingLocation, Mode=TwoWay" />
-          <TextView
-              android:text="Time:"
-              android:id="@+id/tmeTag"
-              android:layout_height="wrap_content"
-              android:layout_width="fill_parent"
-              android:textColor="@android:color/black"
-              android:textSize="20dp" />
-          <EditText
-              android:id="@+id/timeField"
-              android:layout_height="wrap_content"
-              android:layout_width="fill_parent"
-              android:textColor="@android:color/black"
-              android:textSize="20dp"
-              local:MvxBind="Text Time, Mode=TwoWay" />
+            <TextView
+                android:text="Meet at:"
+                android:id="@+id/meetLocTag"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+            <EditText
+                android:id="@+id/meetLocField"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                local:MvxBind="Text MeetingLocation, Mode=TwoWay" />
+            <TextView
+                android:text="Time:"
+                android:id="@+id/tmeTag"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+            <EditText
+                android:id="@+id/timeField"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                local:MvxBind="Text Time, Mode=TwoWay" />
         </LinearLayout>
         <LinearLayout
             android:layout_height="wrap_content"

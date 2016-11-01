@@ -193,33 +193,34 @@ namespace Glados.Core.ViewModels
             _favourites.Clear();
             foreach (var user in _contacts)
             {
-                bool tempUserFav = false;
-                var User = new ContactWrapper(new Contact(user, tempUserFav), this);
-                if (String.IsNullOrEmpty(ContactSearch))
-                {
-                    doesExist = await database.favouriteExists(loggedInUser.Id, user.Id);
-                }
-                //bool doesExist = await fav.favouriteExists(loggedInUser.Id, user.Id);
-                if (doesExist)
-                {
-                    var favTemp = await database.GetFavourite(loggedInUser.Id, user.Id);
-                    tempUserFav = favTemp.isFavourite;
-                    if (tempUserFav && getDatabase || (tempUserFav && !getDatabase && String.IsNullOrEmpty(ContactSearch)))
+                if(!(user.Id == loggedInUser.Id)) { 
+                    bool tempUserFav = false;
+                    var User = new ContactWrapper(new Contact(user, tempUserFav), this);
+                    if (String.IsNullOrEmpty(ContactSearch))
                     {
-                        User.Item.IsFavourite = true;
-                        Contacts.Insert(_favourites.Count, User);
-                        Debug.WriteLine("Added user"+user.Id+"to list");
-                        _favourites.Add(user.Id);
+                        doesExist = await database.favouriteExists(loggedInUser.Id, user.Id);
                     }
-                }else if(!doesExist && getDatabase)
-                {
-                    await database.InsertFavourite(loggedInUser.Id, user.Id, false);
+                    //bool doesExist = await fav.favouriteExists(loggedInUser.Id, user.Id);
+                    if (doesExist)
+                    {
+                        var favTemp = await database.GetFavourite(loggedInUser.Id, user.Id);
+                        tempUserFav = favTemp.isFavourite;
+                        if (tempUserFav && getDatabase || (tempUserFav && !getDatabase && String.IsNullOrEmpty(ContactSearch)))
+                        {
+                            User.Item.IsFavourite = true;
+                            Contacts.Insert(_favourites.Count, User);
+                            Debug.WriteLine("Added user"+user.Id+"to list");
+                            _favourites.Add(user.Id);
+                        }
+                    }else if(!doesExist && getDatabase)
+                    {
+                        await database.InsertFavourite(loggedInUser.Id, user.Id, false);
 
-                }
+                    }
                 
-                Contacts.Add(User);
-                //ContactList.Add(User);
-
+                    Contacts.Add(User);
+                        //ContactList.Add(User);
+                }
             }
             //add headings for contacts and favourites sections
             if(getDatabase || (!getDatabase && String.IsNullOrEmpty(ContactSearch)))
