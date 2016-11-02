@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Glados.Core.Models
 {
+    /// <summary>
+    /// Provides the labels for the favourites and all contacts sections.
+    /// </summary>
     public class ContactLabel : IContactListType
     {
         public ContactLabel() { }

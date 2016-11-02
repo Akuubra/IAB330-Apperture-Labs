@@ -27,7 +27,7 @@ namespace Glados.Core.Models
             _parent = parent;
         }
 
-
+        //method to allow the changing of a contacts favourite status by tapping on the star
         public IMvxCommand tapFavourite
         {
             get
@@ -36,6 +36,8 @@ namespace Glados.Core.Models
             }
         }
 
+        //returns the Contact item this wraps. 
+        //This is so that any class with an instance of this object can access the required contact fields and edit them as necessary
         public Contact Item
         {
             get

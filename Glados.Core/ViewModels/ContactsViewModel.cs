@@ -101,16 +101,18 @@ namespace Glados.Core.ViewModels
         {
             if (contact.IsFavourite)
             {
+                //remove contact from _favourites and from its place at the top of Contacts
                 contact.IsFavourite = false;
                 var index = _favourites.IndexOf(contact.UserId);
                 _favourites.Remove(contact.UserId);
+                //adjusts if the favourites label is there. Which it should be but this is just to confirm
                 if (Contacts[0] is ContactLabel)
                 {
                     index = index + 1;
                 }
                 Contacts.RemoveAt(index);              
                 RaisePropertyChanged(() => Contacts);
-                //Remove favourites heading if no favourites are there
+                //Remove favourites label if no favourites are there
                 if (_favourites.Count <= 0 && ((Contacts[0] is ContactLabel) && (Contacts[0].Label == "Favourites")))
                 {
                     Contacts.RemoveAt(0);
@@ -131,6 +133,7 @@ namespace Glados.Core.ViewModels
                 {
                     Contacts.Insert(0, new ContactLabel("Favourites"));
                 }
+                //check if favourite already exists in _favourites. Only exists to prevent bugs.
                 if (!(_favourites.Contains(contact.UserId)))
                 { 
                     _favourites.Add(contact.UserId);
@@ -175,7 +178,7 @@ namespace Glados.Core.ViewModels
             bool doesExist = false;
             if(getDatabase)
             {
-                _contacts = await database.GetUsers(); /// need to add in wrapping for favourites and also separate details for groups
+                _contacts = await database.GetUsers();
                 _contactList = _contacts;
             }
             else
@@ -191,8 +194,10 @@ namespace Glados.Core.ViewModels
             }
             Contacts.Clear();
             _favourites.Clear();
+            //goes through each pulled Contact and sorts it if is favourited and adds them to Contacts
             foreach (var user in _contacts)
             {
+                //prevents logged in user from showing in their own contacts
                 if(!(user.Id == loggedInUser.Id)) { 
                     bool tempUserFav = false;
                     var User = new ContactWrapper(new Contact(user, tempUserFav), this);
@@ -201,6 +206,7 @@ namespace Glados.Core.ViewModels
                         doesExist = await database.favouriteExists(loggedInUser.Id, user.Id);
                     }
                     //bool doesExist = await fav.favouriteExists(loggedInUser.Id, user.Id);
+                    //if user is in the favourites database
                     if (doesExist)
                     {
                         var favTemp = await database.GetFavourite(loggedInUser.Id, user.Id);
@@ -208,6 +214,7 @@ namespace Glados.Core.ViewModels
                         if (tempUserFav && getDatabase || (tempUserFav && !getDatabase && String.IsNullOrEmpty(ContactSearch)))
                         {
                             User.Item.IsFavourite = true;
+                            //Adds favourites to the top of Contacts. It's position is tracked by it's position in _favourites
                             Contacts.Insert(_favourites.Count, User);
                             Debug.WriteLine("Added user"+user.Id+"to list");
                             _favourites.Add(user.Id);
@@ -237,18 +244,7 @@ namespace Glados.Core.ViewModels
         {
             GetContacts(true);
         }
-        /*private string contactFirstName;
-        public string ContactFirstName
-        {
-            get { return contactFirstName; }
-            set
-            {
-                if (value != null)
-                {
-                    SetProperty(ref contactFirstName, value);
-                }
-            }
-        }*/
+
 
         public ICommand SelectContactCommandProfile { get; private set; }
         public ICommand SelectContactCommandToast { get; private set; }
