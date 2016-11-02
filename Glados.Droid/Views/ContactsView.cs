@@ -21,7 +21,12 @@ namespace Glados.Droid.Views
             list.Adapter = new CustomAdapter(this, (IMvxAndroidBindingContext)BindingContext);
         }
 
-
+        /// <summary>
+        /// The below code was taken from a git repository created by Stuart Lodge. 
+        /// Any files in the Collections.Core and Collections.Droid folder that contain polymorphicListItemTypes were referred to
+        /// https://github.com/MvvmCross/MvvmCross-Tutorials/blob/master/Working%20With%20Collections/Collections.Droid/Views/PolymorphicListItemTypesView.cs
+        /// This helped to add the label for 'favourites' and 'all contacts' to the Contacts listView and give them unique itemLayouts
+        /// </summary>
         public class CustomAdapter : MvxAdapter
         {
             public CustomAdapter(Context context, IMvxAndroidBindingContext bindingContext)

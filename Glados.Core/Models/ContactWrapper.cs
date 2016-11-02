@@ -9,7 +9,12 @@ using System.Threading.Tasks;
 
 namespace Glados.Core.Models
 {
-   public class ContactWrapper : IContactListType
+    /// <summary>
+    /// This code was based on a template provdided by Stuart Lodge in the following answer on StackOverflow
+    /// http://stackoverflow.com/questions/12682082/mvvmcross-changing-viewmodel-within-a-mvxbindablelistview/12685784#12685784
+    /// It allowed the binding of elements within items in listviews
+    /// </summary>
+    public class ContactWrapper : IContactListType
     {
 
         Contact _contact;
