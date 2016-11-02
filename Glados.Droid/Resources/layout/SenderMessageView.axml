@@ -204,8 +204,7 @@
             <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
-                
-            android:id="@+id/nudgeCancelButton2"
+                android:id="@+id/nudgeCancelButton2"
                 android:orientation="horizontal">
                 <Button
                     android:text="Nudge"

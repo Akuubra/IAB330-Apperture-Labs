@@ -250,6 +250,9 @@
     <AndroidResource Include="Resources\drawable\rounded_corner_blue_complete.xml" />
     <AndroidResource Include="Resources\drawable\Glados.png" />
     <AndroidResource Include="Resources\drawable\glados_icon.png" />
+    <AndroidResource Include="Resources\drawable\circle_200.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <Content Include="ToDo-MvvmCross\_ Droid UI.txt" />
   </ItemGroup>
   <ItemGroup>

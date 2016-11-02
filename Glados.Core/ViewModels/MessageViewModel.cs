@@ -137,6 +137,7 @@ namespace Glados.Core.ViewModels
 
         public ICommand SeeMessageDetails { get; private set; }
         public ICommand SwitchToContacts { get; private set; }
+        public ICommand ShowUserProfile { get; private set; }
         public  MessageViewModel(IDatabase database)
         {
            // responseStore = resStore;
@@ -146,6 +147,10 @@ namespace Glados.Core.ViewModels
             SeeMessageDetails = new MvxCommand<MessageWrapper>(selectedMessage => {
                 MessageViewSwitcher(selectedMessage);
             });
+
+
+            ShowUserProfile = new MvxCommand(() => { profileCurrentUser(); });
+
         }
         private void MessageViewSwitcher(MessageWrapper message)
         {
@@ -163,6 +168,14 @@ namespace Glados.Core.ViewModels
                 Mvx.Resolve<IToast>().Show("Error!");
             }
 
+        }
+
+
+        private void profileCurrentUser()
+        {
+            Contact user = new Contact(loggedInUser, false);
+
+            ShowViewModel<UserProfileViewModel>(user);
         }
 
     }

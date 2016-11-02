@@ -93,79 +93,82 @@ namespace Glados.Droid
 			public const int button_icon = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int forward_blue = 2130837506;
+			public const int circle_200 = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int Glados = 2130837507;
+			public const int forward_blue = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int glados_icon = 2130837508;
+			public const int Glados = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int Icon = 2130837509;
+			public const int glados_icon = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int message_icon2 = 2130837510;
+			public const int Icon = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int message_icon_contactspage = 2130837511;
+			public const int message_icon2 = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int message_icon_messagespage = 2130837512;
+			public const int message_icon_contactspage = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int not_received = 2130837513;
+			public const int message_icon_messagespage = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int profile_icon = 2130837514;
+			public const int not_received = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int profile_icon2 = 2130837515;
+			public const int profile_icon = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int response_received = 2130837516;
+			public const int profile_icon2 = 2130837516;
 			
 			// aapt resource value: 0x7f02000d
-			public const int rounded_corner = 2130837517;
+			public const int response_received = 2130837517;
 			
 			// aapt resource value: 0x7f02000e
-			public const int rounded_corner_blue = 2130837518;
+			public const int rounded_corner = 2130837518;
 			
 			// aapt resource value: 0x7f02000f
-			public const int rounded_corner_blue_complete = 2130837519;
+			public const int rounded_corner_blue = 2130837519;
 			
 			// aapt resource value: 0x7f020010
-			public const int rounded_corner_green = 2130837520;
+			public const int rounded_corner_blue_complete = 2130837520;
 			
 			// aapt resource value: 0x7f020011
-			public const int rounded_corner_half_green = 2130837521;
+			public const int rounded_corner_green = 2130837521;
 			
 			// aapt resource value: 0x7f020012
-			public const int rounded_corner_half_red = 2130837522;
+			public const int rounded_corner_half_green = 2130837522;
 			
 			// aapt resource value: 0x7f020013
-			public const int search_icon = 2130837523;
+			public const int rounded_corner_half_red = 2130837523;
 			
 			// aapt resource value: 0x7f020014
-			public const int SearchBlue = 2130837524;
+			public const int search_icon = 2130837524;
 			
 			// aapt resource value: 0x7f020015
-			public const int SearchOrange = 2130837525;
+			public const int SearchBlue = 2130837525;
 			
 			// aapt resource value: 0x7f020016
-			public const int settings_icon = 2130837526;
+			public const int SearchOrange = 2130837526;
 			
 			// aapt resource value: 0x7f020017
-			public const int splash = 2130837527;
+			public const int settings_icon = 2130837527;
 			
 			// aapt resource value: 0x7f020018
-			public const int star_gold_icon = 2130837528;
+			public const int splash = 2130837528;
 			
 			// aapt resource value: 0x7f020019
-			public const int star_grey_icon = 2130837529;
+			public const int star_gold_icon = 2130837529;
 			
 			// aapt resource value: 0x7f02001a
-			public const int user_icon = 2130837530;
+			public const int star_grey_icon = 2130837530;
+			
+			// aapt resource value: 0x7f02001b
+			public const int user_icon = 2130837531;
 			
 			static Drawable()
 			{
@@ -264,11 +267,17 @@ namespace Glados.Droid
 			// aapt resource value: 0x7f04001a
 			public const int locationEdit = 2130968602;
 			
+			// aapt resource value: 0x7f040030
+			public const int locationField = 2130968624;
+			
 			// aapt resource value: 0x7f040024
 			public const int locationResponseTag = 2130968612;
 			
 			// aapt resource value: 0x7f040025
 			public const int locationResponseTag2 = 2130968613;
+			
+			// aapt resource value: 0x7f04002f
+			public const int locationTag = 2130968623;
 			
 			// aapt resource value: 0x7f040019
 			public const int locationText = 2130968601;

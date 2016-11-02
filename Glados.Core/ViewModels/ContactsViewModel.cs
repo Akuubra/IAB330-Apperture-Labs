@@ -266,25 +266,25 @@ namespace Glados.Core.ViewModels
 
         public ContactsViewModel(IDatabase database)
         {
-            //ShowUserPRofile = new MvxCommand(() => )
-            //this.fav = fav; 
+
             this.database = database;
-            SelectContactCommandToast = new MvxCommand<ContactWrapper>(
-                selectedContact => 
-                
-                ShowViewModel<UserProfileViewModel>(
-                    selectedContact.Item));
-            //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
+            SelectContactCommandToast = new MvxCommand<ContactWrapper>( selectedContact => ShowViewModel<UserProfileViewModel>(selectedContact.Item));
 
             SelectContactCommandProfile = new MvxCommand<ContactWrapper>(selectedContact => ShowViewModel<SendMessageViewModel>( new { receiver =  selectedContact.Item.UserId , sender = loggedInUser.Id}));
-
-
             
-
             SwitchToMessages = new MvxCommand(()=> ShowViewModel<MessageViewModel>(
                 new { currentUser = loggedInUser.Id }));
-            
 
+            ShowUserProfile = new MvxCommand(() => { profileCurrentUser();  } );
+
+        }
+
+
+        private void profileCurrentUser()
+        {
+            Contact user = new Contact(loggedInUser, false);
+
+            ShowViewModel<UserProfileViewModel>(user);
         }
     }
 }
