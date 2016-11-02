@@ -224,16 +224,12 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\SplashStyle.xml" />
     <AndroidResource Include="Resources\drawable\splash.png" />
-    <AndroidResource Include="Resources\drawable\button_icon.png" />
     <AndroidResource Include="Resources\drawable\profile_icon.png" />
-    <AndroidResource Include="Resources\drawable\settings_icon.png" />
     <AndroidResource Include="Resources\drawable\user_icon.png" />
     <AndroidResource Include="Resources\drawable\star_gold_icon.png" />
     <AndroidResource Include="Resources\drawable\star_grey_icon.png" />
     <AndroidResource Include="Resources\drawable\message_icon_contactspage.png" />
     <AndroidResource Include="Resources\drawable\message_icon_messagespage.png" />
-    <AndroidResource Include="Resources\drawable\message_icon2.png" />
-    <AndroidResource Include="Resources\drawable\profile_icon2.png" />
     <AndroidResource Include="Resources\drawable\search_icon.png" />
     <AndroidResource Include="Resources\drawable\rounded_corner_green.xml">
       <SubType>Designer</SubType>
