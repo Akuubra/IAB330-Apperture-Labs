@@ -84,12 +84,12 @@ namespace Glados.Core.ViewModels
             this.userStore = userStore;
           //  SelectContactCommandToast = new MvxCommand(SelectContactToast);
             //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
-
-            AddUser = new MvxCommand(()=>{
-                addNewUser();
-                ShowViewModel<LoginViewModel>();
-                Mvx.Resolve<IToast>().Show("User Created");
-            });
+            
+                AddUser = new MvxCommand(() => {
+                    addNewUser();
+                    
+                });
+            
         }
 
         private async void addNewUser()
@@ -100,7 +100,17 @@ namespace Glados.Core.ViewModels
             //Debug.WriteLine(userTemp.Username.GetType());
             //Debug.WriteLine(userTemp.Location.GetType());
             //Debug.WriteLine(userTemp.Email.GetType());
-            await userStore.InsertUser(userTemp);
+            if (String.IsNullOrEmpty(First_Name) || String.IsNullOrEmpty(Email) || String.IsNullOrEmpty(Password) || String.IsNullOrEmpty(Last_Name) || String.IsNullOrEmpty(First_Name) || String.IsNullOrEmpty(Location))
+            {
+                Mvx.Resolve<IToast>().Show("All fields must be completed");
+            }
+            else
+            {
+                await userStore.InsertUser(userTemp);
+                ShowViewModel<LoginViewModel>();
+                Mvx.Resolve<IToast>().Show("User Created");
+            }
+            
         }
 
         private void user()
