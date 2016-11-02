@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/glados"
+            android:gravity="top|center_horizontal" />
+        <Space
+            android:background="#0080FF"
+            android:layout_width="fill_parent"
+            android:layout_height="15dip"
+            android:layout_marginBottom="10.0dp" />
+        <EditText
+            android:hint="User Name"
+            android:textColorHint="#7f7f7f"
+            android:textColor="#000000"
+            android:maxLength="15"
+            android:minEms="10"
+            android:layout_width="fill_parent"
+            android:layout_height="75dip"
+            android:padding="10dip"
+            android:id="@+id/editText1"
+            local:MvxBind="Text UserName, Mode=TwoWay" />
+        <EditText
+            android:hint="Password"
+            android:textColorHint="#7f7f7f"
+            android:textColor="#000000"
+            android:maxLength="15"
+            android:minEms="10"
+            android:layout_width="fill_parent"
+            android:layout_height="75dip"
+            android:padding="10dip"
+            android:inputType="textPassword"
+            local:MvxBind="Text Password, Mode=TwoWay" />
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="75dip"
+            android:padding="10dip"
+            android:text="Login"
+            android:textSize="50dip"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:background="#0080FF"
+            android:id="@+id/button1"
+            local:MvxBind="Click Login" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
+        android:gravity="center|bottom"
+        android:layout_weight="1">
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="75dip"
+            android:padding="10dip"
+            android:text="Sign Up"
+            android:textSize="50dip"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:background="#ff7300"
+            android:id="@+id/button2"
+            local:MvxBind="Click CreateUser" />
+    </LinearLayout>
+</LinearLayout>

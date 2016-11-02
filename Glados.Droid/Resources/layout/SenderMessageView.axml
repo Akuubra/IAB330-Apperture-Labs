@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/rounded_corner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@drawable/rounded_corner_blue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Review"
+                android:id="@+id/sendTag"
+                android:layout_height="75dip"
+                android:layout_width="fill_parent"
+                android:textColor="@android:color/white"
+                android:textSize="50dip"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dip"
+            android:paddingTop="20dip"
+            android:paddingRight="20dip"
+            android:paddingBottom="20dip"
+            android:layout_weight="0">
+            <TextView
+                android:text="Sent to:"
+                android:id="@+id/firstNameTag"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/firstNameField"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                local:MvxBind="Text Receiver_First_Name" />
+            <CheckBox
+                android:id="@+id/locationCheck"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Request Location?"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                local:MvxBind="Checked LocationSet" />
+            <CheckBox
+                android:id="@+id/meetingCheck"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Request Meeting?"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                local:MvxBind="Checked MeetingSet" />
+            <TextView
+                android:text="Meet at:"
+                android:id="@+id/meetLocTag"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+            <EditText
+                android:id="@+id/meetLocField"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                local:MvxBind="Text MeetingLocation, Mode=TwoWay" />
+            <TextView
+                android:text="Time:"
+                android:id="@+id/tmeTag"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+            <EditText
+                android:id="@+id/timeField"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                local:MvxBind="Text Time, Mode=TwoWay" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/responseLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dip"
+            android:paddingTop="10dip"
+            android:paddingRight="10dip"
+            android:paddingBottom="10dip"
+            android:layout_weight="0">
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:background="@drawable/rounded_corner_blue_complete"
+                android:layout_weight="0.9"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dip"
+                    android:paddingTop="10dip"
+                    android:paddingRight="10dip"
+                    android:paddingBottom="10dip"
+                    android:layout_weight="0">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:text="Response from "
+                            android:id="@+id/firstNameTag2"
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:textColor="@android:color/white"
+                            android:textSize="20dp" />
+                        <TextView
+                            android:id="@+id/firstNameField2"
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:textColor="@android:color/white"
+                            android:textSize="20dp"
+                            local:MvxBind="Text Receiver_First_Name" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:text="Location: "
+                            android:id="@+id/locationResponseTag"
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:textColor="@android:color/black"
+                            android:textSize="20dp" />
+                        <TextView
+                            android:id="@+id/locationResponseTag2"
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:textColor="@android:color/white"
+                            android:textSize="20dp"
+                            local:MvxBind="Text LocationReceived" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:text="Meeting: "
+                            android:id="@+id/meetResponseTag"
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:textColor="@android:color/black"
+                            android:textSize="20dp" />
+                        <TextView
+                            android:id="@+id/meetResponseTag2"
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:textColor="@android:color/white"
+                            android:textSize="20dp"
+                            local:MvxBind="Text AcceptedMeeting" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:gravity="center|bottom"
+            android:id="@+id/completeButton"
+            android:layout_weight="1">
+            <Button
+                android:text="Read"
+                android:layout_width="fill_parent"
+                android:layout_height="100dip"
+                android:textColor="#ffffff"
+                android:background="@drawable/rounded_corner_green"
+                android:textSize="40dp"
+                android:id="@+id/CompleteBTN"
+                local:MvxBind="Click CompleteThisMessage" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:id="@+id/nudgeCancelButton"
+            android:gravity="center|bottom"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:id="@+id/nudgeCancelButton2"
+                android:orientation="horizontal">
+                <Button
+                    android:text="Nudge"
+                    android:layout_width="fill_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/rounded_corner_half_green"
+                    android:textSize="40dp"
+                    android:id="@+id/NudgeBTN"
+                    local:MvxBind="Click NudgeThisMessage" />
+                <Button
+                    android:text="Delete"
+                    android:layout_width="fill_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/rounded_corner_half_red"
+                    android:textSize="40dp"
+                    android:id="@+id/CancelBTN"
+                    local:MvxBind="Click CancelThisMessage" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,52 @@
+﻿using Glados.Core.Interfaces;
+using Glados.Core.ViewModels;
+using MvvmCross.Core.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Glados.Core.Models
+{
+    /// <summary>
+    /// This code was based on a template provdided by Stuart Lodge in the following answer on StackOverflow
+    /// http://stackoverflow.com/questions/12682082/mvvmcross-changing-viewmodel-within-a-mvxbindablelistview/12685784#12685784
+    /// It allowed the binding of elements within items in listviews
+    /// </summary>
+    public class ContactWrapper : IContactListType
+    {
+
+        Contact _contact;
+        ContactsViewModel _parent;
+        public ContactWrapper() { }
+
+        public ContactWrapper(Contact contact, ContactsViewModel parent)
+        {
+            _contact = contact;
+            _parent = parent;
+        }
+
+        //method to allow the changing of a contacts favourite status by tapping on the star
+        public IMvxCommand tapFavourite
+        {
+            get
+            {
+                return new MvxCommand(() => _parent.favClick(_contact));
+            }
+        }
+
+        //returns the Contact item this wraps. 
+        //This is so that any class with an instance of this object can access the required contact fields and edit them as necessary
+        public Contact Item
+        {
+            get
+            {
+                return _contact;
+            }
+        }
+
+
+        public string Label { get; set; }
+    }
+}

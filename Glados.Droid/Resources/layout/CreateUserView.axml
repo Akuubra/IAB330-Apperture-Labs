@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <LinearLayout
+      android:orientation="vertical"
+      android:background="@drawable/rounded_corner"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/rounded_corner_blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+      <TextView
+          android:text="Review"
+          android:id="@+id/sendTag"
+          android:layout_height="75dip"
+          android:layout_width="fill_parent"
+          android:textColor="@android:color/white"
+          android:textSize="50dip"
+          android:gravity="center_horizontal" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dip"
+        android:paddingTop="20dip"
+        android:paddingRight="20dip"
+        android:paddingBottom="20dip"
+        android:layout_weight="0">
+    <TextView
+        android:text="UserName"
+        android:id="@+id/nameTag"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+    <EditText
+        android:id="@+id/nameField"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        local:MvxBind="Text UserName, Mode=TwoWay" />
+    <TextView
+        android:text="First Name"
+        android:id="@+id/firstNameTag"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+    <EditText
+        android:id="@+id/firstNameField"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        local:MvxBind="Text First_Name, Mode=TwoWay" />
+    <TextView
+        android:text="Last Name"
+        android:id="@+id/lastNameTag"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+    <EditText
+        android:id="@+id/lastNameField"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        local:MvxBind="Text Last_Name, Mode=TwoWay" />
+    <TextView
+        android:text="Email"
+        android:id="@+id/EmailTag"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+    <EditText
+        android:id="@+id/EmailField"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        local:MvxBind="Text Email, Mode=TwoWay" />
+    <TextView
+        android:text="Password"
+        android:id="@+id/PasswordTag"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/passwordField"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:inputType="textPassword"
+        local:MvxBind="Text Password, Mode=TwoWay" />
+    <TextView
+        android:text="Location"
+        android:id="@+id/LocationTag"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
+    <EditText
+        android:id="@+id/lastNameField"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        local:MvxBind="Text Location, Mode=TwoWay" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
+        android:gravity="center|bottom"
+        android:layout_weight="1">
+      <Button
+          android:text="Sign Up"
+          android:layout_height="100dip"
+          android:layout_width="fill_parent"
+          android:textColor="#ffffff"
+          android:textSize="40dp"
+          android:background="@drawable/rounded_corner_green"
+          android:id="@+id/signUpBTN"
+          local:MvxBind="Click AddUser" />
+    </LinearLayout>
+  </LinearLayout>
+</LinearLayout>
+
+

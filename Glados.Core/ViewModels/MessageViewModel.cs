@@ -1,0 +1,194 @@
+using MvvmCross.Core.ViewModels;
+using Glados.Core.Models;
+using Glados.Core.Interfaces;
+using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Input;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using MvvmCross.Platform;
+
+/// <summary>
+/// Author: Jack Hendy
+/// Student Number: n9066845
+/// Responsible Screen: Messaging Screen
+/// Responsible Files: FirstViewModel.cs, Message.cs, MessageLayout.axml, FirstView.axml, FirstView.cs
+/// </summary>
+namespace Glados.Core.ViewModels
+{
+    public class MessageViewModel 
+        : MvxViewModel
+    {
+        List<MessageRequestStore> rawMessages = new List<MessageRequestStore>();
+        private ObservableCollection<MessageWrapper> messages = new ObservableCollection<MessageWrapper>();
+        private ObservableCollection<MessageWrapper> filteredMessages = new ObservableCollection<MessageWrapper>();
+        private ObservableCollection<MessageWrapper> messageList = new ObservableCollection<MessageWrapper>();
+        private readonly IDatabase database;
+        
+        private UserStore loggedInUser;
+
+        public async Task<int> Init(string currentUser)
+        {
+             loggedInUser = await database.GetSingleUser( currentUser);
+            
+            await GetMessages();
+            return 1;
+        }
+
+        private ObservableCollection<MessageWrapper> rawMessageList = new ObservableCollection<MessageWrapper>();
+
+        /// <summary>
+        /// Gets the messages from the database for the logged in user
+        /// </summary>
+        /// <returns></returns>
+        public async Task<int> GetMessages()
+        {
+           
+            var rawMessages = await database.GetUsersMessages(loggedInUser.Id);
+            rawMessageList.Clear();
+            Messages.Clear();
+            foreach (var message in rawMessages)
+            {
+                bool message_received = true;
+                message_received = await database.IsResponded(message.Id, message.ReceivedBy);
+                if (message.Sender == loggedInUser.Id)
+                {
+                    var receiver = await database.GetSingleUser(message.ReceivedBy);
+                  
+                    rawMessageList.Add(new MessageWrapper(message, receiver.First_Name, true, message_received));
+                }
+                else
+                {
+                    if (!message_received)
+                    {
+                        var sender = await database.GetSingleUser(message.Sender);
+                        rawMessageList.Add(new MessageWrapper(message, sender.First_Name, false, false));
+                    }
+                   
+
+                }
+            }
+
+            foreach(MessageWrapper message in rawMessageList)
+            {
+                Messages.Add(message);
+                MessageList.Add(message);
+            }
+            
+            return 1;
+        }
+
+               
+        public ObservableCollection<MessageWrapper> MessageList
+        {
+            get { return messageList; }
+            set { SetProperty(ref messageList, value);}
+        }
+        public ObservableCollection<MessageWrapper> Messages
+        {
+            get { return messages; }
+            set { SetProperty(ref messages, value); }
+        }
+        public ObservableCollection<MessageWrapper> FilteredMessages
+        {
+            get { return filteredMessages; }
+            set { SetProperty(ref filteredMessages, value); }
+        }
+        private string _messageSearch;
+        public string MessageSearch
+        {
+            get { return _messageSearch; }
+            set
+            {
+                SetProperty(ref _messageSearch, value);
+                if (String.IsNullOrEmpty(MessageSearch))
+                {
+                    Messages.Clear();
+                    foreach(MessageWrapper message in MessageList)
+                    {
+                        Messages.Add(message);
+                    }
+                }
+                else if (_messageSearch.Length > 0)
+                {
+                    SearchMessages(_messageSearch);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// limits the messages collection by the search team provided
+        /// </summary>
+        /// <param name="searchTerm">search term to limit the collection</param>
+        /// <returns>int value when successful</returns>
+        public async Task<int> SearchMessages(string searchTerm)
+        {
+
+            FilteredMessages.Clear();
+
+            foreach (MessageWrapper mes in MessageList)
+            {
+                if(mes.MessageName.ToLower().Contains(searchTerm) && !FilteredMessages.Contains(mes))
+                {
+                    FilteredMessages.Add(mes);
+                }
+            }
+            Messages.Clear();
+            foreach(MessageWrapper message in FilteredMessages)
+            {
+                Messages.Add(message);
+            }
+            return 1;
+        }
+
+        public ICommand SeeMessageDetails { get; private set; }
+        public ICommand SwitchToContacts { get; private set; }
+        public ICommand ShowUserProfile { get; private set; }
+        public  MessageViewModel(IDatabase database)
+        {
+           // responseStore = resStore;
+            this.database = database;
+            SwitchToContacts = new MvxCommand(() => ShowViewModel<ContactsViewModel>( new {  currentUser = loggedInUser.Id }));
+
+            SeeMessageDetails = new MvxCommand<MessageWrapper>(selectedMessage => {
+                MessageViewSwitcher(selectedMessage);
+            });
+
+
+            ShowUserProfile = new MvxCommand(() => { profileCurrentUser(); });
+
+        }
+
+        /// <summary>
+        /// directs to the right screen when selecting a message depending on if the user sent or received the message.
+        /// </summary>
+        /// <param name="message"></param>
+        private void MessageViewSwitcher(MessageWrapper message)
+        {
+            if (message.GetMessage.Sender == loggedInUser.Id)
+            {
+                ShowViewModel<SenderMessageViewModel>(message.GetMessage);
+            }
+            else if (message.GetMessage.ReceivedBy == loggedInUser.Id)
+            {
+                ShowViewModel<ResponseMessageViewModel>(message.GetMessage);
+            }
+            else
+            {
+
+                Mvx.Resolve<IToast>().Show("Error!");
+            }
+
+        }
+
+
+        private void profileCurrentUser()
+        {
+            Contact user = new Contact(loggedInUser, false);
+
+            ShowViewModel<UserProfileViewModel>(user);
+        }
+
+    }
+}
