@@ -35,12 +35,7 @@ namespace Glados.Core.ViewModels
             Receiver = selectedContact.Id;
             return 1;
         }
-      
-        private void getLoggedInUser()
-        {
-           // loggedInUser = await userStore.GetSingleUserByName("deraj");
-            
-        }
+
 
         private string _userName;
 
@@ -104,7 +99,9 @@ namespace Glados.Core.ViewModels
         }
 
               
-
+        /// <summary>
+        /// Generates the message to be sent with the details tha have been entered
+        /// </summary>
         private void  generateMessage()
         {
             SetLocation();
@@ -125,8 +122,6 @@ namespace Glados.Core.ViewModels
         public SendMessageViewModel(IDatabase database)
         {
             this.database = database;
-            //  SelectContactCommandToast = new MvxCommand(SelectContactToast);
-            //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
 
             CreateMessage = new MvxCommand(() => {
                 createNewMessage();
@@ -134,6 +129,10 @@ namespace Glados.Core.ViewModels
             });
         }
 
+        /// <summary>
+        /// Processes the message into the database and directs to the message screen when successful
+        /// </summary>
+        /// <returns></returns>
         private async Task<int> createNewMessage()
         {
             generateMessage();

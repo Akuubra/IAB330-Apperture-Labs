@@ -11,7 +11,7 @@ using MvvmCross.Platform;
 /// Author: Jared Bagnall
 /// Student Number: n5686245
 /// Responsible Screen: Send Message Screen
-/// Responsible Files: SendMessageViewModel.cs, SendMessage.axml, SendMessageView.cs
+/// Responsible Files: SenderMessageViewModel.cs, SenderMessage.axml, SenderMessageView.cs
 /// </summary>
 namespace Glados.Core.ViewModels
 {
@@ -143,12 +143,14 @@ namespace Glados.Core.ViewModels
             set { SetProperty(ref _acceptedMeeting, value); }
         }
 
-
+        /// <summary>
+        /// Sends an updated message for nudging and changing the update_at timestamp
+        /// </summary>
         private void  NudgeMessage()
         {
             SetLocation();
             SetMeeting();
-            //message = new MessageRequestStore();            
+               
             message.ReceivedBy = this.Receiver;
             message.Sender = this.Sender;
             message.Location = this.Location;
@@ -158,11 +160,14 @@ namespace Glados.Core.ViewModels
 
         }
 
+        /// <summary>
+        /// Creates a blank message to be sent to ensure data is updates with update to update_at timestamp
+        /// </summary>
         private void DumbMessage()
         {
             SetLocation();
             SetMeeting();
-            //message = new MessageRequestStore();            
+                 
             message.ReceivedBy = this.Receiver;
             message.Sender = this.Sender;
             message.Location = "";
@@ -182,8 +187,7 @@ namespace Glados.Core.ViewModels
         public SenderMessageViewModel(IDatabase database )
         {
             this.database = database;
-            //  SelectContactCommandToast = new MvxCommand(SelectContactToast);
-            //()=> Mvx.Resolve<IToast>().Show("Message Sent!")
+
 
             NudgeThisMessage = new MvxCommand(() => {
                 UpdateMessage();
@@ -200,6 +204,10 @@ namespace Glados.Core.ViewModels
             });
         }
 
+        /// <summary>
+        /// Deletes the message 
+        /// </summary>
+        /// <returns>value when successfull</returns>
         private async Task<int> DeleteMessage()
         {
             var delete = await database.DeleteMessage(message.Id);
@@ -215,6 +223,11 @@ namespace Glados.Core.ViewModels
         
             return 1;
         }
+
+        /// <summary>
+        /// Completes the message when requested
+        /// </summary>
+        /// <returns>returns value when successfull</returns>
         private async Task<int> CompleteMessage()
         {
             var delete = await database.DeleteMessage(message.Id);
@@ -231,6 +244,10 @@ namespace Glados.Core.ViewModels
             return 1;
         }
 
+        /// <summary>
+        /// updates the message with the updated details. 
+        /// </summary>
+        /// <returns>int value when successful</returns>
         private async Task<int> UpdateMessage()
         {
             DumbMessage();

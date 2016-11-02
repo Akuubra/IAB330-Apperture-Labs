@@ -8,7 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
+/// <summary>
+/// Author: Jared Bagnall
+/// Student Number: n5686245
+/// Responsible Screen: Respond to Message
+/// Responsible Files: ResponseMessageViewModel.cs, ResponseMessageView.axml, ResponseMessageView.cs
+/// </summary>
 namespace Glados.Core.ViewModels
 {
     public class ResponseMessageViewModel : MvxViewModel
@@ -128,13 +133,15 @@ namespace Glados.Core.ViewModels
         }
 
 
-
+        /// <summary>
+        ///  Completes the details of the message for sending
+        /// </summary>
         private void CreateMessage()
         {
             messageResponse = new MessageResponseStore();
-           // SetLocation();
+
             SetMeeting();
-            //message = new MessageRequestStore();            
+               
             messageResponse.MessageID = originalMessage.Id;
             messageResponse.Sender = originalMessage.ReceivedBy;
             messageResponse.Location = this.Location;
@@ -142,10 +149,14 @@ namespace Glados.Core.ViewModels
                 
                 
         }
+
+        /// <summary>
+        /// Sends an updated message for nudging and changing the update_at timestamp
+        /// </summary>
         private void NudgeMessage()
         {
             
-            //message = new MessageRequestStore();            
+                      
             message.ReceivedBy = this.Receiver;
             message.Sender = this.Sender;
             message.Location = this.Location;
@@ -154,6 +165,10 @@ namespace Glados.Core.ViewModels
 
         }
 
+        /// <summary>
+        /// Creates a blank message to be sent to ensure data is updates with update to update_at timestamp
+        /// </summary>
+        /// <returns>MessageRequestStore message</returns>
         private MessageRequestStore DumbMessage()
         {
             MessageRequestStore _message = new MessageRequestStore();
@@ -177,8 +192,6 @@ namespace Glados.Core.ViewModels
         {
             this.database = database;
 
-
-
             RespondToMessage = new MvxCommand(() => {
                 UpdateMessage();
             });
@@ -186,7 +199,10 @@ namespace Glados.Core.ViewModels
         }
 
      
-
+        /// <summary>
+        /// updates the message with the details supplied
+        /// </summary>
+        /// <returns>value when successfull</returns>
         private async Task<int> UpdateMessage()
         {
             CreateMessage();

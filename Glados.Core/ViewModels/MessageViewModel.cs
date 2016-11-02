@@ -25,9 +25,7 @@ namespace Glados.Core.ViewModels
         private ObservableCollection<MessageWrapper> filteredMessages = new ObservableCollection<MessageWrapper>();
         private ObservableCollection<MessageWrapper> messageList = new ObservableCollection<MessageWrapper>();
         private readonly IDatabase database;
-      // private readonly IMessageResponseStoreDatabase responseStore;
-
-
+        
         private UserStore loggedInUser;
 
         public async Task<int> Init(string currentUser)
@@ -39,6 +37,11 @@ namespace Glados.Core.ViewModels
         }
 
         private ObservableCollection<MessageWrapper> rawMessageList = new ObservableCollection<MessageWrapper>();
+
+        /// <summary>
+        /// Gets the messages from the database for the logged in user
+        /// </summary>
+        /// <returns></returns>
         public async Task<int> GetMessages()
         {
            
@@ -114,7 +117,11 @@ namespace Glados.Core.ViewModels
             }
         }
         
-        
+        /// <summary>
+        /// limits the messages collection by the search team provided
+        /// </summary>
+        /// <param name="searchTerm">search term to limit the collection</param>
+        /// <returns>int value when successful</returns>
         public async Task<int> SearchMessages(string searchTerm)
         {
 
@@ -152,6 +159,11 @@ namespace Glados.Core.ViewModels
             ShowUserProfile = new MvxCommand(() => { profileCurrentUser(); });
 
         }
+
+        /// <summary>
+        /// directs to the right screen when selecting a message depending on if the user sent or received the message.
+        /// </summary>
+        /// <param name="message"></param>
         private void MessageViewSwitcher(MessageWrapper message)
         {
             if (message.GetMessage.Sender == loggedInUser.Id)

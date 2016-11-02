@@ -23,7 +23,8 @@ namespace Glados.Core.Models
             MessageSender = sender;
             this.message = message;
             MessageName = receiver;
-            //MessageContext = string.Format("> Requested Location");
+
+            /// adds specific message context bases on whether a meeting and/or location has been requesed
             if (sender)
             {
                 if (message.Location == "Y" & message.Meet == "Y")

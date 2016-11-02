@@ -14,14 +14,10 @@ namespace Glados.Core.ViewModels
 {
     public class LoginViewModel : MvxViewModel
     {
-        // Define a authenticated user.
-      //  private MobileServiceUser user;
-
-
+        
         private readonly IDatabase UserDB;
         private string _userName;
         private UserStore tempUser;
-       // private LoggedInUser tempUserLoggedIn;
         private readonly IDatabase userStore;
         public string UserName
         {
@@ -36,6 +32,11 @@ namespace Glados.Core.ViewModels
             set { SetProperty(ref _password, value); }
             }
         public ICommand Login { get; private set; }
+
+        /// <summary>
+        /// Logs in the user if the username and password match
+        /// </summary>
+        /// <returns></returns>
         public async Task<int> LoginUser()
         {
             
@@ -44,17 +45,6 @@ namespace Glados.Core.ViewModels
             //if okay
             if (!(tempUser == null))
             {
-                //tempUserLoggedIn = new LoggedInUser();
-                //tempUserLoggedIn.UserId = tempUser.Id;
-                //tempUserLoggedIn.Email = tempUser.Email;
-                //tempUserLoggedIn.Location = tempUser.Location;
-                //tempUserLoggedIn.First_Name = tempUser.First_Name;
-                //tempUserLoggedIn.Last_Name = tempUser.Last_Name;
-                //tempUserLoggedIn.Username = tempUser.Username;
-                //tempUserLoggedIn.LoggedIn = true;
-
-
-                //await UserDB.InsertUser(tempUserLoggedIn);
                 ShowViewModel<MessageViewModel>(new { currentUser = tempUser.Id });
             }
                 else
@@ -66,31 +56,16 @@ namespace Glados.Core.ViewModels
         public ICommand CreateUser { get; private set; }
         public LoginViewModel(IDatabase userStore)
         {
-          //  this.UserDB = UserDB;
             CreateUser = new MvxCommand(() => ShowViewModel<CreateUserViewModel>());
             this.userStore = userStore;
-
 
             Login = new MvxCommand(() =>
             {
             LoginUser();
-
                
             });
         }
 
-
-        //public async Task<int> Init()
-        //{
-        //    // loggedInUser = await userStore.GetSingleUser( currentUser);
-
-        //    tempUserLoggedIn = await UserDB.GetSingleUser(true);
-        //    if(!(tempUserLoggedIn == null))
-        //    {
-        //        ShowViewModel<MessageViewModel>(new { currentUser = tempUser.Id });
-        //    }
-
-        //    return 1;
-        //}
+        
     }
 }
